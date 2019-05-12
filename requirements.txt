@@ -1,0 +1,5 @@
+pytest==3.7.3
+requests-mock==1.6.0
+requests==v2.21.0
+flake8==3.7.7
+autopep8==1.4.4
