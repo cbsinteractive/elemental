@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <live_event href="/live_events/3" product="Elemental Live + HEVC Package" version="2.14.4.308149">
-  <name>SuperBowl AVC Live 1 (FLL - Dev)</name>
+  <name>SuperBowl AVC Live (FLL - Dev)</name>
   <input>
     <deblock_selected>true</deblock_selected>
     <denoise_selected>false</denoise_selected>
@@ -835,7 +835,7 @@
       <destination>
         <password>{{ password }}</password>
         <username>{{ username }}</username>
-        <uri>{{ mediastore_container }}</uri>
+        <uri>{{ mediastore_container_master}}</uri>
       </destination>
     </apple_live_group_settings>
     <type>apple_live_group_settings</type>
@@ -1107,7 +1107,7 @@
       <destination>
         <password>{{ password }}</password>
         <username>{{ username }}</username>
-        <uri>{{ mediastore_container }}</uri>
+        <uri>{{ mediastore_container_backup }}</uri>
       </destination>
     </apple_live_group_settings>
     <type>apple_live_group_settings</type>
