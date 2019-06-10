@@ -1,4 +1,5 @@
 .pytest_cache
 .python-version
-./live/test.py
+live/test.py
 __pycache__
+.idea
