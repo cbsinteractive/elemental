@@ -1,5 +1,5 @@
 from client import ElementalLive
-
+from Keys import *
 def test_ElementalLive_should_receive_server_ip():
     e = ElementalLive('http://elemental.dev.cbsivideo.com/')
     assert e.server_ip == 'http://elemental.dev.cbsivideo.com/'

@@ -77,7 +77,7 @@ class ElementalLive():
 if __name__ == "__main__":
     eleClient = ElementalLive("http://elemental.dev.cbsivideo.com/")
     res = eleClient.create_event("./templates/qvbr_mediastore.xml",
-                                 {'username': 'AKIAX3GU2745LBFI5NOH', 'password' : 'AQbwCQuTXhfJH6KefbOYXSPL+SnlBITDi0zQG0bD',
+                                 {'username': '***************', 'password' : '*****************',
                                   'mediastore_container_master' : 'https://hu5n3jjiyi2jev.data.mediastore.us-east-1.amazonaws.com/master',
                                   'mediastore_container_backup' : 'https://hu5n3jjiyi2jev.data.mediastore.us-east-1.amazonaws.com/backup'})
     print(res.status_code)
