@@ -1,7 +1,6 @@
 from client import ElementalLive
-from Keys import *
 import mock
-import unittest
+import os
 
 def mock_response(status=200, content="CONTENT", json_data=None, raise_for_status=None):
     mock_resp = mock.Mock()
@@ -25,16 +24,16 @@ def test_ElementalLive_should_receive_server_ip():
     e = ElementalLive('http://elemental.dev.cbsivideo.com/')
     assert e.server_ip == 'http://elemental.dev.cbsivideo.com/'
 
-@mock.patch('requests.post')
-def test_create_event_should_receive_201_status_code(mock_post):
+@mock.patch('requests.request')
+def test_create_event_should_receive_201_status_code(mock_request):
     """test create_event method"""
-    mock_resp = mock_response(201, "")
-    mock_post.return_value = mock_resp
+    mock_resp = mock_response(status=201, content=open("./templates/sample_event.xml").read())
+    mock_request.return_value = mock_resp
 
-    eleClient = ElementalLive("http://elemental.dev.cbsivideo.com/")
-    res = eleClient.create_event("./templates/qvbr_mediastore.xml",
-                                 {'username': ACCESS_KEY,
-                                  'password': SECRET_KEY,
+    client = ElementalLive("http://elemental.dev.cbsivideo.com/")
+    res = client.create_event("./templates/qvbr_mediastore.xml",
+                                 {'username': os.getenv('ACCESS_KEY'),
+                                  'password': os.getenv('SECRET_KEY'),
                                   'mediastore_container_master': 'https://hu5n3jjiyi2jev.data.mediastore.us-east-1.amazonaws.com/master',
                                   'mediastore_container_backup': 'https://hu5n3jjiyi2jev.data.mediastore.us-east-1.amazonaws.com/backup'})
     assert res.status_code == 201

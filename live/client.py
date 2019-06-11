@@ -1,8 +1,5 @@
-import time
-import hashlib
 import requests
 from jinja2 import Template
-
 
 
 class ElementalLive():
@@ -17,35 +14,26 @@ class ElementalLive():
             'Content-Type': 'application/xml'
         }
 
-    # General method to send request
-    def send_request(self, method, querystring, data):
-        result = None
-        url = self.server_ip + 'live_events'
-        if method == 'CREATE':
-            result = requests.post(url, data=data, headers=self.generate_headers())
-        elif method == 'DELETE':
-            pass
-        elif method == 'START':
-            pass
-        elif method == 'STOP':
-            pass
-
-
-
-        return result
 
     # Create event, options contain username, password and mediastore_container url
     def create_event(self, template_path, options):
+
+        # Initiate url
+        url = f'{self.server_ip}/live_events'
+
+        # Generate template
         xml_file = open(template_path, 'r')
         xml_content = xml_file.read()
         template = Template(xml_content)
 
-        # Pass paras to template
+        # Pass params to template
         body = template.render(**options)
-        response = self.send_request('CREATE', None, body)
+        response = requests.request(method='POST', url=url, data=body,
+                                    headers=self.generate_headers())
+
         return response
 
-    def delete_event(self):
+    def delete_event(self, event_id):
         pass
 
     def start_event(self):
