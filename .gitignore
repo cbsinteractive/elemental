@@ -1,6 +1,7 @@
 .pytest_cache
 .python-version
-live/test.py
+live/main.py
 live/Keys.py
+live/.DS_Store
 __pycache__
 .idea
