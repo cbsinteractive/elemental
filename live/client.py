@@ -6,16 +6,16 @@ class ElementalLive():
     def __init__(self, server_ip):
         self.server_ip = server_ip
 
-
-    # Simple version of generate_header, may need more paras in the future(like api_key)
+    # Simple version of generate_header,
+    # may need more paras in the future(like api_key)
     def generate_headers(self):
         return {
             'Accept': 'application/xml',
             'Content-Type': 'application/xml'
         }
 
-
-    # Create event, options contain username, password and mediastore_container url
+    # Create event, options contain username,
+    # password and mediastore_container url
     def create_event(self, template_path, options):
 
         # Initiate url
@@ -37,7 +37,7 @@ class ElementalLive():
 
     def delete_event(self, event_id):
 
-        #Initial url
+        # Initial url
         url = f'{self.server_ip}/live_events/{event_id}'
 
         # Send request
@@ -47,13 +47,13 @@ class ElementalLive():
 
     def start_event(self, event_id):
 
-        #Initail url
+        # Initail url
         url = f'{self.server_ip}/live_events/{event_id}/start'
 
         # Generate body
         body = "<start></start>"
 
-        #Send request
+        # Send request
         response = requests.request(method='POST', url=url, data=body,
                                     headers=self.generate_headers())
 
@@ -61,16 +61,14 @@ class ElementalLive():
 
     def stop_event(self, event_id):
 
-        #Initail url
+        # Initail url
         url = f'{self.server_ip}/live_events/{event_id}/stop'
 
         # Generate body
         body = "<stop></stop>"
 
-        #Send request
+        # Send request
         response = requests.request(method='POST', url=url, data=body,
                                     headers=self.generate_headers())
 
         return response
-
-
