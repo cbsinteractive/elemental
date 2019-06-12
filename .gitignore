@@ -3,6 +3,7 @@
 live/main.py
 live/Keys.py
 live/.DS_Store
+live/templates/.DS_Store
 live/templates/sample_response_for_create.xml
 live/templates/sample_response_for_delete.xml
 live/templates/sample_response_for_start.xml
