@@ -12,4 +12,4 @@ jobs:
             sudo pip install -r requirements.txt
       - run:
           command:
-            pytest client_test.py
+            pytest live/client_test.py
