@@ -4,6 +4,7 @@ live/main.py
 live/Keys.py
 live/.DS_Store
 live/templates/.DS_Store
+venv
 
 __pycache__
 .idea

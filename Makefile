@@ -9,7 +9,7 @@ clean-build:
 	rm --force --recursive *.egg-info
 
 lint:
-	flake8 --exclude=.tox
+	flake8 --exclude=.tox --exclude=venv
 
 test: lint
 	py.test --verbose --color=yes .

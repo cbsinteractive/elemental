@@ -40,11 +40,16 @@ def test_create_event_should_receive_201_status_code(mock_request):
     response = client.create_event("live/templates/qvbr_mediastore.xml",
                                    {'username': os.getenv('ACCESS_KEY'),
                                     'password': os.getenv('SECRET_KEY'),
-                                    'mediastore_container_master': 'https://hu5n3jjiyi2jev.data.mediastore.us-east-1.amazonaws.com/master',
-                                    'mediastore_container_backup': 'https://hu5n3jjiyi2jev.data.mediastore.us-east-1.amazonaws.com/backup'})
+                                    'mediastore_container_master':
+                                        'https://hu5n3jjiyi2jev.data.media'
+                                        'store.us-east-1.amazonaws.com/master',
+                                    'mediastore_container_backup':
+                                        'https://hu5n3jjiyi2jev.data.medias'
+                                        'tore.us-east-1.amazonaws.com/backup'})
 
     request_to_elemental = mock_request.call_args_list[0][1]
-    assert request_to_elemental['url'] == 'http://elemental.dev.cbsivideo.com/live_events'
+    assert request_to_elemental['url'] == 'http://elemental' \
+                                          '.dev.cbsivideo.com/live_events'
     assert request_to_elemental['method'] == 'POST'
     assert request_to_elemental['headers'] == {
         'Accept': 'application/xml', 'Content-Type': 'application/xml'}
