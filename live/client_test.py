@@ -32,12 +32,12 @@ def test_ElementalLive_should_receive_server_ip():
 def test_create_event_should_receive_201_status_code(mock_request):
     """test create_event method"""
     response_from_elemental_api = open(
-        './templates/sample_response_for_create.xml').read()
+        'live/templates/sample_response_for_create.xml').read()
     mock_request.return_value = mock_response(
         status=201, content=response_from_elemental_api)
 
     client = ElementalLive("http://elemental.dev.cbsivideo.com")
-    response = client.create_event("./templates/qvbr_mediastore.xml",
+    response = client.create_event("live/templates/qvbr_mediastore.xml",
                                    {'username': os.getenv('ACCESS_KEY'),
                                     'password': os.getenv('SECRET_KEY'),
                                     'mediastore_container_master': 'https://hu5n3jjiyi2jev.data.mediastore.us-east-1.amazonaws.com/master',
@@ -55,7 +55,7 @@ def test_create_event_should_receive_201_status_code(mock_request):
 def test_delete_event_should_receive_200_status_code(mock_request):
     """test delete_event method"""
     response_from_elemental_api = open(
-        './templates/sample_response_for_delete.xml').read()
+        'live/templates/sample_response_for_delete.xml').read()
     mock_request.return_value = mock_response(
         status=200, content=response_from_elemental_api)
 
@@ -77,7 +77,7 @@ def test_delete_event_should_receive_200_status_code(mock_request):
 def test_start_event_should_receive_200_status_code(mock_request):
     """test start_event method"""
     response_from_elemental_api = open(
-        './templates/sample_response_for_start.xml').read()
+        'live/templates/sample_response_for_start.xml').read()
     mock_request.return_value = mock_response(
         status=200, content=response_from_elemental_api)
 
@@ -101,7 +101,7 @@ def test_start_event_should_receive_200_status_code(mock_request):
 def test_stop_event_should_receive_200_status_code(mock_request):
     """test stop_event method"""
     response_from_elemental_api = open(
-        './templates/sample_response_for_start.xml').read()
+        'live/templates/sample_response_for_start.xml').read()
     mock_request.return_value = mock_response(
         status=200, content=response_from_elemental_api)
 
