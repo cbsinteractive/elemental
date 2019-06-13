@@ -1,0 +1,1505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<live_event href="/live_events/78" product="Elemental Live" version="2.14.1.306914">
+  <id>78</id>
+  <name>SuperBowl AVC Live (FLL - Dev)</name>
+  <input>
+    <active>false</active>
+    <deblock_selected>true</deblock_selected>
+    <denoise_selected>false</denoise_selected>
+    <error_clear_time nil="true"/>
+    <failback_rule>immediately</failback_rule>
+    <filter_enable>Auto</filter_enable>
+    <filter_strength>1</filter_strength>
+    <hot_backup_pair>false</hot_backup_pair>
+    <id>138</id>
+    <input_label nil="true"/>
+    <loop_source>false</loop_source>
+    <no_psi>false</no_psi>
+    <order>1</order>
+    <prefer_smpte2038>false</prefer_smpte2038>
+    <service_name nil="true"/>
+    <service_provider_name nil="true"/>
+    <status>pending</status>
+    <timecode_source>embedded</timecode_source>
+    <device_input>
+      <id>87</id>
+      <device_type>AJA</device_type>
+      <device_number>0</device_number>
+      <channel>1</channel>
+      <channel_type>HD-SDI</channel_type>
+      <device_name>HD-SDI 1</device_name>
+      <name nil="true"/>
+      <device_id>1</device_id>
+      <sdi_settings>
+        <id>88</id>
+        <input_format>Auto</input_format>
+        <scte104_offset>0</scte104_offset>
+      </sdi_settings>
+    </device_input>
+    <video_selector>
+      <color_space>follow</color_space>
+      <default_afd nil="true"/>
+      <id>138</id>
+      <order>1</order>
+    </video_selector>
+    <audio_selector>
+      <default_selection>true</default_selection>
+      <id>138</id>
+      <order>1</order>
+      <program_selection>1</program_selection>
+      <selector_type nil="true"/>
+      <unwrap_smpte337>true</unwrap_smpte337>
+    </audio_selector>
+    <caption_selector>
+      <id>129</id>
+      <order>1</order>
+      <source_type>Embedded</source_type>
+      <embedded_source_settings>
+        <autodetect_scte20>false</autodetect_scte20>
+        <id>129</id>
+        <source_608_channel_number>1</source_608_channel_number>
+        <source_608_track_number>1</source_608_track_number>
+        <upconvert_608_to_708>false</upconvert_608_to_708>
+      </embedded_source_settings>
+    </caption_selector>
+    <input_info>
+      <general>Waiting for device input...</general>
+    </input_info>
+  </input>
+  <active_input_id>138</active_input_id>
+  <loop_all_inputs>false</loop_all_inputs>
+  <timecode_config>
+    <id>88</id>
+    <require_initial_timecode>false</require_initial_timecode>
+    <source>systemclock</source>
+    <sync_threshold nil="true"/>
+  </timecode_config>
+  <node_id>1</node_id>
+  <node>elemental5</node>
+  <failure_rule>
+    <id>121</id>
+    <priority>50</priority>
+    <restart_on_failure>false</restart_on_failure>
+  </failure_rule>
+  <esam>
+    <acquisition_point_id>fll_dev_1</acquisition_point_id>
+    <asset_uri_id nil="true"/>
+    <id>32</id>
+    <response_signal_preroll>0</response_signal_preroll>
+    <scc_uri>
+      <id>327</id>
+      <uri>http://10.25.68.173:8080/signal</uri>
+    </scc_uri>
+  </esam>
+  <input_loss_behavior>
+    <black_frame_msec>10000</black_frame_msec>
+    <id>121</id>
+    <input_loss_image_color>000000</input_loss_image_color>
+    <input_loss_image_type>color</input_loss_image_type>
+    <repeat_frame_msec>1000</repeat_frame_msec>
+  </input_loss_behavior>
+  <ad_trigger>esam</ad_trigger>
+  <ad_avail_offset>0</ad_avail_offset>
+  <ignore_web_delivery_allowed_flag>false</ignore_web_delivery_allowed_flag>
+  <ignore_no_regional_blackout_flag>false</ignore_no_regional_blackout_flag>
+  <low_latency_mode>false</low_latency_mode>
+  <initial_audio_gain>0</initial_audio_gain>
+  <avsync_enable>true</avsync_enable>
+  <avsync_pad_trim_audio>true</avsync_pad_trim_audio>
+  <user_data/>
+  <input_end_action>switch_input</input_end_action>
+  <output_timing_source>input_clock</output_timing_source>
+  <input_buffer_size>60</input_buffer_size>
+  <resource_reservation>none</resource_reservation>
+  <low_framerate_input>false</low_framerate_input>
+  <extract_sdt>false</extract_sdt>
+  <submitted>2019-06-11 17:07:31 -0400</submitted>
+  <status>complete</status>
+  <average_fps>0.0</average_fps>
+  <buffer_avg/>
+  <buffer_max/>
+  <dropped_frames/>
+  <start_time>2019-06-12 11:41:08 -0400</start_time>
+  <complete_time>2019-06-12 11:44:06 -0400</complete_time>
+  <elapsed>160</elapsed>
+  <stream_assembly>
+    <id>548</id>
+    <preset_id nil="true"/>
+    <name>stream_assembly_0</name>
+    <video_description>
+      <afd_signaling>None</afd_signaling>
+      <anti_alias>true</anti_alias>
+      <drop_frame_timecode>true</drop_frame_timecode>
+      <encoder_type>gpu</encoder_type>
+      <fixed_afd nil="true"/>
+      <force_cpu_encode>false</force_cpu_encode>
+      <height>540</height>
+      <id>699</id>
+      <insert_color_metadata>true</insert_color_metadata>
+      <respond_to_afd>None</respond_to_afd>
+      <sharpness>100</sharpness>
+      <stretch_to_output>false</stretch_to_output>
+      <timecode_passthrough>true</timecode_passthrough>
+      <vbi_passthrough>false</vbi_passthrough>
+      <width>960</width>
+      <h264_settings>
+        <adaptive_quantization>medium</adaptive_quantization>
+        <bitrate nil="true"/>
+        <buf_fill_pct nil="true"/>
+        <buf_size>3600000</buf_size>
+        <cabac>true</cabac>
+        <dynamic_sub_gop>true</dynamic_sub_gop>
+        <flicker_aq>true</flicker_aq>
+        <force_field_pictures>false</force_field_pictures>
+        <framerate_denominator>1001</framerate_denominator>
+        <framerate_follow_source>false</framerate_follow_source>
+        <framerate_numerator>30000</framerate_numerator>
+        <gop_b_reference>true</gop_b_reference>
+        <gop_closed_cadence>1</gop_closed_cadence>
+        <gop_markers>false</gop_markers>
+        <gop_num_b_frames>3</gop_num_b_frames>
+        <gop_size>3.0</gop_size>
+        <gop_size_units>seconds</gop_size_units>
+        <id>623</id>
+        <interpolate_frc>false</interpolate_frc>
+        <look_ahead_rate_control>high</look_ahead_rate_control>
+        <max_bitrate>1800000</max_bitrate>
+        <max_qp nil="true"/>
+        <min_bitrate nil="true"/>
+        <min_buf_occ>0</min_buf_occ>
+        <min_i_interval>0</min_i_interval>
+        <min_qp nil="true"/>
+        <motion_vector_direct_mode nil="true"/>
+        <num_ref_frames>3</num_ref_frames>
+        <par_denominator nil="true"/>
+        <par_follow_source>true</par_follow_source>
+        <par_numerator nil="true"/>
+        <passes>1</passes>
+        <progressive_references>false</progressive_references>
+        <qp nil="true"/>
+        <quality_level>7</quality_level>
+        <repeat_pps>false</repeat_pps>
+        <rp2027_syntax>false</rp2027_syntax>
+        <scd_mode>transition_detection</scd_mode>
+        <sei_timecode>false</sei_timecode>
+        <slices>1</slices>
+        <slow_pal>false</slow_pal>
+        <softness nil="true"/>
+        <spatial_aq>true</spatial_aq>
+        <svq>0</svq>
+        <telecine>None</telecine>
+        <temporal_aq>true</temporal_aq>
+        <level>4</level>
+        <profile>High</profile>
+        <rate_control_mode>QVBR</rate_control_mode>
+        <interlace_mode>progressive</interlace_mode>
+      </h264_settings>
+      <gpu>0</gpu>
+      <selected_gpu nil="true"/>
+      <codec>h.264</codec>
+      <video_preprocessors>
+        <deinterlacer>
+          <algorithm>interpolate</algorithm>
+          <deinterlace_mode>Deinterlace</deinterlace_mode>
+          <force>false</force>
+          <id>689</id>
+        </deinterlacer>
+        <noise_reducer>
+          <aggressive_mode>0</aggressive_mode>
+          <filter>Conserve</filter>
+          <id>145</id>
+          <post_filter_sharpen_strength nil="true"/>
+          <speed nil="true"/>
+          <strength>2</strength>
+        </noise_reducer>
+        <timecode_burnin>
+          <font_size>16</font_size>
+          <id>213</id>
+          <position>top_left</position>
+          <prefix>fll - dev1 - </prefix>
+        </timecode_burnin>
+      </video_preprocessors>
+    </video_description>
+    <audio_description>
+      <audio_type>0</audio_type>
+      <follow_input_audio_type>true</follow_input_audio_type>
+      <follow_input_language_code>true</follow_input_language_code>
+      <id>705</id>
+      <language_code nil="true"/>
+      <nielsen_rtvod_watermark nil="true"/>
+      <order>1</order>
+      <stream_name nil="true"/>
+      <timecode_passthrough>false</timecode_passthrough>
+      <aac_settings>
+        <ad_broadcaster_mix>false</ad_broadcaster_mix>
+        <bitrate>96000</bitrate>
+        <coding_mode>2_0</coding_mode>
+        <id>736</id>
+        <latm_loas>false</latm_loas>
+        <mpeg2>false</mpeg2>
+        <sample_rate>48000</sample_rate>
+        <profile>LC</profile>
+        <rate_control_mode>CBR</rate_control_mode>
+      </aac_settings>
+      <codec>aac</codec>
+      <audio_source_name>Audio Selector 1</audio_source_name>
+    </audio_description>
+    <caption_description>
+      <destination_type>Embedded</destination_type>
+      <id>400</id>
+      <id3_as_caption_content>false</id3_as_caption_content>
+      <language_code nil="true"/>
+      <language_description nil="true"/>
+      <order>1</order>
+      <caption_source_name>Caption Selector 1</caption_source_name>
+    </caption_description>
+  </stream_assembly>
+  <stream_assembly>
+    <id>549</id>
+    <preset_id nil="true"/>
+    <name>stream_assembly_1</name>
+    <video_description>
+      <afd_signaling>None</afd_signaling>
+      <anti_alias>true</anti_alias>
+      <drop_frame_timecode>true</drop_frame_timecode>
+      <encoder_type>cpu_small_frames</encoder_type>
+      <fixed_afd nil="true"/>
+      <force_cpu_encode>false</force_cpu_encode>
+      <height>224</height>
+      <id>700</id>
+      <insert_color_metadata>true</insert_color_metadata>
+      <respond_to_afd>None</respond_to_afd>
+      <sharpness>100</sharpness>
+      <stretch_to_output>false</stretch_to_output>
+      <timecode_passthrough>true</timecode_passthrough>
+      <vbi_passthrough>false</vbi_passthrough>
+      <width>400</width>
+      <h264_settings>
+        <adaptive_quantization>medium</adaptive_quantization>
+        <bitrate nil="true"/>
+        <buf_fill_pct nil="true"/>
+        <buf_size>500000</buf_size>
+        <cabac>true</cabac>
+        <dynamic_sub_gop>true</dynamic_sub_gop>
+        <flicker_aq>true</flicker_aq>
+        <force_field_pictures>false</force_field_pictures>
+        <framerate_denominator>1001</framerate_denominator>
+        <framerate_follow_source>false</framerate_follow_source>
+        <framerate_numerator>30000</framerate_numerator>
+        <gop_b_reference>true</gop_b_reference>
+        <gop_closed_cadence>1</gop_closed_cadence>
+        <gop_markers>false</gop_markers>
+        <gop_num_b_frames>3</gop_num_b_frames>
+        <gop_size>3.0</gop_size>
+        <gop_size_units>seconds</gop_size_units>
+        <id>624</id>
+        <interpolate_frc>false</interpolate_frc>
+        <look_ahead_rate_control>high</look_ahead_rate_control>
+        <max_bitrate>250000</max_bitrate>
+        <max_qp nil="true"/>
+        <min_bitrate nil="true"/>
+        <min_buf_occ>0</min_buf_occ>
+        <min_i_interval>0</min_i_interval>
+        <min_qp nil="true"/>
+        <motion_vector_direct_mode nil="true"/>
+        <num_ref_frames>3</num_ref_frames>
+        <par_denominator nil="true"/>
+        <par_follow_source>true</par_follow_source>
+        <par_numerator nil="true"/>
+        <passes>1</passes>
+        <progressive_references>false</progressive_references>
+        <qp nil="true"/>
+        <quality_level>7</quality_level>
+        <repeat_pps>false</repeat_pps>
+        <rp2027_syntax>false</rp2027_syntax>
+        <scd_mode>transition_detection</scd_mode>
+        <sei_timecode>false</sei_timecode>
+        <slices>1</slices>
+        <slow_pal>false</slow_pal>
+        <softness nil="true"/>
+        <spatial_aq>true</spatial_aq>
+        <svq>0</svq>
+        <telecine>None</telecine>
+        <temporal_aq>true</temporal_aq>
+        <profile>Main</profile>
+        <rate_control_mode>QVBR</rate_control_mode>
+        <interlace_mode>progressive</interlace_mode>
+      </h264_settings>
+      <gpu>0</gpu>
+      <selected_gpu nil="true"/>
+      <codec>h.264</codec>
+      <video_preprocessors>
+        <deinterlacer>
+          <algorithm>interpolate</algorithm>
+          <deinterlace_mode>Deinterlace</deinterlace_mode>
+          <force>false</force>
+          <id>690</id>
+        </deinterlacer>
+        <timecode_burnin>
+          <font_size>16</font_size>
+          <id>214</id>
+          <position>top_left</position>
+          <prefix>fll - dev1 - </prefix>
+        </timecode_burnin>
+      </video_preprocessors>
+    </video_description>
+    <audio_description>
+      <audio_type>0</audio_type>
+      <follow_input_audio_type>true</follow_input_audio_type>
+      <follow_input_language_code>true</follow_input_language_code>
+      <id>706</id>
+      <language_code nil="true"/>
+      <nielsen_rtvod_watermark nil="true"/>
+      <order>1</order>
+      <stream_name nil="true"/>
+      <timecode_passthrough>false</timecode_passthrough>
+      <aac_settings>
+        <ad_broadcaster_mix>false</ad_broadcaster_mix>
+        <bitrate>96000</bitrate>
+        <coding_mode>2_0</coding_mode>
+        <id>737</id>
+        <latm_loas>false</latm_loas>
+        <mpeg2>false</mpeg2>
+        <sample_rate>48000</sample_rate>
+        <profile>LC</profile>
+        <rate_control_mode>CBR</rate_control_mode>
+      </aac_settings>
+      <codec>aac</codec>
+      <audio_source_name>Audio Selector 1</audio_source_name>
+    </audio_description>
+    <caption_description>
+      <destination_type>Embedded</destination_type>
+      <id>401</id>
+      <id3_as_caption_content>false</id3_as_caption_content>
+      <language_code nil="true"/>
+      <language_description nil="true"/>
+      <order>1</order>
+      <caption_source_name>Caption Selector 1</caption_source_name>
+    </caption_description>
+  </stream_assembly>
+  <stream_assembly>
+    <id>550</id>
+    <preset_id nil="true"/>
+    <name>stream_assembly_2</name>
+    <video_description>
+      <afd_signaling>None</afd_signaling>
+      <anti_alias>true</anti_alias>
+      <drop_frame_timecode>true</drop_frame_timecode>
+      <encoder_type>cpu_small_frames</encoder_type>
+      <fixed_afd nil="true"/>
+      <force_cpu_encode>false</force_cpu_encode>
+      <height>288</height>
+      <id>701</id>
+      <insert_color_metadata>true</insert_color_metadata>
+      <respond_to_afd>None</respond_to_afd>
+      <sharpness>100</sharpness>
+      <stretch_to_output>false</stretch_to_output>
+      <timecode_passthrough>true</timecode_passthrough>
+      <vbi_passthrough>false</vbi_passthrough>
+      <width>512</width>
+      <h264_settings>
+        <adaptive_quantization>medium</adaptive_quantization>
+        <bitrate nil="true"/>
+        <buf_fill_pct nil="true"/>
+        <buf_size>1000000</buf_size>
+        <cabac>true</cabac>
+        <dynamic_sub_gop>true</dynamic_sub_gop>
+        <flicker_aq>true</flicker_aq>
+        <force_field_pictures>false</force_field_pictures>
+        <framerate_denominator>1001</framerate_denominator>
+        <framerate_follow_source>false</framerate_follow_source>
+        <framerate_numerator>30000</framerate_numerator>
+        <gop_b_reference>true</gop_b_reference>
+        <gop_closed_cadence>1</gop_closed_cadence>
+        <gop_markers>false</gop_markers>
+        <gop_num_b_frames>3</gop_num_b_frames>
+        <gop_size>3.0</gop_size>
+        <gop_size_units>seconds</gop_size_units>
+        <id>625</id>
+        <interpolate_frc>false</interpolate_frc>
+        <look_ahead_rate_control>high</look_ahead_rate_control>
+        <max_bitrate>500000</max_bitrate>
+        <max_qp nil="true"/>
+        <min_bitrate nil="true"/>
+        <min_buf_occ>0</min_buf_occ>
+        <min_i_interval>0</min_i_interval>
+        <min_qp nil="true"/>
+        <motion_vector_direct_mode nil="true"/>
+        <num_ref_frames>3</num_ref_frames>
+        <par_denominator nil="true"/>
+        <par_follow_source>true</par_follow_source>
+        <par_numerator nil="true"/>
+        <passes>1</passes>
+        <progressive_references>false</progressive_references>
+        <qp nil="true"/>
+        <quality_level>7</quality_level>
+        <repeat_pps>false</repeat_pps>
+        <rp2027_syntax>false</rp2027_syntax>
+        <scd_mode>transition_detection</scd_mode>
+        <sei_timecode>false</sei_timecode>
+        <slices>1</slices>
+        <slow_pal>false</slow_pal>
+        <softness nil="true"/>
+        <spatial_aq>true</spatial_aq>
+        <svq>0</svq>
+        <telecine>None</telecine>
+        <temporal_aq>true</temporal_aq>
+        <profile>Main</profile>
+        <rate_control_mode>QVBR</rate_control_mode>
+        <interlace_mode>progressive</interlace_mode>
+      </h264_settings>
+      <gpu>0</gpu>
+      <selected_gpu nil="true"/>
+      <codec>h.264</codec>
+      <video_preprocessors>
+        <deinterlacer>
+          <algorithm>interpolate</algorithm>
+          <deinterlace_mode>Deinterlace</deinterlace_mode>
+          <force>false</force>
+          <id>691</id>
+        </deinterlacer>
+        <timecode_burnin>
+          <font_size>16</font_size>
+          <id>215</id>
+          <position>top_left</position>
+          <prefix>fll - dev1 - </prefix>
+        </timecode_burnin>
+      </video_preprocessors>
+    </video_description>
+    <audio_description>
+      <audio_type>0</audio_type>
+      <follow_input_audio_type>true</follow_input_audio_type>
+      <follow_input_language_code>true</follow_input_language_code>
+      <id>707</id>
+      <language_code nil="true"/>
+      <nielsen_rtvod_watermark nil="true"/>
+      <order>1</order>
+      <stream_name nil="true"/>
+      <timecode_passthrough>false</timecode_passthrough>
+      <aac_settings>
+        <ad_broadcaster_mix>false</ad_broadcaster_mix>
+        <bitrate>96000</bitrate>
+        <coding_mode>2_0</coding_mode>
+        <id>738</id>
+        <latm_loas>false</latm_loas>
+        <mpeg2>false</mpeg2>
+        <sample_rate>48000</sample_rate>
+        <profile>LC</profile>
+        <rate_control_mode>CBR</rate_control_mode>
+      </aac_settings>
+      <codec>aac</codec>
+      <audio_source_name>Audio Selector 1</audio_source_name>
+    </audio_description>
+    <caption_description>
+      <destination_type>Embedded</destination_type>
+      <id>402</id>
+      <id3_as_caption_content>false</id3_as_caption_content>
+      <language_code nil="true"/>
+      <language_description nil="true"/>
+      <order>1</order>
+      <caption_source_name>Caption Selector 1</caption_source_name>
+    </caption_description>
+  </stream_assembly>
+  <stream_assembly>
+    <id>551</id>
+    <preset_id nil="true"/>
+    <name>stream_assembly_3</name>
+    <video_description>
+      <afd_signaling>None</afd_signaling>
+      <anti_alias>true</anti_alias>
+      <drop_frame_timecode>true</drop_frame_timecode>
+      <encoder_type>cpu_small_frames</encoder_type>
+      <fixed_afd nil="true"/>
+      <force_cpu_encode>false</force_cpu_encode>
+      <height>360</height>
+      <id>702</id>
+      <insert_color_metadata>true</insert_color_metadata>
+      <respond_to_afd>None</respond_to_afd>
+      <sharpness>100</sharpness>
+      <stretch_to_output>false</stretch_to_output>
+      <timecode_passthrough>true</timecode_passthrough>
+      <vbi_passthrough>false</vbi_passthrough>
+      <width>640</width>
+      <h264_settings>
+        <adaptive_quantization>medium</adaptive_quantization>
+        <bitrate nil="true"/>
+        <buf_fill_pct nil="true"/>
+        <buf_size>1800000</buf_size>
+        <cabac>true</cabac>
+        <dynamic_sub_gop>true</dynamic_sub_gop>
+        <flicker_aq>true</flicker_aq>
+        <force_field_pictures>false</force_field_pictures>
+        <framerate_denominator>1001</framerate_denominator>
+        <framerate_follow_source>false</framerate_follow_source>
+        <framerate_numerator>30000</framerate_numerator>
+        <gop_b_reference>true</gop_b_reference>
+        <gop_closed_cadence>1</gop_closed_cadence>
+        <gop_markers>false</gop_markers>
+        <gop_num_b_frames>3</gop_num_b_frames>
+        <gop_size>3.0</gop_size>
+        <gop_size_units>seconds</gop_size_units>
+        <id>626</id>
+        <interpolate_frc>false</interpolate_frc>
+        <look_ahead_rate_control>high</look_ahead_rate_control>
+        <max_bitrate>900000</max_bitrate>
+        <max_qp nil="true"/>
+        <min_bitrate nil="true"/>
+        <min_buf_occ>0</min_buf_occ>
+        <min_i_interval>0</min_i_interval>
+        <min_qp nil="true"/>
+        <motion_vector_direct_mode nil="true"/>
+        <num_ref_frames>3</num_ref_frames>
+        <par_denominator nil="true"/>
+        <par_follow_source>true</par_follow_source>
+        <par_numerator nil="true"/>
+        <passes>1</passes>
+        <progressive_references>false</progressive_references>
+        <qp nil="true"/>
+        <quality_level>7</quality_level>
+        <repeat_pps>false</repeat_pps>
+        <rp2027_syntax>false</rp2027_syntax>
+        <scd_mode>transition_detection</scd_mode>
+        <sei_timecode>false</sei_timecode>
+        <slices>1</slices>
+        <slow_pal>false</slow_pal>
+        <softness nil="true"/>
+        <spatial_aq>true</spatial_aq>
+        <svq>0</svq>
+        <telecine>None</telecine>
+        <temporal_aq>true</temporal_aq>
+        <profile>Main</profile>
+        <rate_control_mode>QVBR</rate_control_mode>
+        <interlace_mode>progressive</interlace_mode>
+      </h264_settings>
+      <gpu>0</gpu>
+      <selected_gpu nil="true"/>
+      <codec>h.264</codec>
+      <video_preprocessors>
+        <deinterlacer>
+          <algorithm>interpolate</algorithm>
+          <deinterlace_mode>Deinterlace</deinterlace_mode>
+          <force>false</force>
+          <id>692</id>
+        </deinterlacer>
+        <timecode_burnin>
+          <font_size>16</font_size>
+          <id>216</id>
+          <position>top_left</position>
+          <prefix>fll - dev1 - </prefix>
+        </timecode_burnin>
+      </video_preprocessors>
+    </video_description>
+    <audio_description>
+      <audio_type>0</audio_type>
+      <follow_input_audio_type>true</follow_input_audio_type>
+      <follow_input_language_code>true</follow_input_language_code>
+      <id>708</id>
+      <language_code nil="true"/>
+      <nielsen_rtvod_watermark nil="true"/>
+      <order>1</order>
+      <stream_name nil="true"/>
+      <timecode_passthrough>false</timecode_passthrough>
+      <aac_settings>
+        <ad_broadcaster_mix>false</ad_broadcaster_mix>
+        <bitrate>96000</bitrate>
+        <coding_mode>2_0</coding_mode>
+        <id>739</id>
+        <latm_loas>false</latm_loas>
+        <mpeg2>false</mpeg2>
+        <sample_rate>48000</sample_rate>
+        <profile>LC</profile>
+        <rate_control_mode>CBR</rate_control_mode>
+      </aac_settings>
+      <codec>aac</codec>
+      <audio_source_name>Audio Selector 1</audio_source_name>
+    </audio_description>
+    <caption_description>
+      <destination_type>Embedded</destination_type>
+      <id>403</id>
+      <id3_as_caption_content>false</id3_as_caption_content>
+      <language_code nil="true"/>
+      <language_description nil="true"/>
+      <order>1</order>
+      <caption_source_name>Caption Selector 1</caption_source_name>
+    </caption_description>
+  </stream_assembly>
+  <stream_assembly>
+    <id>552</id>
+    <preset_id nil="true"/>
+    <name>stream_assembly_4</name>
+    <video_description>
+      <afd_signaling>None</afd_signaling>
+      <anti_alias>true</anti_alias>
+      <drop_frame_timecode>true</drop_frame_timecode>
+      <encoder_type>gpu</encoder_type>
+      <fixed_afd nil="true"/>
+      <force_cpu_encode>false</force_cpu_encode>
+      <height>720</height>
+      <id>703</id>
+      <insert_color_metadata>true</insert_color_metadata>
+      <respond_to_afd>None</respond_to_afd>
+      <sharpness>100</sharpness>
+      <stretch_to_output>false</stretch_to_output>
+      <timecode_passthrough>true</timecode_passthrough>
+      <vbi_passthrough>false</vbi_passthrough>
+      <width>1280</width>
+      <h264_settings>
+        <adaptive_quantization>medium</adaptive_quantization>
+        <bitrate nil="true"/>
+        <buf_fill_pct nil="true"/>
+        <buf_size>6000000</buf_size>
+        <cabac>true</cabac>
+        <dynamic_sub_gop>true</dynamic_sub_gop>
+        <flicker_aq>true</flicker_aq>
+        <force_field_pictures>false</force_field_pictures>
+        <framerate_denominator>1001</framerate_denominator>
+        <framerate_follow_source>false</framerate_follow_source>
+        <framerate_numerator>30000</framerate_numerator>
+        <gop_b_reference>true</gop_b_reference>
+        <gop_closed_cadence>1</gop_closed_cadence>
+        <gop_markers>false</gop_markers>
+        <gop_num_b_frames>3</gop_num_b_frames>
+        <gop_size>3.0</gop_size>
+        <gop_size_units>seconds</gop_size_units>
+        <id>627</id>
+        <interpolate_frc>false</interpolate_frc>
+        <look_ahead_rate_control>high</look_ahead_rate_control>
+        <max_bitrate>3000000</max_bitrate>
+        <max_qp nil="true"/>
+        <min_bitrate nil="true"/>
+        <min_buf_occ>0</min_buf_occ>
+        <min_i_interval>0</min_i_interval>
+        <min_qp nil="true"/>
+        <motion_vector_direct_mode>spatial</motion_vector_direct_mode>
+        <num_ref_frames>3</num_ref_frames>
+        <par_denominator nil="true"/>
+        <par_follow_source>true</par_follow_source>
+        <par_numerator nil="true"/>
+        <passes>1</passes>
+        <progressive_references>false</progressive_references>
+        <qp nil="true"/>
+        <quality_level>7</quality_level>
+        <repeat_pps>false</repeat_pps>
+        <rp2027_syntax>false</rp2027_syntax>
+        <scd_mode>transition_detection</scd_mode>
+        <sei_timecode>false</sei_timecode>
+        <slices>1</slices>
+        <slow_pal>false</slow_pal>
+        <softness nil="true"/>
+        <spatial_aq>true</spatial_aq>
+        <svq>-2</svq>
+        <telecine>None</telecine>
+        <temporal_aq>true</temporal_aq>
+        <level>4</level>
+        <profile>High</profile>
+        <rate_control_mode>QVBR</rate_control_mode>
+        <interlace_mode>progressive</interlace_mode>
+      </h264_settings>
+      <gpu>0</gpu>
+      <selected_gpu nil="true"/>
+      <codec>h.264</codec>
+      <video_preprocessors>
+        <deinterlacer>
+          <algorithm>interpolate</algorithm>
+          <deinterlace_mode>Deinterlace</deinterlace_mode>
+          <force>false</force>
+          <id>693</id>
+        </deinterlacer>
+        <noise_reducer>
+          <aggressive_mode>0</aggressive_mode>
+          <filter>Conserve</filter>
+          <id>146</id>
+          <post_filter_sharpen_strength nil="true"/>
+          <speed nil="true"/>
+          <strength>2</strength>
+        </noise_reducer>
+        <timecode_burnin>
+          <font_size>16</font_size>
+          <id>217</id>
+          <position>top_left</position>
+          <prefix>fll - dev1 - </prefix>
+        </timecode_burnin>
+      </video_preprocessors>
+    </video_description>
+    <audio_description>
+      <audio_type>0</audio_type>
+      <follow_input_audio_type>true</follow_input_audio_type>
+      <follow_input_language_code>true</follow_input_language_code>
+      <id>709</id>
+      <language_code nil="true"/>
+      <nielsen_rtvod_watermark nil="true"/>
+      <order>1</order>
+      <stream_name nil="true"/>
+      <timecode_passthrough>false</timecode_passthrough>
+      <aac_settings>
+        <ad_broadcaster_mix>false</ad_broadcaster_mix>
+        <bitrate>96000</bitrate>
+        <coding_mode>2_0</coding_mode>
+        <id>740</id>
+        <latm_loas>false</latm_loas>
+        <mpeg2>false</mpeg2>
+        <sample_rate>48000</sample_rate>
+        <profile>LC</profile>
+        <rate_control_mode>CBR</rate_control_mode>
+      </aac_settings>
+      <codec>aac</codec>
+      <audio_source_name>Audio Selector 1</audio_source_name>
+    </audio_description>
+    <caption_description>
+      <destination_type>Embedded</destination_type>
+      <id>404</id>
+      <id3_as_caption_content>false</id3_as_caption_content>
+      <language_code nil="true"/>
+      <language_description nil="true"/>
+      <order>1</order>
+      <caption_source_name>Caption Selector 1</caption_source_name>
+    </caption_description>
+  </stream_assembly>
+  <stream_assembly>
+    <id>553</id>
+    <preset_id nil="true"/>
+    <name>stream_assembly_5</name>
+    <video_description>
+      <afd_signaling>None</afd_signaling>
+      <anti_alias>true</anti_alias>
+      <drop_frame_timecode>true</drop_frame_timecode>
+      <encoder_type>gpu</encoder_type>
+      <fixed_afd nil="true"/>
+      <force_cpu_encode>false</force_cpu_encode>
+      <height>720</height>
+      <id>704</id>
+      <insert_color_metadata>true</insert_color_metadata>
+      <respond_to_afd>None</respond_to_afd>
+      <sharpness>100</sharpness>
+      <stretch_to_output>false</stretch_to_output>
+      <timecode_passthrough>true</timecode_passthrough>
+      <vbi_passthrough>false</vbi_passthrough>
+      <width>1280</width>
+      <h264_settings>
+        <adaptive_quantization>high</adaptive_quantization>
+        <bitrate nil="true"/>
+        <buf_fill_pct nil="true"/>
+        <buf_size>12000000</buf_size>
+        <cabac>true</cabac>
+        <dynamic_sub_gop>true</dynamic_sub_gop>
+        <flicker_aq>true</flicker_aq>
+        <force_field_pictures>false</force_field_pictures>
+        <framerate_denominator>1001</framerate_denominator>
+        <framerate_follow_source>false</framerate_follow_source>
+        <framerate_numerator>60000</framerate_numerator>
+        <gop_b_reference>true</gop_b_reference>
+        <gop_closed_cadence>1</gop_closed_cadence>
+        <gop_markers>false</gop_markers>
+        <gop_num_b_frames>3</gop_num_b_frames>
+        <gop_size>3.0</gop_size>
+        <gop_size_units>seconds</gop_size_units>
+        <id>628</id>
+        <interpolate_frc>false</interpolate_frc>
+        <look_ahead_rate_control>high</look_ahead_rate_control>
+        <max_bitrate>6000000</max_bitrate>
+        <max_qp nil="true"/>
+        <min_bitrate nil="true"/>
+        <min_buf_occ>0</min_buf_occ>
+        <min_i_interval>0</min_i_interval>
+        <min_qp nil="true"/>
+        <motion_vector_direct_mode>spatial</motion_vector_direct_mode>
+        <num_ref_frames>3</num_ref_frames>
+        <par_denominator nil="true"/>
+        <par_follow_source>true</par_follow_source>
+        <par_numerator nil="true"/>
+        <passes>1</passes>
+        <progressive_references>false</progressive_references>
+        <qp nil="true"/>
+        <quality_level>8</quality_level>
+        <repeat_pps>false</repeat_pps>
+        <rp2027_syntax>false</rp2027_syntax>
+        <scd_mode>transition_detection</scd_mode>
+        <sei_timecode>false</sei_timecode>
+        <slices>1</slices>
+        <slow_pal>false</slow_pal>
+        <softness nil="true"/>
+        <spatial_aq>true</spatial_aq>
+        <svq>-2</svq>
+        <telecine>None</telecine>
+        <temporal_aq>true</temporal_aq>
+        <level>4</level>
+        <profile>High</profile>
+        <rate_control_mode>QVBR</rate_control_mode>
+        <interlace_mode>progressive</interlace_mode>
+      </h264_settings>
+      <gpu>0</gpu>
+      <selected_gpu nil="true"/>
+      <codec>h.264</codec>
+      <video_preprocessors>
+        <deinterlacer>
+          <algorithm>interpolate</algorithm>
+          <deinterlace_mode>Deinterlace</deinterlace_mode>
+          <force>false</force>
+          <id>694</id>
+        </deinterlacer>
+        <noise_reducer>
+          <aggressive_mode>0</aggressive_mode>
+          <filter>Conserve</filter>
+          <id>147</id>
+          <post_filter_sharpen_strength nil="true"/>
+          <speed nil="true"/>
+          <strength>2</strength>
+        </noise_reducer>
+        <timecode_burnin>
+          <font_size>16</font_size>
+          <id>218</id>
+          <position>top_left</position>
+          <prefix>fll - dev1 - </prefix>
+        </timecode_burnin>
+      </video_preprocessors>
+    </video_description>
+    <audio_description>
+      <audio_type>0</audio_type>
+      <follow_input_audio_type>true</follow_input_audio_type>
+      <follow_input_language_code>true</follow_input_language_code>
+      <id>710</id>
+      <language_code nil="true"/>
+      <nielsen_rtvod_watermark nil="true"/>
+      <order>1</order>
+      <stream_name nil="true"/>
+      <timecode_passthrough>false</timecode_passthrough>
+      <aac_settings>
+        <ad_broadcaster_mix>false</ad_broadcaster_mix>
+        <bitrate>96000</bitrate>
+        <coding_mode>2_0</coding_mode>
+        <id>741</id>
+        <latm_loas>false</latm_loas>
+        <mpeg2>false</mpeg2>
+        <sample_rate>48000</sample_rate>
+        <profile>LC</profile>
+        <rate_control_mode>CBR</rate_control_mode>
+      </aac_settings>
+      <codec>aac</codec>
+      <audio_source_name>Audio Selector 1</audio_source_name>
+    </audio_description>
+    <caption_description>
+      <destination_type>Embedded</destination_type>
+      <id>405</id>
+      <id3_as_caption_content>false</id3_as_caption_content>
+      <language_code nil="true"/>
+      <language_description nil="true"/>
+      <order>1</order>
+      <caption_source_name>Caption Selector 1</caption_source_name>
+    </caption_description>
+  </stream_assembly>
+  <output_group>
+    <custom_name>avc_east</custom_name>
+    <id>289</id>
+    <name nil="true"/>
+    <order>1</order>
+    <apple_live_group_settings>
+      <ad_markers>elemental-scte35</ad_markers>
+      <base_url_content nil="true"/>
+      <base_url_manifest nil="true"/>
+      <caption_language_setting>omit</caption_language_setting>
+      <cdn>AWS Elemental MediaStore</cdn>
+      <chunked_transfer>false</chunked_transfer>
+      <compress_manifests>false</compress_manifests>
+      <connection_retry_interval>2</connection_retry_interval>
+      <disable_cache>false</disable_cache>
+      <emit_single_file>false</emit_single_file>
+      <filecache_duration>300</filecache_duration>
+      <floating_point_manifest>true</floating_point_manifest>
+      <follow_segment>false</follow_segment>
+      <generate_meta_file>true</generate_meta_file>
+      <id>282</id>
+      <include_resolution>true</include_resolution>
+      <index_n_segments>10</index_n_segments>
+      <insert_program_date_time>true</insert_program_date_time>
+      <keep_segments>11</keep_segments>
+      <key_format nil="true"/>
+      <key_format_versions nil="true"/>
+      <log_uploads>false</log_uploads>
+      <min_segment_length>6</min_segment_length>
+      <num_retries>10</num_retries>
+      <on_input_loss>emit_output</on_input_loss>
+      <program_date_time_period>600</program_date_time_period>
+      <restart_delay>15</restart_delay>
+      <salt nil="true"/>
+      <segment_length>6</segment_length>
+      <segments_per_subdirectory>10</segments_per_subdirectory>
+      <timed_metadata_id3_frame>PRIV</timed_metadata_id3_frame>
+      <timed_metadata_id3_period>10</timed_metadata_id3_period>
+      <timestamp_delta_milliseconds nil="true"/>
+      <token nil="true"/>
+      <use_pantos_7_codecs>false</use_pantos_7_codecs>
+      <use_subdirectories>false</use_subdirectories>
+      <vod_mode>false</vod_mode>
+      <destination>
+        <id>328</id>
+        <password>FAKE_PASSWORD</password>
+        <username>FAKE_USERNAME</username>
+        <uri>FAKE_ADDRESS</uri>
+      </destination>
+    </apple_live_group_settings>
+    <type>apple_live_group_settings</type>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>769</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>true</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_960x540_2997</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>1</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>710</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>757</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <timed_metadata_pid>502</timed_metadata_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_0</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>770</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>false</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_400x224_2997</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>2</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>711</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>758</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_1</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>771</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>false</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_512x288_2997</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>3</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>712</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>759</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_2</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>772</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>false</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_640x360_2997</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>4</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>713</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>760</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_3</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>773</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>false</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_1280x720_2997</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>5</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>714</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>761</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_4</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>774</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>false</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_1280x720_5994</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>6</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>715</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>762</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_5</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+  </output_group>
+  <output_group>
+    <custom_name>avc_west</custom_name>
+    <id>290</id>
+    <name nil="true"/>
+    <order>2</order>
+    <apple_live_group_settings>
+      <ad_markers>elemental-scte35</ad_markers>
+      <base_url_content nil="true"/>
+      <base_url_manifest nil="true"/>
+      <caption_language_setting>omit</caption_language_setting>
+      <cdn>AWS Elemental MediaStore</cdn>
+      <chunked_transfer>false</chunked_transfer>
+      <compress_manifests>false</compress_manifests>
+      <connection_retry_interval>2</connection_retry_interval>
+      <disable_cache>false</disable_cache>
+      <emit_single_file>false</emit_single_file>
+      <filecache_duration>300</filecache_duration>
+      <floating_point_manifest>true</floating_point_manifest>
+      <follow_segment>false</follow_segment>
+      <generate_meta_file>true</generate_meta_file>
+      <id>283</id>
+      <include_resolution>true</include_resolution>
+      <index_n_segments>10</index_n_segments>
+      <insert_program_date_time>true</insert_program_date_time>
+      <keep_segments>21</keep_segments>
+      <key_format nil="true"/>
+      <key_format_versions nil="true"/>
+      <log_uploads>false</log_uploads>
+      <min_segment_length>0</min_segment_length>
+      <num_retries>10</num_retries>
+      <on_input_loss>emit_output</on_input_loss>
+      <program_date_time_period>600</program_date_time_period>
+      <restart_delay>15</restart_delay>
+      <salt nil="true"/>
+      <segment_length>6</segment_length>
+      <segments_per_subdirectory nil="true"/>
+      <timed_metadata_id3_frame>PRIV</timed_metadata_id3_frame>
+      <timed_metadata_id3_period>10</timed_metadata_id3_period>
+      <timestamp_delta_milliseconds nil="true"/>
+      <token nil="true"/>
+      <use_pantos_7_codecs>false</use_pantos_7_codecs>
+      <use_subdirectories>false</use_subdirectories>
+      <vod_mode>false</vod_mode>
+      <destination>
+        <id>329</id>
+        <password>ZF/yjHCSvgCkmM69hf6NJKOgm0Hp61xBVZaT8I6I</password>
+        <username>AKIAX3GU2745IRM7YRTZ</username>
+        <uri>https://hu5n3jjiyi2jev.data.mediastore.us-east-1.amazonaws.com/backup</uri>
+      </destination>
+    </apple_live_group_settings>
+    <type>apple_live_group_settings</type>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>775</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>true</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_960x540_2997</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>1</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>716</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>763</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <timed_metadata_pid>502</timed_metadata_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_0</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>776</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>true</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_400x224_2997</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>2</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>717</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>764</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <timed_metadata_pid>502</timed_metadata_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_1</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>777</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>true</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_512x288_2997</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>3</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>718</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>765</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <timed_metadata_pid>502</timed_metadata_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_2</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>778</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>true</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_640x360_2997</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>4</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>719</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>766</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <timed_metadata_pid>502</timed_metadata_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_3</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>779</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>true</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_1280x720_2997</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>5</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>720</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>767</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <timed_metadata_pid>502</timed_metadata_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_4</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+    <output>
+      <arib_captions_passthrough>false</arib_captions_passthrough>
+      <description nil="true"/>
+      <extension>m3u8</extension>
+      <id>780</id>
+      <insert_amf_metadata>false</insert_amf_metadata>
+      <insert_timed_metadata>true</insert_timed_metadata>
+      <log_edit_points>false</log_edit_points>
+      <name_modifier>_1280x720_5994</name_modifier>
+      <nielsen_id3_passthrough>false</nielsen_id3_passthrough>
+      <order>6</order>
+      <preset_id nil="true"/>
+      <scte35_passthrough>true</scte35_passthrough>
+      <start_paused>false</start_paused>
+      <timed_metadata_passthrough>false</timed_metadata_passthrough>
+      <write_hvc1_for_h265>false</write_hvc1_for_h265>
+      <apple_live_settings>
+        <audio_group_id>program_audio</audio_group_id>
+        <audio_rendition_sets>program_audio</audio_rendition_sets>
+        <id>721</id>
+        <iframe_only_manifests>false</iframe_only_manifests>
+        <segment_modifier>_seg</segment_modifier>
+        <segment_type>TS</segment_type>
+      </apple_live_settings>
+      <m3u8_settings>
+        <audio_frames_per_pes>4</audio_frames_per_pes>
+        <id>768</id>
+        <pat_interval>0</pat_interval>
+        <pcr_every_pes>true</pcr_every_pes>
+        <pcr_period nil="true"/>
+        <pmt_interval>0</pmt_interval>
+        <program_num>1</program_num>
+        <transport_stream_id nil="true"/>
+        <audio_pids>482-498</audio_pids>
+        <pmt_pid>480</pmt_pid>
+        <scte35_pid>500</scte35_pid>
+        <timed_metadata_pid>502</timed_metadata_pid>
+        <video_pid>481</video_pid>
+        <pcr_pid>481</pcr_pid>
+      </m3u8_settings>
+      <stream_assembly_name>stream_assembly_5</stream_assembly_name>
+      <container>m3u8</container>
+    </output>
+  </output_group>
+</live_event>
