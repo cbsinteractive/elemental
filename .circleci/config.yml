@@ -6,6 +6,8 @@ jobs:
       - image: circleci/python:3.6.1
     steps:
       - checkout
+      - restore_cache:
+          - key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
           name: create and run virtual env
           command:
@@ -22,5 +24,5 @@ jobs:
             pytest live/client_test.py
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-          path:
+          paths:
             - "venv"
