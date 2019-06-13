@@ -1,0 +1,2720 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <!--[if lt IE 10]><meta http-equiv="X-UA-Compatible" content="IE=9" /><![endif]-->
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="C2TOJ1kWixgtZz5M7EyXMXYvlXKt/ZdLc8ptS1bWb8U=" name="csrf-token" />
+
+    <title>Elemental Live - Events - elemental5</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    
+
+
+    <link href="/assets/aws_live_general-53fce733800587989dfffe2e80159b76.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/assets/live_events-ffada7760aef6611f72a258634d644f4.css" media="screen" rel="stylesheet" type="text/css" />
+
+    <script src="/assets/general-1c843a25d8552dfcba36323240a7ee71.js" type="text/javascript"></script>
+    <script src="/assets/realtime/live_events-a53399ec0fdfbe9b9760a5981875fe8f.js" type="text/javascript"></script>
+
+    <!--[if lt IE 9]>
+      <link href="/assets/ie-4c0e3c4e924edadf4cf2bce509867e1d.css" media="screen" rel="stylesheet" type="text/css" />
+      <script src="/assets/ie-84a929510f188375cbb683e56e651e1a.js" type="text/javascript"></script>
+    <![endif]-->
+
+  <script type="text/javascript">
+//<![CDATA[
+window._token = 'C2TOJ1kWixgtZz5M7EyXMXYvlXKt/ZdLc8ptS1bWb8U=';
+//]]>
+</script>
+  </head>
+  
+  <div id="browser_warning" class="hidden">
+  <div id="hide_browser_warning">hide</div>
+  Warning! You are using an unsupported browser. The latest version of <a href="http://www.mozilla.org/firefox/">Firefox</a> or <a href="http://www.google.com/chrome/">Chrome</a> is recommended.<br/>
+</div>
+
+  
+  <body class="live_events index" data-action="index" data-controller="live_events" data-mode="live" data-model-name="live_event" data-platform="appliance" data-product="Live" data-version="2.14.1.306914" id="live_events_index">
+    <div id="content" class="">
+      
+
+      <div id="heading">
+  <div class="header-left"></div>
+  <div class="header-right"></div>
+  <a href="/"><img alt="Elemental Technologies" id="logo" src="/assets/AWS_Elemental_LIVE_logo_H_REVERSE_COLOR_RGB-b7d42dbca85ffd38463f17e6c536be61.svg" /></a>
+
+    <div id="status_header">
+            <div id="status_indicator">
+        <h2>Status</h2>
+        <div class="status orange_status" title ="Pending"></div>
+      </div>
+    <div id="cpu_indicator">
+      <h2>CPU</h2>
+      <div class="level_indicator level_indicator_0" title="N/A%"><div class="level level_5"></div><div class="level level_4"></div><div class="level level_3"></div><div class="level level_2"></div><div class="level level_1"></div></div>
+    </div>
+      <div id="gpu_indicator">
+        <h2>GPUs</h2>
+            <div class="level_indicator level_indicator_0" title="N/A%"><div class="level level_5"></div><div class="level level_4"></div><div class="level level_3"></div><div class="level level_2"></div><div class="level level_1"></div></div>
+            <div class="level_indicator level_indicator_0" title="N/A%"><div class="level level_5"></div><div class="level level_4"></div><div class="level level_3"></div><div class="level level_2"></div><div class="level level_1"></div></div>
+            <div class="level_indicator level_indicator_0" title="N/A%"><div class="level level_5"></div><div class="level level_4"></div><div class="level level_3"></div><div class="level level_2"></div><div class="level level_1"></div></div>
+            <div class="level_indicator level_indicator_0" title="N/A%"><div class="level level_5"></div><div class="level level_4"></div><div class="level level_3"></div><div class="level level_2"></div><div class="level level_1"></div></div>
+      </div>
+    <div id="memory_indicator">
+      <h2>Memory</h2>
+      <div class="pie pie_0" title="N/A% Memory Used"></div>
+    </div>
+<div id="alert_indicator">
+  <div id="alert_list">
+    <div id="alerts_header">
+      
+<script type="text/javascript">
+//<![CDATA[
+window._alert = 'false'
+//]]>
+</script>
+
+    </div>
+  </div>
+</div>
+
+    </div>
+
+  <div id="header_buttons">
+  </div>
+
+</div>
+
+
+      <div id="main_container">
+        <ul id="nav">
+  <li class="live_events has_subnav selected">
+    <a href="/live_events">Event Control</a>
+    <ul class="subnav">
+      <li><a href="/mpts">MPTS Control</a></li>
+    </ul>
+  </li>
+  <li class="presets has_subnav ">
+    <a href="/presets">Presets</a>
+    <ul class="subnav">
+      <li><a href="/preset_categories">Preset Categories</a></li>
+      <li><a href="/remix_settings">Audio Remixing</a></li>
+    </ul>
+  </li>
+  <li class="profiles has_subnav ">
+    <a href="/live_event_profiles">Profiles</a>
+    <ul class="subnav">
+      <li><a href="/schedules">Schedules</a></li>
+    </ul>
+  </li>
+  <li class="statistics has_subnav ">
+    <a href="/stats">Stats</a>
+    <ul class="subnav">
+      <li><a href="/alerts">Alerts</a></li>
+      <li><a href="/messages">Messages</a></li>
+      <li><a href="/logs">Logs</a></li>
+    </ul>
+  </li>
+  <li class="settings has_subnav  ">
+    <a href="/settings">Settings</a>
+    <ul class="subnav">
+      <li><a href="/devices">Input Devices</a></li>
+      <li><a href="/routers">Routers</a></li>
+    </ul>
+  </li>
+  <li class="support has_subnav ">
+    <a href="/help">Support</a>
+    <ul class="subnav">
+      <li><a href="https://community.elementaltechnologies.com" target="_blank">Customer Portal</a></li>
+    </ul>
+  </li>
+  <li id="time_indicator">
+    <div class="date">Jun 12, 2019 11:46:41</div>
+  </li>
+</ul>
+
+        <div id="body_container">
+          
+          
+          <div id="black_header">
+  <div class="content">
+  <h1>Live Events</h1>
+  <div class="buttons">
+    <div id="search_live_events" class="search_field">
+  <form accept-charset="UTF-8" action="/live_events" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <input id="search" name="search" placeholder="Search for Live Events" type="text" />
+    <div id="search_magnifying_glass"></div>
+    
+</form></div>
+    <div class="button green_btn" data-icon="plus"><a href="/live_events/new"><div class="left"></div><div class="bg">New Event <i class="icon-plus"></i></div></a></div>
+  </div>
+</div>
+  <div class="separator"></div>
+  <div id="error_field">
+    
+  </div>
+  <div class="content">
+    <ul class="jobs_data">
+      <li><div class="blk_btn active"><a href="/live_events"><div class="left"></div><div class="bg">All</div><div class="right"></div></a></div></li>
+          <li id="filter_pending" class="hidden">
+            <div class="blk_btn "><a href="/live_events?filter=pending"><div class="left"></div><div class="bg">Pending (<em>0</em>)</div><div class="right"></div></a></div>
+          </li>
+          <li id="filter_active" class="hidden">
+            <div class="blk_btn "><a href="/live_events?filter=active"><div class="left"></div><div class="bg">Active (<em>0</em>)</div><div class="right"></div></a></div>
+          </li>
+          <li id="filter_complete" class="">
+            <div class="blk_btn "><a href="/live_events?filter=complete"><div class="left"></div><div class="bg">Complete (<em>3</em>)</div><div class="right"></div></a></div>
+          </li>
+          <li id="filter_error" class="hidden">
+            <div class="blk_btn "><a href="/live_events?filter=error"><div class="left"></div><div class="bg">Error (<em>0</em>)</div><div class="right"></div></a></div>
+          </li>
+          <li id="filter_cancelled" class="">
+            <div class="blk_btn "><a href="/live_events?filter=cancelled"><div class="left"></div><div class="bg">Cancelled (<em>3</em>)</div><div class="right"></div></a></div>
+          </li>
+          <li id="filter_archived" class="">
+            <div class="blk_btn "><a href="/live_events?filter=archived"><div class="left"></div><div class="bg">Archived (<em>25</em>)</div><div class="right"></div></a></div>
+          </li>
+    </ul>
+  </div>
+  <div class="separator"></div>
+</div>
+<div id="live_events">
+  <form accept-charset="UTF-8" action="live_events/update_multiple" autocomplete="off" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="C2TOJ1kWixgtZz5M7EyXMXYvlXKt/ZdLc8ptS1bWb8U=" /></div>    <input id="multi_action" name="multi_action" type="hidden" />
+    <input id="filter" name="filter" type="hidden" />
+    <input id="page" name="page" type="hidden" value="1" />
+    <input id="per_page" name="per_page" type="hidden" value="20" />
+    <div id="index_table">
+      <table id="jobs_table" summary="Latest events">
+  <thead>
+  <tr>
+    <th class="options" colspan="14">
+      <ul id="multiselect_options">
+        <li><input id="multiselect" name="multiselect" type="checkbox" value="all" /><span class="multi_select_colon">:</span></li>
+        <li class=""><div id="multi_action_archive" class="" title="Archive"><i class="icon-archive"></i></div></li>
+        <li class=""><div id="multi_action_cancel" class="" title="Cancel"><i class="icon-ban-circle"></i></div></li>
+        <li class="hidden"><div id="multi_action_delete" class="" title="Delete"><i class="icon-remove"></i></div></li>
+      </ul>
+    </th>
+  </tr>
+  <tr>
+    <th colspan="2" class="spacer_col"></th>
+    <th>Id</th>
+    <th id="name_col"><a href="/?direction=asc&amp;page=1&amp;per_page=20&amp;sort=name" class="sortable_column">Name<i class="icon-sort"></i></a></th>
+    <th hidden>Service Provider Name </th>
+    <th hidden>Service Name </th>
+    <th id="out_col">Outputs</th>
+    <th>Streams</th>
+    <th id="status_col">Status</th>
+    <th class="icon_col">&nbsp;</th>
+    <th class="icon_col">&nbsp;</th>
+    <th class="icon_col">&nbsp;</th>
+    <th class="icon_col">&nbsp;</th>
+    <th class="icon_col">&nbsp;</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr id="live_event_47" class="live_event_row  cancelled_row" data-current-status="cancelled">
+  <td class="check_col"><input class="multi_select" id="live_events_" name="live_events[]" type="checkbox" value="47" /></td>
+  <td class="icon_col toggle"><span class="icon-caret-right expand icon-large" id="live_event_47_icon"></span></td>
+  <td>47</td>
+  <td class="toggle bold_col source">Mannul Post Test2</td>
+
+  <td id="live_event_47_sdt_provider_name" hidden>N/A</td>
+  <td id="live_event_47_sdt_service_name" hidden>N/A</td>
+
+  <td class="toggle outputs_count">2</td>
+  <td class="toggle">2</td>
+  <td class="toggle status_text_cell cancelled" ><span id="live_event_47_status">Cancelled</span></td>
+  <td><div class="show_icon" title="Show"><a href="/live_events/47"><div class="filler"><i class="icon-search"></i></div></a></div></td>
+  <td>
+    <div class="edit_icon " title="Edit"><a href="/live_events/47/edit"><div class="filler"><i class="icon-pencil"></i></div></a></div>
+  </td>
+  <td><div class="duplicate_icon " title="Duplicate"><a href="/live_events/new?duplicate=47"><div class="filler"><i class="icon-copy"></i></div></a></div></td>
+  <td>
+    <div id="live_event_47_startable" class="control start_icon   hidden" title="Start"><div class="filler"><i class="icon-play"></i></div></div>
+    <div class="control stop_icon   hidden" title="Stop"><div class="filler"><i class="icon-stop"></i></div></div>
+    <div class="control reset_icon  " title="Reset"><div class="filler"><i class="icon-undo"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+  <td>
+    <div class="control cancel_icon  hidden" title="Cancel"><div class="filler"><i class="icon-ban-circle"></i></div></div>
+    <div class="control archive_icon  " title="Archive"><div class="filler"><i class="icon-archive"></i></div></div>
+    <div class="control delete_icon  hidden" title="Delete"><div class="filler"><i class="icon-remove"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+</tr>
+<tr class="live_event_47_detail media_detail  hidden">
+  <td></td>
+  <td colspan="11">
+    <strong id="live_event_47_display_input_title">Location:</strong>
+    <span id="live_event_47_display_input_string" class="">HD-SDI 1</span><br/>
+    <span id="live_event_47_active_input_numbers"> </span><span id="live_event_47_active_input_label"></span>
+  </td>
+</tr>
+<tr class="live_event_47_detail media_detail  hidden">
+  <td></td>
+  <td colspan="11">
+    <div class="output_list">
+        <h4>Apple HLS</h4>
+          <div class="output ">
+    <div class="settings_row">
+
+      <h4>/data/server/outgoing/multi_use/apple_270.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 1</label><br/>
+          480 x 270p<br />
+        TS; 400.0 kbit/s; 14.985 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item cancelled width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_47_outputs_413_output_status">Cancelled</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_47_outputs_413_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_47_outputs_413_elapsed">0</span> s <br/>
+          <span id="live_event_47_outputs_413_fps"><em>N/A</em></span> fps <br/>
+          psnr: <span id="live_event_47_outputs_413_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_47_outputs_413_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>/data/server/outgoing/multi_use/apple_360.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 2</label><br/>
+          640 x 360p<br />
+        TS; 600.0 kbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item cancelled width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_47_outputs_414_output_status">Cancelled</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_47_outputs_414_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_47_outputs_414_elapsed">0</span> s <br/>
+          <span id="live_event_47_outputs_414_fps"><em>N/A</em></span> fps <br/>
+          psnr: <span id="live_event_47_outputs_414_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_47_outputs_414_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+
+    </div>
+  </td>
+</tr>
+<tr id="live_event_46" class="live_event_row highlighted complete_row" data-current-status="complete">
+  <td class="check_col"><input class="multi_select" id="live_events_" name="live_events[]" type="checkbox" value="46" /></td>
+  <td class="icon_col toggle"><span class="icon-caret-right expand icon-large" id="live_event_46_icon"></span></td>
+  <td>46</td>
+  <td class="toggle bold_col source">Mannul Post Test</td>
+
+  <td id="live_event_46_sdt_provider_name" hidden>N/A</td>
+  <td id="live_event_46_sdt_service_name" hidden>N/A</td>
+
+  <td class="toggle outputs_count">2</td>
+  <td class="toggle">2</td>
+  <td class="toggle status_text_cell complete" ><span id="live_event_46_status">Complete</span></td>
+  <td><div class="show_icon" title="Show"><a href="/live_events/46"><div class="filler"><i class="icon-search"></i></div></a></div></td>
+  <td>
+    <div class="edit_icon " title="Edit"><a href="/live_events/46/edit"><div class="filler"><i class="icon-pencil"></i></div></a></div>
+  </td>
+  <td><div class="duplicate_icon " title="Duplicate"><a href="/live_events/new?duplicate=46"><div class="filler"><i class="icon-copy"></i></div></a></div></td>
+  <td>
+    <div id="live_event_46_startable" class="control start_icon   hidden" title="Start"><div class="filler"><i class="icon-play"></i></div></div>
+    <div class="control stop_icon   hidden" title="Stop"><div class="filler"><i class="icon-stop"></i></div></div>
+    <div class="control reset_icon  " title="Reset"><div class="filler"><i class="icon-undo"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+  <td>
+    <div class="control cancel_icon  hidden" title="Cancel"><div class="filler"><i class="icon-ban-circle"></i></div></div>
+    <div class="control archive_icon  " title="Archive"><div class="filler"><i class="icon-archive"></i></div></div>
+    <div class="control delete_icon  hidden" title="Delete"><div class="filler"><i class="icon-remove"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+</tr>
+<tr class="live_event_46_detail media_detail highlighted hidden">
+  <td></td>
+  <td colspan="11">
+    <strong id="live_event_46_display_input_title">Location:</strong>
+    <span id="live_event_46_display_input_string" class="">HD-SDI 1</span><br/>
+    <span id="live_event_46_active_input_numbers"> </span><span id="live_event_46_active_input_label"></span>
+  </td>
+</tr>
+<tr class="live_event_46_detail media_detail highlighted hidden">
+  <td></td>
+  <td colspan="11">
+    <strong>Started</strong> Tue 06/11/19 04:48:45 PM&nbsp;&nbsp;&nbsp;
+    <strong>Processing Time</strong> <span id="live_event_46_elapsed_time_in_words">00:01:13</span>&nbsp;&nbsp;&nbsp;
+      <strong>Completed</strong> Tue 06/11/19 04:50:10 PM
+  </td>
+</tr>
+<tr class="live_event_46_detail media_detail highlighted hidden">
+  <td></td>
+  <td colspan="11">
+    <div class="output_list">
+        <h4>Apple HLS</h4>
+          <div class="output ">
+    <div class="settings_row">
+
+      <h4>/data/server/outgoing/multi_use/apple_270.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 1</label><br/>
+          480 x 270p<br />
+        TS; 400.0 kbit/s; 14.985 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_46_outputs_411_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_46_outputs_411_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_46_outputs_411_elapsed">73</span> s <br/>
+          <span id="live_event_46_outputs_411_fps">0.0</span> fps <br/>
+          psnr: <span id="live_event_46_outputs_411_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_46_outputs_411_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>/data/server/outgoing/multi_use/apple_360.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 2</label><br/>
+          640 x 360p<br />
+        TS; 600.0 kbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_46_outputs_412_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_46_outputs_412_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_46_outputs_412_elapsed">73</span> s <br/>
+          <span id="live_event_46_outputs_412_fps">0.0</span> fps <br/>
+          psnr: <span id="live_event_46_outputs_412_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_46_outputs_412_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+
+    </div>
+  </td>
+</tr>
+<tr id="live_event_45" class="live_event_row  complete_row" data-current-status="complete">
+  <td class="check_col"><input class="multi_select" id="live_events_" name="live_events[]" type="checkbox" value="45" /></td>
+  <td class="icon_col toggle"><span class="icon-caret-right expand icon-large" id="live_event_45_icon"></span></td>
+  <td>45</td>
+  <td class="toggle bold_col source">Auto Post Test</td>
+
+  <td id="live_event_45_sdt_provider_name" hidden>N/A</td>
+  <td id="live_event_45_sdt_service_name" hidden>N/A</td>
+
+  <td class="toggle outputs_count">6</td>
+  <td class="toggle">6</td>
+  <td class="toggle status_text_cell complete" ><span id="live_event_45_status">Complete</span></td>
+  <td><div class="show_icon" title="Show"><a href="/live_events/45"><div class="filler"><i class="icon-search"></i></div></a></div></td>
+  <td>
+    <div class="edit_icon " title="Edit"><a href="/live_events/45/edit"><div class="filler"><i class="icon-pencil"></i></div></a></div>
+  </td>
+  <td><div class="duplicate_icon " title="Duplicate"><a href="/live_events/new?duplicate=45"><div class="filler"><i class="icon-copy"></i></div></a></div></td>
+  <td>
+    <div id="live_event_45_startable" class="control start_icon   hidden" title="Start"><div class="filler"><i class="icon-play"></i></div></div>
+    <div class="control stop_icon   hidden" title="Stop"><div class="filler"><i class="icon-stop"></i></div></div>
+    <div class="control reset_icon  " title="Reset"><div class="filler"><i class="icon-undo"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+  <td>
+    <div class="control cancel_icon  hidden" title="Cancel"><div class="filler"><i class="icon-ban-circle"></i></div></div>
+    <div class="control archive_icon  " title="Archive"><div class="filler"><i class="icon-archive"></i></div></div>
+    <div class="control delete_icon  hidden" title="Delete"><div class="filler"><i class="icon-remove"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+</tr>
+<tr class="live_event_45_detail media_detail  hidden">
+  <td></td>
+  <td colspan="11">
+    <strong id="live_event_45_display_input_title">Location:</strong>
+    <span id="live_event_45_display_input_string" class="">HD-SDI 4</span><br/>
+    <span id="live_event_45_active_input_numbers"> </span><span id="live_event_45_active_input_label"></span>
+  </td>
+</tr>
+<tr class="live_event_45_detail media_detail  hidden">
+  <td></td>
+  <td colspan="11">
+    <strong>Started</strong> Tue 06/11/19 04:51:19 PM&nbsp;&nbsp;&nbsp;
+    <strong>Processing Time</strong> <span id="live_event_45_elapsed_time_in_words">00:01:07</span>&nbsp;&nbsp;&nbsp;
+      <strong>Completed</strong> Tue 06/11/19 04:52:36 PM
+  </td>
+</tr>
+<tr class="live_event_45_detail media_detail  hidden">
+  <td></td>
+  <td colspan="11">
+    <div class="output_list">
+        <h4>Apple HLS</h4>
+          <div class="output ">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-1200.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 1</label><br/>
+          768 x 432p<br />
+        TS; 1.2 Mbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_45_outputs_405_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_45_outputs_405_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_45_outputs_405_elapsed">67</span> s <br/>
+          <span id="live_event_45_outputs_405_fps">30.0</span> fps <br/>
+          psnr: <span id="live_event_45_outputs_405_psnr">43.7</span>
+          DoVi: <span id="live_event_45_outputs_405_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-250.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 2</label><br/>
+          400 x 224p<br />
+        TS; 250.0 kbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_45_outputs_406_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_45_outputs_406_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_45_outputs_406_elapsed">67</span> s <br/>
+          <span id="live_event_45_outputs_406_fps">30.0</span> fps <br/>
+          psnr: <span id="live_event_45_outputs_406_psnr">38.5</span>
+          DoVi: <span id="live_event_45_outputs_406_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=345400,AVERAGE-BANDWIDTH=345400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=400x224,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-250.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-500.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 3</label><br/>
+          512 x 288p<br />
+        TS; 500.0 kbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_45_outputs_407_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_45_outputs_407_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_45_outputs_407_elapsed">67</span> s <br/>
+          <span id="live_event_45_outputs_407_fps">30.0</span> fps <br/>
+          psnr: <span id="live_event_45_outputs_407_psnr">41.2</span>
+          DoVi: <span id="live_event_45_outputs_407_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-800.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 4</label><br/>
+          640 x 360p<br />
+        TS; 800.0 kbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_45_outputs_408_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_45_outputs_408_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_45_outputs_408_elapsed">67</span> s <br/>
+          <span id="live_event_45_outputs_408_fps">30.0</span> fps <br/>
+          psnr: <span id="live_event_45_outputs_408_psnr">42.5</span>
+          DoVi: <span id="live_event_45_outputs_408_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-1800.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 5</label><br/>
+          960 x 540p<br />
+        TS; 1.8 Mbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_45_outputs_409_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_45_outputs_409_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_45_outputs_409_elapsed">67</span> s <br/>
+          <span id="live_event_45_outputs_409_fps">30.0</span> fps <br/>
+          psnr: <span id="live_event_45_outputs_409_psnr">44.7</span>
+          DoVi: <span id="live_event_45_outputs_409_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-3500.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 6</label><br/>
+          1280 x 720p<br />
+        TS; 3.5 Mbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_45_outputs_410_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_45_outputs_410_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_45_outputs_410_elapsed">67</span> s <br/>
+          <span id="live_event_45_outputs_410_fps">30.0</span> fps <br/>
+          psnr: <span id="live_event_45_outputs_410_psnr">47.6</span>
+          DoVi: <span id="live_event_45_outputs_410_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+
+        <h4>Apple HLS 2</h4>
+          <div class="output ">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+
+        <h4>Apple HLS 3</h4>
+          <div class="output ">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=345400,AVERAGE-BANDWIDTH=345400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=400x224,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-250.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=345400,AVERAGE-BANDWIDTH=345400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=400x224,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-250.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+
+        <h4>Apple HLS 4</h4>
+          <div class="output ">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=345400,AVERAGE-BANDWIDTH=345400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=400x224,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-250.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=345400,AVERAGE-BANDWIDTH=345400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=400x224,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-250.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+
+        <h4>Apple HLS 5</h4>
+          <div class="output ">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </td>
+</tr>
+<tr id="live_event_44" class="live_event_row highlighted cancelled_row" data-current-status="cancelled">
+  <td class="check_col"><input class="multi_select" id="live_events_" name="live_events[]" type="checkbox" value="44" /></td>
+  <td class="icon_col toggle"><span class="icon-caret-right expand icon-large" id="live_event_44_icon"></span></td>
+  <td>44</td>
+  <td class="toggle bold_col source">Masters Live: 15 and 16 (Primary)</td>
+
+  <td id="live_event_44_sdt_provider_name" hidden>N/A</td>
+  <td id="live_event_44_sdt_service_name" hidden>N/A</td>
+
+  <td class="toggle outputs_count">6</td>
+  <td class="toggle">6</td>
+  <td class="toggle status_text_cell cancelled" ><span id="live_event_44_status">Cancelled</span></td>
+  <td><div class="show_icon" title="Show"><a href="/live_events/44"><div class="filler"><i class="icon-search"></i></div></a></div></td>
+  <td>
+    <div class="edit_icon " title="Edit"><a href="/live_events/44/edit"><div class="filler"><i class="icon-pencil"></i></div></a></div>
+  </td>
+  <td><div class="duplicate_icon " title="Duplicate"><a href="/live_events/new?duplicate=44"><div class="filler"><i class="icon-copy"></i></div></a></div></td>
+  <td>
+    <div id="live_event_44_startable" class="control start_icon   hidden" title="Start"><div class="filler"><i class="icon-play"></i></div></div>
+    <div class="control stop_icon   hidden" title="Stop"><div class="filler"><i class="icon-stop"></i></div></div>
+    <div class="control reset_icon  " title="Reset"><div class="filler"><i class="icon-undo"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+  <td>
+    <div class="control cancel_icon  hidden" title="Cancel"><div class="filler"><i class="icon-ban-circle"></i></div></div>
+    <div class="control archive_icon  " title="Archive"><div class="filler"><i class="icon-archive"></i></div></div>
+    <div class="control delete_icon  hidden" title="Delete"><div class="filler"><i class="icon-remove"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+</tr>
+<tr class="live_event_44_detail media_detail highlighted hidden">
+  <td></td>
+  <td colspan="11">
+    <strong id="live_event_44_display_input_title">Location:</strong>
+    <span id="live_event_44_display_input_string" class="">HD-SDI 4</span><br/>
+    <span id="live_event_44_active_input_numbers"> </span><span id="live_event_44_active_input_label"></span>
+  </td>
+</tr>
+<tr class="live_event_44_detail media_detail highlighted hidden">
+  <td></td>
+  <td colspan="11">
+    <div class="output_list">
+        <h4>Apple HLS</h4>
+          <div class="output ">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-1200.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 1</label><br/>
+          768 x 432p<br />
+        TS; 1.2 Mbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item cancelled width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_44_outputs_399_output_status">Cancelled</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_44_outputs_399_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_44_outputs_399_elapsed">0</span> s <br/>
+          <span id="live_event_44_outputs_399_fps"><em>N/A</em></span> fps <br/>
+          psnr: <span id="live_event_44_outputs_399_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_44_outputs_399_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-250.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 2</label><br/>
+          400 x 224p<br />
+        TS; 250.0 kbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item cancelled width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_44_outputs_400_output_status">Cancelled</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_44_outputs_400_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_44_outputs_400_elapsed">0</span> s <br/>
+          <span id="live_event_44_outputs_400_fps"><em>N/A</em></span> fps <br/>
+          psnr: <span id="live_event_44_outputs_400_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_44_outputs_400_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=345400,AVERAGE-BANDWIDTH=345400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=400x224,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-250.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-500.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 3</label><br/>
+          512 x 288p<br />
+        TS; 500.0 kbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item cancelled width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_44_outputs_401_output_status">Cancelled</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_44_outputs_401_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_44_outputs_401_elapsed">0</span> s <br/>
+          <span id="live_event_44_outputs_401_fps"><em>N/A</em></span> fps <br/>
+          psnr: <span id="live_event_44_outputs_401_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_44_outputs_401_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-800.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 4</label><br/>
+          640 x 360p<br />
+        TS; 800.0 kbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item cancelled width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_44_outputs_402_output_status">Cancelled</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_44_outputs_402_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_44_outputs_402_elapsed">0</span> s <br/>
+          <span id="live_event_44_outputs_402_fps"><em>N/A</em></span> fps <br/>
+          psnr: <span id="live_event_44_outputs_402_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_44_outputs_402_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-1800.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 5</label><br/>
+          960 x 540p<br />
+        TS; 1.8 Mbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item cancelled width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_44_outputs_403_output_status">Cancelled</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_44_outputs_403_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_44_outputs_403_elapsed">0</span> s <br/>
+          <span id="live_event_44_outputs_403_fps"><em>N/A</em></span> fps <br/>
+          psnr: <span id="live_event_44_outputs_403_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_44_outputs_403_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>https://post.cbssportslive-i.akamaihd.net/623184/masterslive_15and16/master-3500.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 6</label><br/>
+          1280 x 720p<br />
+        TS; 3.5 Mbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item cancelled width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_44_outputs_404_output_status">Cancelled</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_44_outputs_404_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_44_outputs_404_elapsed">0</span> s <br/>
+          <span id="live_event_44_outputs_404_fps"><em>N/A</em></span> fps <br/>
+          psnr: <span id="live_event_44_outputs_404_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_44_outputs_404_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+
+        <h4>Apple HLS 2</h4>
+          <div class="output ">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+
+        <h4>Apple HLS 3</h4>
+          <div class="output ">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=345400,AVERAGE-BANDWIDTH=345400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=400x224,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-250.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=345400,AVERAGE-BANDWIDTH=345400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=400x224,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-250.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+
+        <h4>Apple HLS 4</h4>
+          <div class="output ">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=345400,AVERAGE-BANDWIDTH=345400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=400x224,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-250.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=345400,AVERAGE-BANDWIDTH=345400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=400x224,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-250.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+
+        <h4>Apple HLS 5</h4>
+          <div class="output ">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=1425600,AVERAGE-BANDWIDTH=1425600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=768x432,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1200.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=620400,AVERAGE-BANDWIDTH=620400,CODECS=&quot;avc1.66.30,mp4a.40.5&quot;,RESOLUTION=512x288,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=950400,AVERAGE-BANDWIDTH=950400,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=640x360,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=2085600,AVERAGE-BANDWIDTH=2085600,CODECS=&quot;avc1.4d401f,mp4a.40.5&quot;,RESOLUTION=960x540,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-1800.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+      <div class="item output_description">
+        <label>External Output</label><br/>
+      </div>
+      <div class="item bandwidth">
+        <label>Stream Attributes</label><br/>
+        BANDWIDTH=3955600,AVERAGE-BANDWIDTH=3955600,CODECS=&quot;avc1.4d401f,mp4a.40.2&quot;,RESOLUTION=1280x720,FRAME-RATE=29.970
+      </div>
+      <div class="item">
+        <label>External URI</label><br/>
+        https://cbssportslive-i.akamaihd.net/hls/live/623184-b/masterslive_15and16/master-3500.m3u8
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </td>
+</tr>
+<tr id="live_event_43" class="live_event_row  complete_row" data-current-status="complete">
+  <td class="check_col"><input class="multi_select" id="live_events_" name="live_events[]" type="checkbox" value="43" /></td>
+  <td class="icon_col toggle"><span class="icon-caret-right expand icon-large" id="live_event_43_icon"></span></td>
+  <td>43</td>
+  <td class="toggle bold_col source">DEV TEST</td>
+
+  <td id="live_event_43_sdt_provider_name" hidden>N/A</td>
+  <td id="live_event_43_sdt_service_name" hidden>N/A</td>
+
+  <td class="toggle outputs_count">7</td>
+  <td class="toggle">6</td>
+  <td class="toggle status_text_cell complete" ><span id="live_event_43_status">Complete</span></td>
+  <td><div class="show_icon" title="Show"><a href="/live_events/43"><div class="filler"><i class="icon-search"></i></div></a></div></td>
+  <td>
+    <div class="edit_icon " title="Edit"><a href="/live_events/43/edit"><div class="filler"><i class="icon-pencil"></i></div></a></div>
+  </td>
+  <td><div class="duplicate_icon " title="Duplicate"><a href="/live_events/new?duplicate=43"><div class="filler"><i class="icon-copy"></i></div></a></div></td>
+  <td>
+    <div id="live_event_43_startable" class="control start_icon   hidden" title="Start"><div class="filler"><i class="icon-play"></i></div></div>
+    <div class="control stop_icon   hidden" title="Stop"><div class="filler"><i class="icon-stop"></i></div></div>
+    <div class="control reset_icon  " title="Reset"><div class="filler"><i class="icon-undo"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+  <td>
+    <div class="control cancel_icon  hidden" title="Cancel"><div class="filler"><i class="icon-ban-circle"></i></div></div>
+    <div class="control archive_icon  " title="Archive"><div class="filler"><i class="icon-archive"></i></div></div>
+    <div class="control delete_icon  hidden" title="Delete"><div class="filler"><i class="icon-remove"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+</tr>
+<tr class="live_event_43_detail media_detail  hidden">
+  <td></td>
+  <td colspan="11">
+    <strong id="live_event_43_display_input_title">Location:</strong>
+    <span id="live_event_43_display_input_string" class="">HD-SDI 2</span><br/>
+    <span id="live_event_43_active_input_numbers"> </span><span id="live_event_43_active_input_label"></span>
+  </td>
+</tr>
+<tr class="live_event_43_detail media_detail  hidden">
+  <td></td>
+  <td colspan="11">
+    <strong>Started</strong> Tue 06/11/19 04:58:42 PM&nbsp;&nbsp;&nbsp;
+    <strong>Processing Time</strong> <span id="live_event_43_elapsed_time_in_words">00:00:44</span>&nbsp;&nbsp;&nbsp;
+      <strong>Completed</strong> Tue 06/11/19 04:59:39 PM
+  </td>
+</tr>
+<tr class="live_event_43_detail media_detail  hidden">
+  <td></td>
+  <td colspan="11">
+    <div class="output_list">
+        <h4>Apple HLS</h4>
+          <div class="output ">
+    <div class="settings_row">
+
+      <h4>mediastoressl://6wozixcrwfc46k.data.mediastore.us-east-1.amazonaws.com/ctenc1/master_960x540_29.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 1</label><br/>
+          960 x 540p<br />
+        TS; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_43_outputs_392_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_43_outputs_392_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_43_outputs_392_elapsed">44</span> s <br/>
+          <span id="live_event_43_outputs_392_fps">30.0</span> fps <br/>
+          psnr: <span id="live_event_43_outputs_392_psnr">41.7</span>
+          DoVi: <span id="live_event_43_outputs_392_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>mediastoressl://6wozixcrwfc46k.data.mediastore.us-east-1.amazonaws.com/ctenc1/master_400x224_29.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 2</label><br/>
+          400 x 224p<br />
+        TS; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_43_outputs_393_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_43_outputs_393_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_43_outputs_393_elapsed">44</span> s <br/>
+          <span id="live_event_43_outputs_393_fps">30.1</span> fps <br/>
+          psnr: <span id="live_event_43_outputs_393_psnr">42.6</span>
+          DoVi: <span id="live_event_43_outputs_393_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>mediastoressl://6wozixcrwfc46k.data.mediastore.us-east-1.amazonaws.com/ctenc1/master_512x288_29.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 3</label><br/>
+          512 x 288p<br />
+        TS; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_43_outputs_394_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_43_outputs_394_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_43_outputs_394_elapsed">44</span> s <br/>
+          <span id="live_event_43_outputs_394_fps">30.1</span> fps <br/>
+          psnr: <span id="live_event_43_outputs_394_psnr">42.7</span>
+          DoVi: <span id="live_event_43_outputs_394_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>mediastoressl://6wozixcrwfc46k.data.mediastore.us-east-1.amazonaws.com/ctenc1/master_640x360_29.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 4</label><br/>
+          640 x 360p<br />
+        TS; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_43_outputs_395_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_43_outputs_395_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_43_outputs_395_elapsed">44</span> s <br/>
+          <span id="live_event_43_outputs_395_fps">30.0</span> fps <br/>
+          psnr: <span id="live_event_43_outputs_395_psnr">42.1</span>
+          DoVi: <span id="live_event_43_outputs_395_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>mediastoressl://6wozixcrwfc46k.data.mediastore.us-east-1.amazonaws.com/ctenc1/master_1280x720_29.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 5</label><br/>
+          1280 x 720p<br />
+        TS; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_43_outputs_396_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_43_outputs_396_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_43_outputs_396_elapsed">44</span> s <br/>
+          <span id="live_event_43_outputs_396_fps">29.9</span> fps <br/>
+          psnr: <span id="live_event_43_outputs_396_psnr">41.4</span>
+          DoVi: <span id="live_event_43_outputs_396_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>mediastoressl://6wozixcrwfc46k.data.mediastore.us-east-1.amazonaws.com/ctenc1/master_1280x720_59.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 6</label><br/>
+          1280 x 720p<br />
+        TS; 59.940 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_43_outputs_397_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_43_outputs_397_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_43_outputs_397_elapsed">44</span> s <br/>
+          <span id="live_event_43_outputs_397_fps">59.7</span> fps <br/>
+          psnr: <span id="live_event_43_outputs_397_psnr">42.4</span>
+          DoVi: <span id="live_event_43_outputs_397_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+
+        <h4>Adobe RTMP</h4>
+          <div class="output ">
+    <div class="settings_row">
+
+      <h4>rtmp://198.99.122.36:1935/preview/ctenc1_hdsdi2</h4>
+
+      <div class="item output_description">
+        <label>Stream 3</label><br/>
+          512 x 288p<br />
+        29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item complete width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_43_outputs_398_output_status">Complete</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_43_outputs_398_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_43_outputs_398_elapsed">44</span> s <br/>
+          <span id="live_event_43_outputs_398_fps">30.1</span> fps <br/>
+          psnr: <span id="live_event_43_outputs_398_psnr">42.7</span>
+          DoVi: <span id="live_event_43_outputs_398_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+
+    </div>
+  </td>
+</tr>
+<tr id="live_event_42" class="live_event_row highlighted cancelled_row" data-current-status="cancelled">
+  <td class="check_col"><input class="multi_select" id="live_events_" name="live_events[]" type="checkbox" value="42" /></td>
+  <td class="icon_col toggle"><span class="icon-caret-right expand icon-large" id="live_event_42_icon"></span></td>
+  <td>42</td>
+  <td class="toggle bold_col source">HD-SDI 1</td>
+
+  <td id="live_event_42_sdt_provider_name" hidden>N/A</td>
+  <td id="live_event_42_sdt_service_name" hidden>N/A</td>
+
+  <td class="toggle outputs_count">2</td>
+  <td class="toggle">2</td>
+  <td class="toggle status_text_cell cancelled" ><span id="live_event_42_status">Cancelled</span></td>
+  <td><div class="show_icon" title="Show"><a href="/live_events/42"><div class="filler"><i class="icon-search"></i></div></a></div></td>
+  <td>
+    <div class="edit_icon " title="Edit"><a href="/live_events/42/edit"><div class="filler"><i class="icon-pencil"></i></div></a></div>
+  </td>
+  <td><div class="duplicate_icon " title="Duplicate"><a href="/live_events/new?duplicate=42"><div class="filler"><i class="icon-copy"></i></div></a></div></td>
+  <td>
+    <div id="live_event_42_startable" class="control start_icon   hidden" title="Start"><div class="filler"><i class="icon-play"></i></div></div>
+    <div class="control stop_icon   hidden" title="Stop"><div class="filler"><i class="icon-stop"></i></div></div>
+    <div class="control reset_icon  " title="Reset"><div class="filler"><i class="icon-undo"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+  <td>
+    <div class="control cancel_icon  hidden" title="Cancel"><div class="filler"><i class="icon-ban-circle"></i></div></div>
+    <div class="control archive_icon  " title="Archive"><div class="filler"><i class="icon-archive"></i></div></div>
+    <div class="control delete_icon  hidden" title="Delete"><div class="filler"><i class="icon-remove"></i></div></div>
+    <div class="control transition_icon hidden"><div class="filler"><i class="icon-spin icon-spinner"></i></div></div>
+  </td>
+</tr>
+<tr class="live_event_42_detail media_detail highlighted hidden">
+  <td></td>
+  <td colspan="11">
+    <strong id="live_event_42_display_input_title">Location:</strong>
+    <span id="live_event_42_display_input_string" class="">HD-SDI 1</span><br/>
+    <span id="live_event_42_active_input_numbers"> </span><span id="live_event_42_active_input_label"></span>
+  </td>
+</tr>
+<tr class="live_event_42_detail media_detail highlighted hidden">
+  <td></td>
+  <td colspan="11">
+    <div class="output_list">
+        <h4>Apple HLS</h4>
+          <div class="output ">
+    <div class="settings_row">
+
+      <h4>/data/server/outgoing/multi_use/apple_270.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 1</label><br/>
+          480 x 270p<br />
+        TS; 400.0 kbit/s; 14.985 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item cancelled width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_42_outputs_390_output_status">Cancelled</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_42_outputs_390_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_42_outputs_390_elapsed">0</span> s <br/>
+          <span id="live_event_42_outputs_390_fps"><em>N/A</em></span> fps <br/>
+          psnr: <span id="live_event_42_outputs_390_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_42_outputs_390_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+  <div class="output dotted">
+    <div class="settings_row">
+
+      <h4>/data/server/outgoing/multi_use/apple_360.m3u8</h4>
+
+      <div class="item output_description">
+        <label>Stream 2</label><br/>
+          640 x 360p<br />
+        TS; 600.0 kbit/s; 29.970 fps; 
+      </div>
+      <div class="item status_icon">
+        <i class=" icon-2x"></i>
+      </div>
+
+      <div class="item cancelled width_65">
+        <label>Status</label><br/>
+
+        <span id="live_event_42_outputs_391_output_status">Cancelled</span>
+                <a href="/alerts" class="output_alert_link hidden" id="live_event_42_outputs_391_alert_set" title="">
+          <span class="alert_set"></span>
+</a>      </div>
+
+        <div class="item">
+          <label>Statistics</label><br />
+          <span id="live_event_42_outputs_391_elapsed">0</span> s <br/>
+          <span id="live_event_42_outputs_391_fps"><em>N/A</em></span> fps <br/>
+          psnr: <span id="live_event_42_outputs_391_psnr"><em>N/A</em></span>
+          DoVi: <span id="live_event_42_outputs_391_dovi"><em>N/A</em></span>
+        </div>
+    </div>
+  </div>
+
+    </div>
+  </td>
+</tr>
+
+  </tbody>
+</table>
+
+    </div>
+    <div id="pagination">
+      
+    </div>
+</form></div>
+
+        </div>
+      </div>
+
+      <div id="footer">
+  <div class="footer-left"></div>
+  <div class="footer-right"></div>
+    <span class="text">AWS Elemental Live  &middot
+    <span class="version">Version 2.14.1.306914  &middot
+    </span>Copyright 2018 Elemental Technologies LLC </span>
+</div>
+<div id="footer_cover"></div>
+
+      <div id="overlay" class="hidden"></div>
+    </div>
+</body></html>

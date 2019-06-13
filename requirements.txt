@@ -1,5 +1,8 @@
-pytest==3.7.3
-requests-mock==1.6.0
-requests==v2.21.0
 flake8==3.7.7
-autopep8==1.4.4
+Flask==1.0.3
+Flask-RESTful==0.3.7
+Jinja2==2.10.1
+mock==3.0.5
+pytest==3.7.3
+requests==2.21.0
+requests-mock==1.6.0

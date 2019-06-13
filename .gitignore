@@ -3,7 +3,8 @@
 live/main.py
 live/Keys.py
 live/.DS_Store
-live/templates/sample_event.xml
+live/templates/.DS_Store
+venv
 
 __pycache__
 .idea
