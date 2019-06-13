@@ -9,7 +9,7 @@ jobs:
       - run:
           name: install dependencies
           command:
-            pip install -r ../requirements.txt
+            pip install -r requirements.txt
       - run:
           command:
             pytest client_test.py
