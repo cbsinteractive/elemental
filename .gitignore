@@ -5,6 +5,7 @@ live/Keys.py
 live/.DS_Store
 live/templates/.DS_Store
 venv
+.coverage
 
 __pycache__
 .idea
