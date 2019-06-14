@@ -9,5 +9,4 @@ setup(
     license='unlicense',
     long_description=open('README.md').read(),
     install_requires=requirements,
-    packages=['elemental']
 )
