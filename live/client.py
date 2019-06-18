@@ -3,6 +3,12 @@ from jinja2 import Template
 import time
 from urllib.parse import urlparse
 import hashlib
+import xml.etree.ElementTree as ET
+
+
+class InvalidHTTPResponse(Exception):
+    """Execption raised by 'requests' returned with invalid http status code"""
+    pass
 
 
 class ElementalLive():
@@ -52,11 +58,27 @@ class ElementalLive():
             headers = self.generate_headers_with_authentication_enabled(
                 url, self.user, self.api_key)
 
-        # Send request
-        response = requests.request(method='POST', url=url, data=body,
-                                    headers=headers)
+        # Send request and do exception handling
+        try:
+            response = requests.request(method='POST', url=url, data=body,
+                                        headers=headers)
+            if response.status_code != 201:
+                raise InvalidHTTPResponse(f"Create Event Failed \n"
+                                          f"Please Check if You Passed"
+                                          f"The Correct Params")
+        except requests.exceptions.RequestException as e:
+            print(e)
+            return
+        except InvalidHTTPResponse as e:
+            print(e)
+            return
 
-        return response
+        # Find newly created event id
+        xml_root = ET.fromstring(response.content)
+        ids = xml_root.findall('id')
+        event_id = ids[0].text
+
+        return event_id
 
     def delete_event(self, event_id):
 
@@ -70,11 +92,24 @@ class ElementalLive():
             headers = self.generate_headers_with_authentication_enabled(
                 url, self.user, self.api_key)
 
-        # Send request
-        response = requests.request(method='DELETE', url=url,
-                                    headers=headers)
+        # Send request and do exception handling
+        try:
+            response = requests.request(method='DELETE', url=url,
+                                        headers=headers)
+            if response.status_code != 200:
+                raise InvalidHTTPResponse(f"Delete Event {event_id} Failed \n"
+                                          f"Please Check If You Passed "
+                                          f"The Correct Event Id \n"
+                                          f"Or If This Event is allowed to "
+                                          f"Delete")
+        except requests.exceptions.RequestException as e:
+            print(e)
+            return
+        except InvalidHTTPResponse as e:
+            print(e)
+            return
 
-        return response
+        return
 
     def start_event(self, event_id):
 
@@ -91,11 +126,24 @@ class ElementalLive():
             headers = self.generate_headers_with_authentication_enabled(
                 url, self.user, self.api_key)
 
-        # Send request
-        response = requests.request(method='POST', url=url, data=body,
-                                    headers=headers)
+        # Send request and do exception handling
+        try:
+            response = requests.request(method='POST', url=url, data=body,
+                                        headers=headers)
+            if response.status_code != 200:
+                raise InvalidHTTPResponse(f"Start Event {event_id} Failed \n"
+                                          f"Please Check If You Passed "
+                                          f"The Correct Event Id \n"
+                                          f"Or If This Event is allowed to "
+                                          f"Start")
+        except requests.exceptions.RequestException as e:
+            print(e)
+            return
+        except InvalidHTTPResponse as e:
+            print(e)
+            return
 
-        return response
+        return
 
     def stop_event(self, event_id):
 
@@ -112,8 +160,21 @@ class ElementalLive():
             headers = self.generate_headers_with_authentication_enabled(
                 url, self.user, self.api_key)
 
-        # Send request
-        response = requests.request(method='POST', url=url, data=body,
-                                    headers=headers)
+        # Send request and do exception handling
+        try:
+            response = requests.request(method='POST', url=url, data=body,
+                                        headers=headers)
+            if response.status_code != 200:
+                raise InvalidHTTPResponse(f"Stop Event {event_id} Failed \n"
+                                          f"Please Check If You Passed "
+                                          f"The Correct Event Id \n"
+                                          f"Or If This Event is allowed to "
+                                          f"Stop")
+        except requests.exceptions.RequestException as e:
+            print(e)
+            return
+        except InvalidHTTPResponse as e:
+            print(e)
+            return
 
-        return response
+        return

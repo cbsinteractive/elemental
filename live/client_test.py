@@ -40,7 +40,7 @@ def test_create_event_with_authentication(mock_request):
         status=201, content=response_from_elemental_api)
 
     client = ElementalLive("http://elemental.dev.cbsivideo.com", USER, API_KEY)
-    response = client.create_event("live/templates/qvbr_mediastore.xml",
+    event_id = client.create_event("live/templates/qvbr_mediastore.xml",
                                    {'username': os.getenv('ACCESS_KEY'),
                                     'password': os.getenv('SECRET_KEY'),
                                     'mediastore_container_master':
@@ -57,7 +57,7 @@ def test_create_event_with_authentication(mock_request):
     assert request_to_elemental['method'] == 'POST'
     assert request_to_elemental['headers']['Accept'] == 'application/xml'
     assert request_to_elemental['headers']['Content-Type'] == 'application/xml'
-    assert response.status_code == 201
+    assert event_id == "80"
 
 
 @mock.patch('requests.request')
@@ -69,7 +69,7 @@ def test_create_event_without_authentication(mock_request):
         status=201, content=response_from_elemental_api)
 
     client = ElementalLive("http://elemental.dev.cbsivideo.com")
-    response = client.create_event("live/templates/qvbr_mediastore.xml",
+    event_id = client.create_event("live/templates/qvbr_mediastore.xml",
                                    {'username': os.getenv('ACCESS_KEY'),
                                     'password': os.getenv('SECRET_KEY'),
                                     'mediastore_container_master':
@@ -86,7 +86,7 @@ def test_create_event_without_authentication(mock_request):
     assert request_to_elemental['method'] == 'POST'
     assert request_to_elemental['headers']['Accept'] == 'application/xml'
     assert request_to_elemental['headers']['Content-Type'] == 'application/xml'
-    assert response.status_code == 201
+    assert event_id == "80"
 
 
 @mock.patch('requests.request')
@@ -103,12 +103,11 @@ def test_delete_event_with_authentication(mock_request):
     client = ElementalLive("http://elemental.dev.cbsivideo.com", USER, API_KEY)
 
     # Mock delete function
-    response = client.delete_event(event_id=42)
+    client.delete_event(event_id=42)
 
     request_to_elemental = mock_request.call_args_list[0][1]
     assert delete_pattern.match(request_to_elemental['url'])
     assert request_to_elemental['method'] == 'DELETE'
-    assert response.status_code == 200
 
 
 @mock.patch('requests.request')
@@ -125,12 +124,11 @@ def test_delete_event_without_authentication(mock_request):
     client = ElementalLive("http://elemental.dev.cbsivideo.com")
 
     # Mock delete function
-    response = client.delete_event(event_id=42)
+    client.delete_event(event_id=42)
 
     request_to_elemental = mock_request.call_args_list[0][1]
     assert delete_pattern.match(request_to_elemental['url'])
     assert request_to_elemental['method'] == 'DELETE'
-    assert response.status_code == 200
 
 
 @mock.patch('requests.request')
@@ -147,14 +145,13 @@ def test_start_event_with_authentication(mock_request):
     client = ElementalLive("http://elemental.dev.cbsivideo.com", USER, API_KEY)
 
     # Mock delete function
-    response = client.start_event(event_id=42)
+    client.start_event(event_id=42)
 
     request_to_elemental = mock_request.call_args_list[0][1]
     assert delete_pattern.match(request_to_elemental['url'])
     assert request_to_elemental['method'] == 'POST'
     assert request_to_elemental['headers']['Accept'] == 'application/xml'
     assert request_to_elemental['headers']['Content-Type'] == 'application/xml'
-    assert response.status_code == 200
 
 
 @mock.patch('requests.request')
@@ -171,14 +168,13 @@ def test_start_event_without_authentication(mock_request):
     client = ElementalLive("http://elemental.dev.cbsivideo.com")
 
     # Mock delete function
-    response = client.start_event(event_id=42)
+    client.start_event(event_id=42)
 
     request_to_elemental = mock_request.call_args_list[0][1]
     assert delete_pattern.match(request_to_elemental['url'])
     assert request_to_elemental['method'] == 'POST'
     assert request_to_elemental['headers']['Accept'] == 'application/xml'
     assert request_to_elemental['headers']['Content-Type'] == 'application/xml'
-    assert response.status_code == 200
 
 
 @mock.patch('requests.request')
@@ -195,14 +191,13 @@ def test_stop_event_with_authentication(mock_request):
     client = ElementalLive("http://elemental.dev.cbsivideo.com", USER, API_KEY)
 
     # Mock delete function
-    response = client.stop_event(event_id=42)
+    client.stop_event(event_id=42)
 
     request_to_elemental = mock_request.call_args_list[0][1]
     assert delete_pattern.match(request_to_elemental['url'])
     assert request_to_elemental['method'] == 'POST'
     assert request_to_elemental['headers']['Accept'] == 'application/xml'
     assert request_to_elemental['headers']['Content-Type'] == 'application/xml'
-    assert response.status_code == 200
 
 
 @mock.patch('requests.request')
@@ -219,11 +214,10 @@ def test_stop_event_without_authentication(mock_request):
     client = ElementalLive("http://elemental.dev.cbsivideo.com")
 
     # Mock delete function
-    response = client.stop_event(event_id=42)
+    client.stop_event(event_id=42)
 
     request_to_elemental = mock_request.call_args_list[0][1]
     assert delete_pattern.match(request_to_elemental['url'])
     assert request_to_elemental['method'] == 'POST'
     assert request_to_elemental['headers']['Accept'] == 'application/xml'
     assert request_to_elemental['headers']['Content-Type'] == 'application/xml'
-    assert response.status_code == 200
