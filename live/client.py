@@ -5,11 +5,39 @@ from urllib.parse import urlparse
 import hashlib
 import xml.etree.ElementTree as ET
 
-
-class InvalidHTTPResponse(Exception):
-    """Execption raised by 'requests' returned with invalid http status code"""
+class ElementalException(Exception):
+    """Base exception for all exceptions ElementalLive client could raise"""
     pass
 
+class InvalidRequestOrResponse(ElementalException):
+    """Exception raised by 'request' with invalid request or response"""
+    pass
+
+# def send_request_with_exception_handling(http_method, url, headers, body=""):
+#     try:
+#         response = requests.request(method=http_method, url=url, data=body,
+#                                     headers=headers)
+#         # Send request and do exception handling
+#         if http_method == 'DELETE':
+#             method = 'delete'
+#         elif body == "<start></start>":
+#             method = 'start'
+#         elif body == '<stop></stop>':
+#             method = 'stop'
+#         else:
+#             method = 'create'
+#             # Find newly created event id
+#             xml_root = ET.fromstring(response.content)
+#             ids = xml_root.findall('id')
+#             event_id = ids[0].text
+#
+#     except requests.exceptions.RequestException as e:
+#         raise InvalidRequestOrResponse(f"Fail to send request to {method} event\n{e}")
+#     if response.status_code != 201:
+#         raise InvalidRequestOrResponse(f"Fail to {method} event\n"
+#                                        f"Response: "
+#                                        f"{response.status_code}\n{response.text}")
+#     return event_id
 
 class ElementalLive():
     def __init__(self, server_ip, user=None, api_key=None):
@@ -62,16 +90,12 @@ class ElementalLive():
         try:
             response = requests.request(method='POST', url=url, data=body,
                                         headers=headers)
-            if response.status_code != 201:
-                raise InvalidHTTPResponse(f"Create Event Failed \n"
-                                          f"Please Check if You Passed"
-                                          f"The Correct Params")
         except requests.exceptions.RequestException as e:
-            print(e)
-            return
-        except InvalidHTTPResponse as e:
-            print(e)
-            return
+            raise InvalidRequestOrResponse(f"Fail to send request to create event\n{e}")
+        if response.status_code != 201:
+            raise InvalidRequestOrResponse(f"Fail to create event\n"
+                                           f"Response: "
+                                           f"{response.status_code}\n{response.text}")
 
         # Find newly created event id
         xml_root = ET.fromstring(response.content)
@@ -95,19 +119,13 @@ class ElementalLive():
         # Send request and do exception handling
         try:
             response = requests.request(method='DELETE', url=url,
-                                        headers=headers)
-            if response.status_code != 200:
-                raise InvalidHTTPResponse(f"Delete Event {event_id} Failed \n"
-                                          f"Please Check If You Passed "
-                                          f"The Correct Event Id \n"
-                                          f"Or If This Event is allowed to "
-                                          f"Delete")
+                                        headers=headers, data="<start></start>")
         except requests.exceptions.RequestException as e:
-            print(e)
-            return
-        except InvalidHTTPResponse as e:
-            print(e)
-            return
+            raise InvalidRequestOrResponse(f"Fail to send request to delete event\n{e}")
+        if response.status_code != 200:
+            raise InvalidRequestOrResponse(f"Fail to delete event with id: {event_id}\n"
+                                           f"Response: "
+                                           f"{response.status_code}\n{response.text}")
 
         return
 
@@ -130,18 +148,12 @@ class ElementalLive():
         try:
             response = requests.request(method='POST', url=url, data=body,
                                         headers=headers)
-            if response.status_code != 200:
-                raise InvalidHTTPResponse(f"Start Event {event_id} Failed \n"
-                                          f"Please Check If You Passed "
-                                          f"The Correct Event Id \n"
-                                          f"Or If This Event is allowed to "
-                                          f"Start")
         except requests.exceptions.RequestException as e:
-            print(e)
-            return
-        except InvalidHTTPResponse as e:
-            print(e)
-            return
+            raise InvalidRequestOrResponse(f"Fail to send request to start event\n{e}")
+        if response.status_code != 200:
+            raise InvalidRequestOrResponse(f"Fail to start event with id: {event_id}\n"
+                                           f"Response: "
+                                           f"{response.status_code}\n{response.text}")
 
         return
 
@@ -164,17 +176,11 @@ class ElementalLive():
         try:
             response = requests.request(method='POST', url=url, data=body,
                                         headers=headers)
-            if response.status_code != 200:
-                raise InvalidHTTPResponse(f"Stop Event {event_id} Failed \n"
-                                          f"Please Check If You Passed "
-                                          f"The Correct Event Id \n"
-                                          f"Or If This Event is allowed to "
-                                          f"Stop")
         except requests.exceptions.RequestException as e:
-            print(e)
-            return
-        except InvalidHTTPResponse as e:
-            print(e)
-            return
+            raise InvalidRequestOrResponse(f"Fail to send request to stop event\n{e}")
+        if response.status_code != 200:
+            raise InvalidRequestOrResponse(f"Fail to stop event with id: {event_id}\n"
+                                           f"Response: "
+                                           f"{response.status_code}\n{response.text}")
 
         return
