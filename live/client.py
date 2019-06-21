@@ -72,7 +72,9 @@ class ElementalLive():
         # Generate template
         xml_file = open(template_path, 'r')
         xml_content = xml_file.read()
+        xml_file.close()
         template = Template(xml_content)
+
 
         # Pass params to template
         body = template.render(**options)
@@ -102,7 +104,6 @@ class ElementalLive():
         # Send request and do exception handling
         self.send_request(http_method="DELETE", url=url, headers=headers)
 
-        return
 
     def start_event(self, event_id):
 
@@ -119,7 +120,6 @@ class ElementalLive():
         self.send_request(http_method="POST", url=url,
                           headers=headers, body=body)
 
-        return
 
     def stop_event(self, event_id):
 
@@ -136,4 +136,3 @@ class ElementalLive():
         self.send_request(http_method="POST", url=url,
                           headers=headers, body=body)
 
-        return
