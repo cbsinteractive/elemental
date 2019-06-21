@@ -6,6 +6,7 @@ live/.DS_Store
 live/templates/.DS_Store
 venv
 .coverage
+.DS_Store
 
 __pycache__
 .idea

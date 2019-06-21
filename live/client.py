@@ -5,12 +5,19 @@ from urllib.parse import urlparse
 import hashlib
 import xml.etree.ElementTree as ET
 
+
 class ElementalException(Exception):
     """Base exception for all exceptions ElementalLive client could raise"""
     pass
 
-class InvalidRequestOrResponse(ElementalException):
-    """Exception raised by 'request' with invalid request or response"""
+
+class InvalidRequest(ElementalException):
+    """Exception raised by 'request' with invalid request"""
+    pass
+
+
+class InvalidResponse(ElementalException):
+    """Exception raised by 'request' with invalid response"""
     pass
 
 
@@ -30,7 +37,8 @@ class ElementalLive():
         else:
             expiration = int(time.time() + 120)
             parse = urlparse(url)
-            prehash = "%s%s%s%s" % (parse.path, self.user, self.api_key, expiration)
+            prehash = "%s%s%s%s" % (
+                parse.path, self.user, self.api_key, expiration)
             digest = hashlib.md5(prehash.encode('utf-8')).hexdigest()
             final_hash = "%s%s" % (self.api_key, digest)
             key = hashlib.md5(final_hash.encode('utf-8')).hexdigest()
@@ -42,30 +50,18 @@ class ElementalLive():
                 'Content-Type': 'application/xml'
             }
 
-
-    def send_request(self, method, url, headers, body=""):
-        # Default successful http status code
-        right_status = 200
-
+    def send_request(self, http_method, url, headers, body=""):
         # Send request according to different methods
         try:
-            if method == "create":
-                right_status = 201
-                response = requests.request(method='POST', url=url, data=body,
-                                            headers=headers)
-            elif method == "delete":
-                response = requests.request(method='DELETE', url=url, headers=headers)
-            elif method == "start":
-                response = requests.request(method='POST', url=url, data=body, headers=headers)
-            else:
-                response = requests.request(method='POST', url=url, data=body, headers=headers)
+            response = requests.request(
+                method=http_method, url=url, data=body, headers=headers)
 
         except requests.exceptions.RequestException as e:
-            raise InvalidRequestOrResponse(f"Fail to send request to {method} event\n{e}")
-        if response.status_code != right_status:
-            raise InvalidRequestOrResponse(f"Fail to {method} event\n"
-                                           f"Response: "
-                                           f"{response.status_code}\n{response.text}")
+            raise InvalidRequest(f"{http_method}: {url} failed\n{e}")
+        if response.status_code not in (200, 201):
+            raise InvalidResponse(
+                f"{http_method}: {url} failed\nResponse: "
+                f"{response.status_code}\n{response.text}")
         return response
 
     def create_event(self, template_path, options):
@@ -85,7 +81,8 @@ class ElementalLive():
         headers = self.generate_headers(url)
 
         # Send request and do exception handling
-        response = self.send_request("create", url, headers, body)
+        response = self.send_request(
+            http_method="POST", url=url, headers=headers, body=body)
 
         # Find newly created event id
         xml_root = ET.fromstring(response.content)
@@ -102,9 +99,8 @@ class ElementalLive():
         # Generate headers
         headers = self.generate_headers(url)
 
-
         # Send request and do exception handling
-        self.send_request("delete", url, headers)
+        self.send_request(http_method="DELETE", url=url, headers=headers)
 
         return
 
@@ -120,7 +116,8 @@ class ElementalLive():
         headers = self.generate_headers(url)
 
         # Send request and do exception handling
-        self.send_request("start", url, headers, body)
+        self.send_request(http_method="POST", url=url,
+                          headers=headers, body=body)
 
         return
 
@@ -136,6 +133,7 @@ class ElementalLive():
         headers = self.generate_headers(url)
 
         # Send request and do exception handling
-        self.send_request("stop", url, headers, body)
+        self.send_request(http_method="POST", url=url,
+                          headers=headers, body=body)
 
         return
