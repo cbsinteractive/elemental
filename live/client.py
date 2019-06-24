@@ -5,6 +5,8 @@ from urllib.parse import urlparse
 import hashlib
 import xml.etree.ElementTree as ET
 
+TEMPLATE_PATH = "live/templates/qvbr_mediastore.xml"
+
 
 class ElementalException(Exception):
     """Base exception for all exceptions ElementalLive client could raise"""
@@ -64,13 +66,13 @@ class ElementalLive():
                 f"{response.status_code}\n{response.text}")
         return response
 
-    def create_event(self, template_path, options):
+    def create_event(self, options):
 
         # Initiate url
         url = f'{self.server_ip}/live_events'
 
         # Generate template
-        xml_file = open(template_path, 'r')
+        xml_file = open(TEMPLATE_PATH, 'r')
         xml_content = xml_file.read()
         xml_file.close()
         template = Template(xml_content)
