@@ -131,8 +131,7 @@ def test_create_event_should_call_send_request_as_expect_and_return_event_id():
     client.send_request.return_value = mock_response(
         status=201, content=response_from_elemental_api)
 
-    event_id = client.create_event("live/templates/qvbr_mediastore.xml",
-                                   {'username': os.getenv('ACCESS_KEY'),
+    event_id = client.create_event({'username': os.getenv('ACCESS_KEY'),
                                     'password': os.getenv('SECRET_KEY'),
                                     'mediastore_container_master':
                                     'https://hu5n3jjiyi2jev.data.media'
