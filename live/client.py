@@ -1,9 +1,11 @@
+import hashlib
+import json
+import time
+import xml.etree.ElementTree as ET
+from urllib.parse import urlparse
+
 import requests
 from jinja2 import Template
-import time
-from urllib.parse import urlparse
-import hashlib
-import xml.etree.ElementTree as ET
 
 TEMPLATE_PATH = "live/templates/qvbr_mediastore.xml"
 
@@ -21,6 +23,19 @@ class InvalidRequest(ElementalException):
 class InvalidResponse(ElementalException):
     """Exception raised by 'request' with invalid response"""
     pass
+
+
+def etree_to_dict(tree_node):
+    dic = {}
+    children = tree_node.getchildren()
+    if children != []:
+        dic[tree_node.tag] = {}
+        for sub_node in children:
+            dic[tree_node.tag][sub_node.tag] = list(
+                etree_to_dict(sub_node).values())[0]
+    else:
+        dic[tree_node.tag] = tree_node.text
+    return dic
 
 
 class ElementalLive():
@@ -92,7 +107,7 @@ class ElementalLive():
         ids = xml_root.findall('id')
         event_id = ids[0].text
 
-        return event_id
+        return {'id': event_id}
 
     def delete_event(self, event_id):
 
@@ -132,3 +147,56 @@ class ElementalLive():
         # Send request and do exception handling
         self.send_request(http_method="POST", url=url,
                           headers=headers, body=body)
+
+    def get_input_devices(self):
+        events_url = f'{self.server_ip}/live_events'
+        events_headers = self.generate_headers(events_url)
+        events_xml = self.send_request(
+            http_method="GET", url=events_url, headers=events_headers)
+        # print("8**********", events_xml.text)
+        devices_url = f'{self.server_ip}/devices'
+        devices_headers = self.generate_headers(devices_url)
+        devices_xml = self.send_request(
+            http_method="GET", url=devices_url, headers=devices_headers)
+        # print("7**********", devices_xml.text)
+
+        events_list = ET.fromstring(events_xml.text)
+        devices_list = ET.fromstring(devices_xml.text)
+
+        # with open('events.html', 'w') as file:
+        #     file.write(events_xml.text)
+
+        # Find all devices info
+        devices_info = []
+        all_devices = set()
+        for device in devices_list:
+            all_devices.add(device.find('device_name').text)
+            device_dic = etree_to_dict(device)
+            devices_info.append(device_dic['device'])
+
+        # Find in use devices from all events
+        in_use_devices = set()
+        for event in events_list:
+            status = event.find('status').text
+            for input in event.findall('input'):
+                device_input = input.find('device_input')
+                if device_input:
+                    device_name = device_input.find('device_name')
+                    if status == 'preprocessing' or status == 'running':
+                        in_use_devices.add(device_name.text)
+
+        devices_availability = {}
+
+        for d in all_devices:
+            devices_availability[d] = True
+        for d in in_use_devices:
+            devices_availability[d] = False
+
+        # Append availability info to device info
+        for device in devices_info:
+            device['availability'] = \
+                devices_availability[device['device_name']]
+
+        devices_info = sorted(devices_info, key=lambda a: int(a["id"]))
+        print(json.dumps(devices_info))
+        return json.dumps(devices_info)
