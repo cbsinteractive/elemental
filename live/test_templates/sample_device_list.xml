@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device_list>
+<device href="/devices/1">
+  <id>1</id>
+  <name/>
+  <device_name>HD-SDI 1</device_name>
+  <device_number>0</device_number>
+  <device_type>AJA</device_type>
+  <description>AJA Capture Card</description>
+  <channel>1</channel>
+  <channel_type>HD-SDI</channel_type>
+  <quad>false</quad>
+</device>
+<device href="/devices/2">
+  <id>2</id>
+  <name/>
+  <device_name>HD-SDI 2</device_name>
+  <device_number>0</device_number>
+  <device_type>AJA</device_type>
+  <description>AJA Capture Card</description>
+  <channel>2</channel>
+  <channel_type>HD-SDI</channel_type>
+  <quad>false</quad>
+</device>
+</device_list>
