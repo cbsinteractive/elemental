@@ -1,10 +1,15 @@
+import json
 import os
+import xml.etree.ElementTree as ET
 
 import mock
 import pytest
 import requests
 
-from client import ElementalLive, InvalidRequest, InvalidResponse
+from mock import call
+
+from client import (ElementalLive, InvalidRequest, InvalidResponse,
+                    etree_to_dict)
 
 USER = "FAKE"
 API_KEY = "FAKE"
@@ -200,6 +205,33 @@ def test_stop_event_should_call_send_request_as_expect():
         headers=HEADERS, body="<stop></stop>")
 
 
+def test_etree_to_dict_will_parse_as_except():
+    sample_xml = '    <device_input> '\
+        '<device_type>AJA</device_type> '\
+        '<device_number>0</device_number> ' \
+        '<channel>1</channel> ' \
+        '<channel_type>HD-SDI</channel_type>' \
+        '<device_name>HD-SDI 1</device_name>' \
+        '<name nil="true"/>' \
+        '<sdi_settings>' \
+        '<input_format>Auto</input_format>' \
+        '<scte104_offset>0</scte104_offset>' \
+        '</sdi_settings>' \
+        '</device_input>'
+    root = ET.fromstring(sample_xml)
+    root_dict = etree_to_dict(root)
+    assert root_dict == {'device_input': {'device_type': 'AJA',
+                                          'device_number': '0',
+                                          'channel': '1',
+                                          'channel_type': 'HD-SDI',
+                                          'device_name': 'HD-SDI 1',
+                                          'name': None,
+                                          'sdi_settings': {
+                                              'input_format': 'Auto',
+                                              'scte104_offset': '0'
+                                          }}}
+
+
 def send_request_side_effect(**kwargs):
     if kwargs['url'] == f'{ELEMENTAL_ADDRESS}/live_events':
         return mock_response(status=200,
@@ -250,6 +282,7 @@ def test_get_input_devices_will_call_send_request_as_expect():
     client.generate_headers.return_value = HEADERS
 
     client.send_request = mock.Mock()
+
     client.find_devices_in_use = mock.Mock()
     client.find_devices_in_use.return_value = ("HD-SDI 1",)
     client.send_request.return_value = \
@@ -290,3 +323,4 @@ def test_get_input_devices_will_get_right_devices_info():
                     "description": "AJA Capture Card",
                     "channel": "2", "channel_type": "HD-SDI",
                     "quad": "false", "availability": True}]
+

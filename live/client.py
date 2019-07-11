@@ -25,6 +25,19 @@ class InvalidResponse(ElementalException):
     pass
 
 
+def etree_to_dict(tree_node):
+    dic = {}
+    children = tree_node.getchildren()
+    if children != []:
+        dic[tree_node.tag] = {}
+        for sub_node in children:
+            dic[tree_node.tag][sub_node.tag] = list(
+                etree_to_dict(sub_node).values())[0]
+    else:
+        dic[tree_node.tag] = tree_node.text
+    return dic
+
+
 class ElementalLive():
     def __init__(self, server_ip, user=None, api_key=None):
         self.server_ip = server_ip
