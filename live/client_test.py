@@ -1,5 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import os
+=======
+import json
+import os
+import xml.etree.ElementTree as ET
+>>>>>>> Add get_input_devices api and corresponding test
 =======
 import json
 import os
@@ -10,13 +16,19 @@ import mock
 import pytest
 import requests
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 from client import ElementalLive, InvalidRequest, InvalidResponse
 =======
+=======
+>>>>>>> Add get_input_devices api and corresponding test
 from mock import call
 
 from client import (ElementalLive, InvalidRequest, InvalidResponse,
                     etree_to_dict)
+<<<<<<< HEAD
+>>>>>>> Add get_input_devices api and corresponding test
+=======
 >>>>>>> Add get_input_devices api and corresponding test
 
 USER = "FAKE"

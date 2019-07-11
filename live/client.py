@@ -194,7 +194,8 @@ class ElementalLive():
 
         # Append availability info to device info
         for device in devices_info:
-            device['availability'] = devices_availability[device['device_name']]
+            device['availability'] = \
+                devices_availability[device['device_name']]
 
         devices_info = sorted(devices_info, key=lambda a: int(a["id"]))
         print(json.dumps(devices_info))
