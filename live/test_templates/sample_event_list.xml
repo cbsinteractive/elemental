@@ -106,7 +106,10 @@
   <elapsed>0</elapsed>
 </live_event>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Add get_input_devices api and corresponding test
 <live_event href="/live_events/104" product="Elemental Live" version="2.14.1.306914">
   <name>SuperBowl AVC Live (FLL - Dev)</name>
   <input>
@@ -212,5 +215,8 @@
   <start_time/>
   <elapsed>0</elapsed>
 </live_event>
+<<<<<<< HEAD
+>>>>>>> Add get_input_devices api and corresponding test
+=======
 >>>>>>> Add get_input_devices api and corresponding test
 </live_event_list>

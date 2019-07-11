@@ -5,7 +5,10 @@ import xml.etree.ElementTree as ET
 import mock
 import pytest
 import requests
+<<<<<<< HEAD
 
+=======
+>>>>>>> Add get_input_devices api and corresponding test
 from mock import call
 
 from client import (ElementalLive, InvalidRequest, InvalidResponse,
@@ -241,6 +244,7 @@ def send_request_side_effect(**kwargs):
                              text=file_fixture('sample_device_list.xml'))
 
 
+<<<<<<< HEAD
 def test_find_devices_in_use_will_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
@@ -275,6 +279,8 @@ def test_find_devices_in_use_will_return_in_used_devices():
     assert devices == {'HD-SDI 1'}
 
 
+=======
+>>>>>>> Add get_input_devices api and corresponding test
 def test_get_input_devices_will_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
@@ -282,6 +288,7 @@ def test_get_input_devices_will_call_send_request_as_expect():
     client.generate_headers.return_value = HEADERS
 
     client.send_request = mock.Mock()
+<<<<<<< HEAD
 
     client.find_devices_in_use = mock.Mock()
     client.find_devices_in_use.return_value = ("HD-SDI 1",)
@@ -294,6 +301,18 @@ def test_get_input_devices_will_call_send_request_as_expect():
     client.send_request.\
         assert_called_with(http_method="GET",
                            url=f'{ELEMENTAL_ADDRESS}/devices', headers=HEADERS)
+=======
+    client.send_request.side_effect = send_request_side_effect
+
+    client.get_input_devices()
+
+    calls = [call(http_method="GET",
+                  url=f'{ELEMENTAL_ADDRESS}/live_events', headers=HEADERS),
+             call(http_method="GET",
+                  url=f'{ELEMENTAL_ADDRESS}/devices', headers=HEADERS)]
+
+    client.send_request.assert_has_calls(calls)
+>>>>>>> Add get_input_devices api and corresponding test
 
 
 def test_get_input_devices_will_get_right_devices_info():
@@ -303,6 +322,7 @@ def test_get_input_devices_will_get_right_devices_info():
     client.generate_headers.return_value = HEADERS
 
     client.send_request = mock.Mock()
+<<<<<<< HEAD
     client.find_devices_in_use = mock.Mock()
     client.find_devices_in_use.return_value = ("HD-SDI 1",)
     client.send_request.return_value = \
@@ -324,3 +344,20 @@ def test_get_input_devices_will_get_right_devices_info():
                     "channel": "2", "channel_type": "HD-SDI",
                     "quad": "false", "availability": True}]
 
+=======
+    client.send_request.side_effect = send_request_side_effect
+
+    res = client.get_input_devices()
+    assert res == json.dumps([{"id": "1", "name": None,
+                               "device_name": "HD-SDI 1",
+                               "device_number": "0", "device_type": "AJA",
+                               "description": "AJA Capture Card",
+                               "channel": "1", "channel_type": "HD-SDI",
+                               "quad": "false", "availability": False},
+                              {"id": "2", "name": None,
+                               "device_name": "HD-SDI 2",
+                               "device_number": "0", "device_type": "AJA",
+                               "description": "AJA Capture Card",
+                               "channel": "2", "channel_type": "HD-SDI",
+                               "quad": "false", "availability": True}])
+>>>>>>> Add get_input_devices api and corresponding test
