@@ -153,18 +153,14 @@ class ElementalLive():
         events_headers = self.generate_headers(events_url)
         events_xml = self.send_request(
             http_method="GET", url=events_url, headers=events_headers)
-        # print("8**********", events_xml.text)
+
         devices_url = f'{self.server_ip}/devices'
         devices_headers = self.generate_headers(devices_url)
         devices_xml = self.send_request(
             http_method="GET", url=devices_url, headers=devices_headers)
-        # print("7**********", devices_xml.text)
 
         events_list = ET.fromstring(events_xml.text)
         devices_list = ET.fromstring(devices_xml.text)
-
-        # with open('events.html', 'w') as file:
-        #     file.write(events_xml.text)
 
         # Find all devices info
         devices_info = []
