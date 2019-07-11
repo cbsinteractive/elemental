@@ -282,7 +282,6 @@ def test_get_input_devices_will_call_send_request_as_expect():
     client.generate_headers.return_value = HEADERS
 
     client.send_request = mock.Mock()
-
     client.find_devices_in_use = mock.Mock()
     client.find_devices_in_use.return_value = ("HD-SDI 1",)
     client.send_request.return_value = \
