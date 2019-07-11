@@ -6,6 +6,8 @@ import mock
 import pytest
 import requests
 
+from mock import call
+
 from client import (ElementalLive, InvalidRequest, InvalidResponse,
                     etree_to_dict)
 
@@ -321,4 +323,3 @@ def test_get_input_devices_will_get_right_devices_info():
                     "description": "AJA Capture Card",
                     "channel": "2", "channel_type": "HD-SDI",
                     "quad": "false", "availability": True}]
-
