@@ -277,13 +277,13 @@ def test_get_input_devices_will_get_right_devices_info():
 
     res = client.get_input_devices()
     print(res)
-    assert res == [{"@href": "/devices/1", "id": "1",
+    assert res == [{"id": "1",
                     "name": None, "device_name": "HD-SDI 1",
                     "device_number": "0", "device_type": "AJA",
                     "description": "AJA Capture Card",
                     "channel": "1", "channel_type": "HD-SDI",
                     "quad": "false", "availability": False},
-                   {"@href": "/devices/2", "id": "2",
+                   {"id": "2",
                     "name": None, "device_name": "HD-SDI 2",
                     "device_number": "0", "device_type": "AJA",
                     "description": "AJA Capture Card",

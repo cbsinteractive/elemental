@@ -168,7 +168,7 @@ class ElementalLive():
         all_devices = \
             {device.find('device_name').text for device in devices_list}
 
-        devices_info_dict = xmltodict.parse(devices_xml.text)[
+        devices_info = xmltodict.parse(devices_xml.text)[
             'device_list']['device']
 
         devices_in_use = self.find_devices_in_use()
@@ -176,10 +176,11 @@ class ElementalLive():
         devices_availability = \
             {d: (d not in devices_in_use) for d in all_devices}
 
-        for device in devices_info_dict:
+        for device in devices_info:
+            device.pop('@href')
             device['availability'] = \
                 devices_availability[device['device_name']]
 
-        devices_info_dict = sorted(
-            devices_info_dict, key=lambda d: int(d["id"]))
-        return [dict(d) for d in devices_info_dict]
+        devices_info = sorted(
+            devices_info, key=lambda d: int(d["id"]))
+        return [dict(d) for d in devices_info]
