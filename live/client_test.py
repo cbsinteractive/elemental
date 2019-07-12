@@ -224,7 +224,8 @@ def test_find_devices_in_use_will_call_send_request_as_expect():
 
     client.send_request.assert_called_with(http_method="GET",
                                            url=f'{ELEMENTAL_ADDRESS}'
-                                           f'/live_events', headers=HEADERS)
+                                           f'/live_events?'
+                                           f'filter=active', headers=HEADERS)
 
 
 def test_find_devices_in_use_will_return_in_used_devices():
