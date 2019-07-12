@@ -1,8 +1,5 @@
 import hashlib
-<<<<<<< HEAD
 
-=======
->>>>>>> optimize code
 import time
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
@@ -140,11 +137,7 @@ class ElementalLive():
                           headers=headers, body=body)
 
     def find_devices_in_use(self):
-<<<<<<< HEAD
         events_url = f'{self.server_ip}/live_events?filter=active'
-=======
-        events_url = f'{self.server_ip}/live_events'
->>>>>>> optimize code
         events_headers = self.generate_headers(events_url)
         events_xml = self.send_request(
             http_method="GET", url=events_url, headers=events_headers)
@@ -155,22 +148,6 @@ class ElementalLive():
         for device_name in events_list.iter('device_name'):
             in_use_devices.add(device_name.text)
 
-<<<<<<< HEAD
-=======
-        events_list = ET.fromstring(events_xml.text)
-
-        # Find in use devices from all events
-        in_use_devices = set()
-        for event in events_list:
-            status = event.find('status').text
-            for event_input in event.findall('input'):
-                device_input = event_input.find('device_input')
-                if device_input:
-                    device_name = device_input.find('device_name')
-                    if status in ('preprocessing', 'running'):
-                        in_use_devices.add(device_name.text)
-
->>>>>>> optimize code
         return in_use_devices
 
     def get_input_devices(self):
@@ -181,37 +158,14 @@ class ElementalLive():
         devices_info = xmltodict.parse(devices_xml.text)[
             'device_list']['device']
 
-<<<<<<< HEAD
         devices_in_use = self.find_devices_in_use()
 
         for device in devices_info:
             device.pop('@href')
-=======
-        devices_list = ET.fromstring(devices_xml.text)
-
-        # Find all devices info
-        all_devices = \
-            {device.find('device_name').text for device in devices_list}
-
-        devices_info_dict = xmltodict.parse(devices_xml.text)[
-            'device_list']['device']
-
-        devices_in_use = self.find_devices_in_use()
-
-        devices_availability = \
-            {d: (d not in devices_in_use) for d in all_devices}
-
-        for device in devices_info_dict:
->>>>>>> optimize code
             device['availability'] = \
                 (device['device_name'] not in devices_in_use)
 
-<<<<<<< HEAD
         devices_info = sorted(
             devices_info, key=lambda d: int(d["id"]))
         return [dict(d) for d in devices_info]
-=======
-        devices_info_dict = sorted(
-            devices_info_dict, key=lambda d: int(d["id"]))
-        return [dict(d) for d in devices_info_dict]
->>>>>>> optimize code
+
