@@ -1,10 +1,10 @@
 import hashlib
-import json
 import time
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
 
 import requests
+import xmltodict
 from jinja2 import Template
 
 TEMPLATE_PATH = "live/templates/qvbr_mediastore.xml"
@@ -23,19 +23,6 @@ class InvalidRequest(ElementalException):
 class InvalidResponse(ElementalException):
     """Exception raised by 'request' with invalid response"""
     pass
-
-
-def etree_to_dict(tree_node):
-    dic = {}
-    children = tree_node.getchildren()
-    if children != []:
-        dic[tree_node.tag] = {}
-        for sub_node in children:
-            dic[tree_node.tag][sub_node.tag] = list(
-                etree_to_dict(sub_node).values())[0]
-    else:
-        dic[tree_node.tag] = tree_node.text
-    return dic
 
 
 class ElementalLive():
@@ -148,27 +135,13 @@ class ElementalLive():
         self.send_request(http_method="POST", url=url,
                           headers=headers, body=body)
 
-    def get_input_devices(self):
+    def find_devices_in_use(self):
         events_url = f'{self.server_ip}/live_events'
         events_headers = self.generate_headers(events_url)
         events_xml = self.send_request(
             http_method="GET", url=events_url, headers=events_headers)
 
-        devices_url = f'{self.server_ip}/devices'
-        devices_headers = self.generate_headers(devices_url)
-        devices_xml = self.send_request(
-            http_method="GET", url=devices_url, headers=devices_headers)
-
         events_list = ET.fromstring(events_xml.text)
-        devices_list = ET.fromstring(devices_xml.text)
-
-        # Find all devices info
-        devices_info = []
-        all_devices = set()
-        for device in devices_list:
-            all_devices.add(device.find('device_name').text)
-            device_dic = etree_to_dict(device)
-            devices_info.append(device_dic['device'])
 
         # Find in use devices from all events
         in_use_devices = set()
@@ -178,8 +151,28 @@ class ElementalLive():
                 device_input = input.find('device_input')
                 if device_input:
                     device_name = device_input.find('device_name')
-                    if status == 'preprocessing' or status == 'running':
+                    if status in ('preprocessing', 'running'):
                         in_use_devices.add(device_name.text)
+
+        return in_use_devices
+
+    def get_input_devices(self):
+        devices_url = f'{self.server_ip}/devices'
+        devices_headers = self.generate_headers(devices_url)
+        devices_xml = self.send_request(
+            http_method="GET", url=devices_url, headers=devices_headers)
+
+        devices_list = ET.fromstring(devices_xml.text)
+
+        # Find all devices info
+        all_devices = set()
+        for device in devices_list:
+            all_devices.add(device.find('device_name').text)
+
+        devices_info_dict = xmltodict.parse(devices_xml.text)[
+            'device_list']['device']
+
+        in_use_devices = self.find_devices_in_use()
 
         devices_availability = {}
 
@@ -189,10 +182,10 @@ class ElementalLive():
             devices_availability[d] = False
 
         # Append availability info to device info
-        for device in devices_info:
+        for device in devices_info_dict:
             device['availability'] = \
                 devices_availability[device['device_name']]
 
-        devices_info = sorted(devices_info, key=lambda a: int(a["id"]))
-        print(json.dumps(devices_info))
-        return json.dumps(devices_info)
+        devices_info_dict = sorted(
+            devices_info_dict, key=lambda d: int(d["id"]))
+        return [dict(d) for d in devices_info_dict]

@@ -1,14 +1,10 @@
-import json
 import os
-import xml.etree.ElementTree as ET
 
 import mock
 import pytest
 import requests
-from mock import call
 
-from client import (ElementalLive, InvalidRequest, InvalidResponse,
-                    etree_to_dict)
+from client import ElementalLive, InvalidRequest, InvalidResponse
 
 USER = "FAKE"
 API_KEY = "FAKE"
@@ -204,33 +200,6 @@ def test_stop_event_should_call_send_request_as_expect():
         headers=HEADERS, body="<stop></stop>")
 
 
-def test_etree_to_dict_will_parse_as_except():
-    sample_xml = '    <device_input> '\
-        '<device_type>AJA</device_type> '\
-        '<device_number>0</device_number> ' \
-        '<channel>1</channel> ' \
-        '<channel_type>HD-SDI</channel_type>' \
-        '<device_name>HD-SDI 1</device_name>' \
-        '<name nil="true"/>' \
-        '<sdi_settings>' \
-        '<input_format>Auto</input_format>' \
-        '<scte104_offset>0</scte104_offset>' \
-        '</sdi_settings>' \
-        '</device_input>'
-    root = ET.fromstring(sample_xml)
-    root_dict = etree_to_dict(root)
-    assert root_dict == {'device_input': {'device_type': 'AJA',
-                                          'device_number': '0',
-                                          'channel': '1',
-                                          'channel_type': 'HD-SDI',
-                                          'device_name': 'HD-SDI 1',
-                                          'name': None,
-                                          'sdi_settings': {
-                                              'input_format': 'Auto',
-                                              'scte104_offset': '0'
-                                          }}}
-
-
 def send_request_side_effect(**kwargs):
     if kwargs['url'] == f'{ELEMENTAL_ADDRESS}/live_events':
         return mock_response(status=200,
@@ -240,6 +209,39 @@ def send_request_side_effect(**kwargs):
                              text=file_fixture('sample_device_list.xml'))
 
 
+def test_find_devices_in_use_will_call_send_request_as_expect():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    client.send_request.return_value = \
+        mock_response(status=200,
+                      text=file_fixture('sample_event_list.xml'))
+
+    client.find_devices_in_use()
+
+    client.send_request.assert_called_with(http_method="GET",
+                                           url=f'{ELEMENTAL_ADDRESS}'
+                                           f'/live_events', headers=HEADERS)
+
+
+def test_find_devices_in_use_will_return_in_used_devices():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    client.send_request.return_value = \
+        mock_response(status=200,
+                      text=file_fixture('sample_event_list.xml'))
+
+    devices = client.find_devices_in_use()
+    assert devices == {'HD-SDI 1'}
+
+
 def test_get_input_devices_will_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
@@ -247,16 +249,17 @@ def test_get_input_devices_will_call_send_request_as_expect():
     client.generate_headers.return_value = HEADERS
 
     client.send_request = mock.Mock()
-    client.send_request.side_effect = send_request_side_effect
+    client.find_devices_in_use = mock.Mock()
+    client.find_devices_in_use.return_value = ("HD-SDI 1",)
+    client.send_request.return_value = \
+        mock_response(status=200,
+                      text=file_fixture('sample_device_list.xml'))
 
     client.get_input_devices()
 
-    calls = [call(http_method="GET",
-                  url=f'{ELEMENTAL_ADDRESS}/live_events', headers=HEADERS),
-             call(http_method="GET",
-                  url=f'{ELEMENTAL_ADDRESS}/devices', headers=HEADERS)]
-
-    client.send_request.assert_has_calls(calls)
+    client.send_request.\
+        assert_called_with(http_method="GET",
+                           url=f'{ELEMENTAL_ADDRESS}/devices', headers=HEADERS)
 
 
 def test_get_input_devices_will_get_right_devices_info():
@@ -266,18 +269,23 @@ def test_get_input_devices_will_get_right_devices_info():
     client.generate_headers.return_value = HEADERS
 
     client.send_request = mock.Mock()
-    client.send_request.side_effect = send_request_side_effect
+    client.find_devices_in_use = mock.Mock()
+    client.find_devices_in_use.return_value = ("HD-SDI 1",)
+    client.send_request.return_value = \
+        mock_response(status=200,
+                      text=file_fixture('sample_device_list.xml'))
 
     res = client.get_input_devices()
-    assert res == json.dumps([{"id": "1", "name": None,
-                               "device_name": "HD-SDI 1",
-                               "device_number": "0", "device_type": "AJA",
-                               "description": "AJA Capture Card",
-                               "channel": "1", "channel_type": "HD-SDI",
-                               "quad": "false", "availability": False},
-                              {"id": "2", "name": None,
-                               "device_name": "HD-SDI 2",
-                               "device_number": "0", "device_type": "AJA",
-                               "description": "AJA Capture Card",
-                               "channel": "2", "channel_type": "HD-SDI",
-                               "quad": "false", "availability": True}])
+    print(res)
+    assert res == [{"@href": "/devices/1", "id": "1",
+                    "name": None, "device_name": "HD-SDI 1",
+                    "device_number": "0", "device_type": "AJA",
+                    "description": "AJA Capture Card",
+                    "channel": "1", "channel_type": "HD-SDI",
+                    "quad": "false", "availability": False},
+                   {"@href": "/devices/2", "id": "2",
+                    "name": None, "device_name": "HD-SDI 2",
+                    "device_number": "0", "device_type": "AJA",
+                    "description": "AJA Capture Card",
+                    "channel": "2", "channel_type": "HD-SDI",
+                    "quad": "false", "availability": True}]
