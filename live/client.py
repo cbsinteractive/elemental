@@ -1,5 +1,8 @@
 import hashlib
+<<<<<<< HEAD
 
+=======
+>>>>>>> optimize code
 import time
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
@@ -24,19 +27,6 @@ class InvalidRequest(ElementalException):
 class InvalidResponse(ElementalException):
     """Exception raised by 'request' with invalid response"""
     pass
-
-
-def etree_to_dict(tree_node):
-    dic = {}
-    children = tree_node.getchildren()
-    if children != []:
-        dic[tree_node.tag] = {}
-        for sub_node in children:
-            dic[tree_node.tag][sub_node.tag] = list(
-                etree_to_dict(sub_node).values())[0]
-    else:
-        dic[tree_node.tag] = tree_node.text
-    return dic
 
 
 class ElementalLive():
@@ -150,7 +140,11 @@ class ElementalLive():
                           headers=headers, body=body)
 
     def find_devices_in_use(self):
+<<<<<<< HEAD
         events_url = f'{self.server_ip}/live_events?filter=active'
+=======
+        events_url = f'{self.server_ip}/live_events'
+>>>>>>> optimize code
         events_headers = self.generate_headers(events_url)
         events_xml = self.send_request(
             http_method="GET", url=events_url, headers=events_headers)
@@ -161,6 +155,22 @@ class ElementalLive():
         for device_name in events_list.iter('device_name'):
             in_use_devices.add(device_name.text)
 
+<<<<<<< HEAD
+=======
+        events_list = ET.fromstring(events_xml.text)
+
+        # Find in use devices from all events
+        in_use_devices = set()
+        for event in events_list:
+            status = event.find('status').text
+            for input in event.findall('input'):
+                device_input = input.find('device_input')
+                if device_input:
+                    device_name = device_input.find('device_name')
+                    if status in ('preprocessing', 'running'):
+                        in_use_devices.add(device_name.text)
+
+>>>>>>> optimize code
         return in_use_devices
 
     def get_input_devices(self):
@@ -171,13 +181,43 @@ class ElementalLive():
         devices_info = xmltodict.parse(devices_xml.text)[
             'device_list']['device']
 
+<<<<<<< HEAD
         devices_in_use = self.find_devices_in_use()
 
         for device in devices_info:
             device.pop('@href')
+=======
+        devices_list = ET.fromstring(devices_xml.text)
+
+        # Find all devices info
+        all_devices = set()
+        for device in devices_list:
+            all_devices.add(device.find('device_name').text)
+
+        devices_info_dict = xmltodict.parse(devices_xml.text)[
+            'device_list']['device']
+
+        in_use_devices = self.find_devices_in_use()
+
+        devices_availability = {}
+
+        for d in all_devices:
+            devices_availability[d] = True
+        for d in in_use_devices:
+            devices_availability[d] = False
+
+        # Append availability info to device info
+        for device in devices_info_dict:
+>>>>>>> optimize code
             device['availability'] = \
                 (device['device_name'] not in devices_in_use)
 
+<<<<<<< HEAD
         devices_info = sorted(
             devices_info, key=lambda d: int(d["id"]))
         return [dict(d) for d in devices_info]
+=======
+        devices_info_dict = sorted(
+            devices_info_dict, key=lambda d: int(d["id"]))
+        return [dict(d) for d in devices_info_dict]
+>>>>>>> optimize code

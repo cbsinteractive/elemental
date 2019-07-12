@@ -1,15 +1,10 @@
-import json
 import os
-import xml.etree.ElementTree as ET
 
 import mock
 import pytest
 import requests
 
-from mock import call
-
-from client import (ElementalLive, InvalidRequest, InvalidResponse,
-                    etree_to_dict)
+from client import ElementalLive, InvalidRequest, InvalidResponse
 
 USER = "FAKE"
 API_KEY = "FAKE"
@@ -203,33 +198,6 @@ def test_stop_event_should_call_send_request_as_expect():
         http_method='POST',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/stop',
         headers=HEADERS, body="<stop></stop>")
-
-
-def test_etree_to_dict_will_parse_as_except():
-    sample_xml = '    <device_input> '\
-        '<device_type>AJA</device_type> '\
-        '<device_number>0</device_number> ' \
-        '<channel>1</channel> ' \
-        '<channel_type>HD-SDI</channel_type>' \
-        '<device_name>HD-SDI 1</device_name>' \
-        '<name nil="true"/>' \
-        '<sdi_settings>' \
-        '<input_format>Auto</input_format>' \
-        '<scte104_offset>0</scte104_offset>' \
-        '</sdi_settings>' \
-        '</device_input>'
-    root = ET.fromstring(sample_xml)
-    root_dict = etree_to_dict(root)
-    assert root_dict == {'device_input': {'device_type': 'AJA',
-                                          'device_number': '0',
-                                          'channel': '1',
-                                          'channel_type': 'HD-SDI',
-                                          'device_name': 'HD-SDI 1',
-                                          'name': None,
-                                          'sdi_settings': {
-                                              'input_format': 'Auto',
-                                              'scte104_offset': '0'
-                                          }}}
 
 
 def send_request_side_effect(**kwargs):
