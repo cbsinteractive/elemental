@@ -161,10 +161,7 @@ class ElementalLive():
 
         for device in devices_info:
             device.pop('@href')
-            if device['device_name'] in devices_in_use:
-                device['availability'] = False
-            else:
-                device['availability'] = True
+            device['availability'] = (device['device_name'] not in devices_in_use)
 
         devices_info = sorted(
             devices_info, key=lambda d: int(d["id"]))
