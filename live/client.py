@@ -136,23 +136,16 @@ class ElementalLive():
                           headers=headers, body=body)
 
     def find_devices_in_use(self):
-        events_url = f'{self.server_ip}/live_events'
+        events_url = f'{self.server_ip}/live_events?filter=active'
         events_headers = self.generate_headers(events_url)
         events_xml = self.send_request(
             http_method="GET", url=events_url, headers=events_headers)
-
         events_list = ET.fromstring(events_xml.text)
 
-        # Find in use devices from all events
+        # Find in use devices from active events
         in_use_devices = set()
-        for event in events_list:
-            status = event.find('status').text
-            for event_input in event.findall('input'):
-                device_input = event_input.find('device_input')
-                if device_input:
-                    device_name = device_input.find('device_name')
-                    if status in ('preprocessing', 'running'):
-                        in_use_devices.add(device_name.text)
+        for device_name in events_list.iter('device_name'):
+            in_use_devices.add(device_name.text)
 
         return in_use_devices
 
@@ -161,15 +154,10 @@ class ElementalLive():
         devices_headers = self.generate_headers(devices_url)
         devices_xml = self.send_request(
             http_method="GET", url=devices_url, headers=devices_headers)
-
-        devices_list = ET.fromstring(devices_xml.text)
-
-        # Find all devices info
-        all_devices = \
-            {device.find('device_name').text for device in devices_list}
-
         devices_info = xmltodict.parse(devices_xml.text)[
             'device_list']['device']
+
+        all_devices = {d['device_name'] for d in devices_info}
 
         devices_in_use = self.find_devices_in_use()
 
