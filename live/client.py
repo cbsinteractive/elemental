@@ -147,8 +147,8 @@ class ElementalLive():
         in_use_devices = set()
         for event in events_list:
             status = event.find('status').text
-            for input in event.findall('input'):
-                device_input = input.find('device_input')
+            for event_input in event.findall('input'):
+                device_input = event_input.find('device_input')
                 if device_input:
                     device_name = device_input.find('device_name')
                     if status in ('preprocessing', 'running'):
@@ -165,23 +165,17 @@ class ElementalLive():
         devices_list = ET.fromstring(devices_xml.text)
 
         # Find all devices info
-        all_devices = set()
-        for device in devices_list:
-            all_devices.add(device.find('device_name').text)
+        all_devices = \
+            {device.find('device_name').text for device in devices_list}
 
         devices_info_dict = xmltodict.parse(devices_xml.text)[
             'device_list']['device']
 
-        in_use_devices = self.find_devices_in_use()
+        devices_in_use = self.find_devices_in_use()
 
-        devices_availability = {}
+        devices_availability = \
+            {d: (d not in devices_in_use) for d in all_devices}
 
-        for d in all_devices:
-            devices_availability[d] = True
-        for d in in_use_devices:
-            devices_availability[d] = False
-
-        # Append availability info to device info
         for device in devices_info_dict:
             device['availability'] = \
                 devices_availability[device['device_name']]
