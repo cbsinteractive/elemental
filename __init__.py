@@ -1,3 +1,3 @@
-from live.client import ElementalLive
+import elemental
 
-__all__ = [ElementalLive]
+__all__ = [elemental]

@@ -4,7 +4,7 @@ import mock
 import pytest
 import requests
 
-from client import ElementalLive, InvalidRequest, InvalidResponse
+from .client import ElementalLive, InvalidRequest, InvalidResponse
 
 USER = "FAKE"
 API_KEY = "FAKE"
@@ -14,7 +14,7 @@ REQUEST_BODY = "<live_event>FAKE</live_event>"
 
 
 def file_fixture(file_name):
-    with open(os.path.join("live/test_templates", file_name)) as f:
+    with open(os.path.join("elemental/test_templates", file_name)) as f:
         return f.read()
 
 
