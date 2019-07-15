@@ -1,10 +1,10 @@
-from client import ElementalLive
-from client import InvalidRequest
-from client import InvalidResponse
-import mock
-import requests
 import os
+
+import mock
 import pytest
+import requests
+
+from client import ElementalLive, InvalidRequest, InvalidResponse
 
 USER = "FAKE"
 API_KEY = "FAKE"

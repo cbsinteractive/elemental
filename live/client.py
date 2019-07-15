@@ -1,9 +1,10 @@
+import hashlib
+import time
+import xml.etree.ElementTree as ET
+from urllib.parse import urlparse
+
 import requests
 from jinja2 import Template
-import time
-from urllib.parse import urlparse
-import hashlib
-import xml.etree.ElementTree as ET
 
 TEMPLATE_PATH = "live/templates/qvbr_mediastore.xml"
 
