@@ -1,3 +1,1 @@
-import elemental
-
-__all__ = [elemental]
+name = "elemental"
