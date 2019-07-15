@@ -1,11 +1,9 @@
-from distutils.core import setup
-
 import setuptools
 
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
-setup(
+setuptools.setup(
     name='elemental',
     version='0.1',
     url='https://github.com/cbsinteractive/elemental.git',
