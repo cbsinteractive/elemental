@@ -1,4 +1,5 @@
 from distutils.core import setup
+import setuptools
 
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
@@ -10,4 +11,5 @@ setup(
     license='unlicense',
     long_description=open('README.md').read(),
     install_requires=requirements,
+    packages=setuptools.find_packages(),
 )
