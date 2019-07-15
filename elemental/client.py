@@ -8,7 +8,7 @@ import requests
 import xmltodict
 from jinja2 import Template
 
-TEMPLATE_PATH = "live/templates/qvbr_mediastore.xml"
+TEMPLATE_PATH = "elemental/templates/qvbr_mediastore.xml"
 
 
 class ElementalException(Exception):
