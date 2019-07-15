@@ -1,8 +1,10 @@
 import os
+
 import mock
 import pytest
 import requests
-from .client import ElementalLive, InvalidRequest, InvalidResponse
+
+from client import ElementalLive, InvalidRequest, InvalidResponse
 
 USER = "FAKE"
 API_KEY = "FAKE"
