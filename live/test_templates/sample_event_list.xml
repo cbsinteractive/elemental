@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<live_event_list>
+<live_event href="/live_events/105" product="Elemental Live" version="2.14.1.306914">
+  <name>SuperBowl AVC Live (FLL - Dev)</name>
+  <input>
+    <deblock_selected>true</deblock_selected>
+    <denoise_selected>false</denoise_selected>
+    <error_clear_time nil="true"/>
+    <failback_rule>immediately</failback_rule>
+    <filter_enable>Auto</filter_enable>
+    <filter_strength>1</filter_strength>
+    <hot_backup_pair>false</hot_backup_pair>
+    <input_label nil="true"/>
+    <loop_source>false</loop_source>
+    <no_psi>false</no_psi>
+    <order>1</order>
+    <prefer_smpte2038>false</prefer_smpte2038>
+    <service_name nil="true"/>
+    <service_provider_name nil="true"/>
+    <timecode_source>embedded</timecode_source>
+    <device_input>
+      <device_type>AJA</device_type>
+      <device_number>0</device_number>
+      <channel>1</channel>
+      <channel_type>HD-SDI</channel_type>
+      <device_name>HD-SDI 1</device_name>
+      <name nil="true"/>
+      <sdi_settings>
+        <input_format>Auto</input_format>
+        <scte104_offset>0</scte104_offset>
+      </sdi_settings>
+    </device_input>
+    <name>input_1</name>
+    <video_selector>
+      <color_space>follow</color_space>
+      <default_afd nil="true"/>
+      <order>1</order>
+      <name>input_1_video_selector_0</name>
+    </video_selector>
+    <audio_selector>
+      <default_selection>true</default_selection>
+      <order>1</order>
+      <program_selection>1</program_selection>
+      <selector_type nil="true"/>
+      <unwrap_smpte337>true</unwrap_smpte337>
+      <name>input_1_audio_selector_0</name>
+    </audio_selector>
+    <caption_selector>
+      <order>1</order>
+      <source_type>Embedded</source_type>
+      <embedded_source_settings>
+        <autodetect_scte20>false</autodetect_scte20>
+        <source_608_channel_number>1</source_608_channel_number>
+        <source_608_track_number>1</source_608_track_number>
+        <upconvert_608_to_708>false</upconvert_608_to_708>
+      </embedded_source_settings>
+    </caption_selector>
+  </input>
+  <loop_all_inputs>false</loop_all_inputs>
+  <timecode_config>
+    <require_initial_timecode>false</require_initial_timecode>
+    <source>systemclock</source>
+    <sync_threshold nil="true"/>
+  </timecode_config>
+  <node_id>1</node_id>
+  <failure_rule>
+    <priority>50</priority>
+    <restart_on_failure>false</restart_on_failure>
+  </failure_rule>
+  <esam>
+    <acquisition_point_id>fll_dev_1</acquisition_point_id>
+    <asset_uri_id nil="true"/>
+    <response_signal_preroll>0</response_signal_preroll>
+    <scc_uri>
+      <uri>http://10.25.68.173:8080/signal</uri>
+    </scc_uri>
+  </esam>
+  <input_loss_behavior>
+    <black_frame_msec>10000</black_frame_msec>
+    <input_loss_image_color>000000</input_loss_image_color>
+    <input_loss_image_type>color</input_loss_image_type>
+    <repeat_frame_msec>1000</repeat_frame_msec>
+  </input_loss_behavior>
+  <ad_trigger>esam</ad_trigger>
+  <ad_avail_offset>0</ad_avail_offset>
+  <ignore_web_delivery_allowed_flag>false</ignore_web_delivery_allowed_flag>
+  <ignore_no_regional_blackout_flag>false</ignore_no_regional_blackout_flag>
+  <low_latency_mode>false</low_latency_mode>
+  <initial_audio_gain>0</initial_audio_gain>
+  <avsync_enable>true</avsync_enable>
+  <avsync_pad_trim_audio>true</avsync_pad_trim_audio>
+  <user_data/>
+  <input_end_action>switch_input</input_end_action>
+  <output_timing_source>input_clock</output_timing_source>
+  <input_buffer_size>60</input_buffer_size>
+  <resource_reservation>none</resource_reservation>
+  <low_framerate_input>false</low_framerate_input>
+  <extract_sdt>false</extract_sdt>
+  <submitted>2019-07-10 14:06:06 -0400</submitted>
+  <status>running</status>
+  <average_fps>0</average_fps>
+  <buffer_avg/>
+  <buffer_max/>
+  <dropped_frames/>
+  <start_time/>
+  <elapsed>0</elapsed>
+</live_event>
+</live_event_list>

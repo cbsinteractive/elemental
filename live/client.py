@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
 
 import requests
+import xmltodict
 from jinja2 import Template
 
 TEMPLATE_PATH = "live/templates/qvbr_mediastore.xml"
@@ -93,7 +94,7 @@ class ElementalLive():
         ids = xml_root.findall('id')
         event_id = ids[0].text
 
-        return event_id
+        return {'id': event_id}
 
     def delete_event(self, event_id):
 
@@ -133,3 +134,36 @@ class ElementalLive():
         # Send request and do exception handling
         self.send_request(http_method="POST", url=url,
                           headers=headers, body=body)
+
+    def find_devices_in_use(self):
+        events_url = f'{self.server_ip}/live_events?filter=active'
+        events_headers = self.generate_headers(events_url)
+        events_xml = self.send_request(
+            http_method="GET", url=events_url, headers=events_headers)
+        events_list = ET.fromstring(events_xml.text)
+
+        # Find in use devices from active events
+        in_use_devices = set()
+        for device_name in events_list.iter('device_name'):
+            in_use_devices.add(device_name.text)
+
+        return in_use_devices
+
+    def get_input_devices(self):
+        devices_url = f'{self.server_ip}/devices'
+        devices_headers = self.generate_headers(devices_url)
+        devices_xml = self.send_request(
+            http_method="GET", url=devices_url, headers=devices_headers)
+        devices_info = xmltodict.parse(devices_xml.text)[
+            'device_list']['device']
+
+        devices_in_use = self.find_devices_in_use()
+
+        for device in devices_info:
+            device.pop('@href')
+            device['availability'] = \
+                (device['device_name'] not in devices_in_use)
+
+        devices_info = sorted(
+            devices_info, key=lambda d: int(d["id"]))
+        return [dict(d) for d in devices_info]
