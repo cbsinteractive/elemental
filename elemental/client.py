@@ -1,5 +1,4 @@
 import hashlib
-
 import time
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
@@ -168,4 +167,3 @@ class ElementalLive():
         devices_info = sorted(
             devices_info, key=lambda d: int(d["id"]))
         return [dict(d) for d in devices_info]
-
