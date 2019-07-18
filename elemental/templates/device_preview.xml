@@ -3,11 +3,11 @@
   <preview_image>
     <width>320</width>
     <height>240</height>
-    <name>small.jpg</name>
+    <name>{{image_small}}</name>
   </preview_image>
   <preview_image>
     <width>720</width>
     <height>480</height>
-    <name>large.jpg</name>
+    <name>{{image_large}}</name>
   </preview_image>
 </preview_images>

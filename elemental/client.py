@@ -10,7 +10,9 @@ from jinja2 import Template
 
 
 def file_fixture(file_name):
-    with open(os.path.join("elemental/templates", file_name)) as f:
+    templates_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                                 'templates')
+    with open(os.path.join(templates_dir, file_name)) as f:
         return f.read()
 
 
@@ -175,7 +177,12 @@ class ElementalLive():
         headers = self.generate_headers(url)
 
         # generate body
-        body = file_fixture('device_preview.xml')
+        xml = file_fixture('device_preview.xml')
+
+        template = Template(xml)
+
+        body = template.render({'image_small': f'small_{device_id}.jpg',
+                                'image_large': f'large_{device_id}.jpg'})
 
         device_preview = self.send_request(http_method="POST", url=url,
                                            headers=headers, body=body)
