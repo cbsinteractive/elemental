@@ -12,7 +12,7 @@ lint:
 	flake8 --exclude=.tox --exclude=venv
 
 test: lint
-	py.test --verbose --cov=./live --color=yes .
+	py.test --verbose --cov=./elemental --color=yes .
 
 test_cov: test
 	codecov
