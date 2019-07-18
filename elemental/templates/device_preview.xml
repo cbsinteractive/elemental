@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preview_images>
+  <preview_image>
+    <width>320</width>
+    <height>240</height>
+    <name>small.jpg</name>
+  </preview_image>
+  <preview_image>
+    <width>720</width>
+    <height>480</height>
+    <name>large.jpg</name>
+  </preview_image>
+</preview_images>

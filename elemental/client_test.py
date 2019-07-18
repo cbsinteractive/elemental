@@ -290,3 +290,23 @@ def test_get_input_devices_will_get_right_devices_info():
                     "description": "AJA Capture Card",
                     "channel": "2", "channel_type": "HD-SDI",
                     "quad": "false", "availability": True}]
+
+
+def test_generate_preview_will_parse_xml_as_expect():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    response_from_request = file_fixture('devices_preview_response.xml')
+
+    client.send_request.return_value = mock_response(
+        status=200, text=response_from_request)
+
+    response = client.generate_preview('1')
+
+    assert response == [{'width': '320', 'height': '240', 'name': 'small.jpg',
+                         'location': '/images/preview/small.jpg'},
+                        {'width': '720', 'height': '480', 'name': 'large.jpg',
+                         'location': '/images/preview/large.jpg'}]

@@ -1,4 +1,5 @@
 import hashlib
+import os
 import time
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
@@ -7,7 +8,10 @@ import requests
 import xmltodict
 from jinja2 import Template
 
-TEMPLATE_PATH = "elemental/templates/qvbr_mediastore.xml"
+
+def file_fixture(file_name):
+    with open(os.path.join("elemental/templates", file_name)) as f:
+        return f.read()
 
 
 class ElementalException(Exception):
@@ -74,10 +78,8 @@ class ElementalLive():
         url = f'{self.server_ip}/live_events'
 
         # Generate template
-        xml_file = open(TEMPLATE_PATH, 'r')
-        xml_content = xml_file.read()
-        xml_file.close()
-        template = Template(xml_content)
+        xml = file_fixture('qvbr_mediastore.xml')
+        template = Template(xml)
 
         # Pass params to template
         body = template.render(**options)
@@ -138,9 +140,9 @@ class ElementalLive():
     def find_devices_in_use(self):
         events_url = f'{self.server_ip}/live_events?filter=active'
         events_headers = self.generate_headers(events_url)
-        events_xml = self.send_request(
+        events = self.send_request(
             http_method="GET", url=events_url, headers=events_headers)
-        events_list = ET.fromstring(events_xml.text)
+        events_list = ET.fromstring(events.text)
 
         # Find in use devices from active events
         in_use_devices = set()
@@ -152,9 +154,9 @@ class ElementalLive():
     def get_input_devices(self):
         devices_url = f'{self.server_ip}/devices'
         devices_headers = self.generate_headers(devices_url)
-        devices_xml = self.send_request(
+        devices = self.send_request(
             http_method="GET", url=devices_url, headers=devices_headers)
-        devices_info = xmltodict.parse(devices_xml.text)[
+        devices_info = xmltodict.parse(devices.text)[
             'device_list']['device']
 
         devices_in_use = self.find_devices_in_use()
@@ -167,3 +169,17 @@ class ElementalLive():
         devices_info = sorted(
             devices_info, key=lambda d: int(d["id"]))
         return [dict(d) for d in devices_info]
+
+    def generate_preview(self, device_id):
+        url = f'{self.server_ip}/devices/{device_id}/preview'
+        headers = self.generate_headers(url)
+
+        # generate body
+        body = file_fixture('device_preview.xml')
+
+        device_preview = self.send_request(http_method="POST", url=url,
+                                           headers=headers, body=body)
+        device_preview_info = xmltodict.parse(device_preview.text)
+
+        return [dict(d) for d in
+                device_preview_info['preview_images']['preview_image']]
