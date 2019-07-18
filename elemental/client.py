@@ -9,10 +9,9 @@ import xmltodict
 from jinja2 import Template
 
 
-def file_fixture(file_name):
-    templates_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                                 'templates')
-    with open(os.path.join(templates_dir, file_name)) as f:
+def read_template(file_name):
+    folder = os.path.dirname(os.path.realpath(__file__))
+    with open(os.path.join(folder, 'templates', file_name)) as f:
         return f.read()
 
 
@@ -80,7 +79,7 @@ class ElementalLive():
         url = f'{self.server_ip}/live_events'
 
         # Generate template
-        xml = file_fixture('qvbr_mediastore.xml')
+        xml = read_template('qvbr_mediastore.xml')
         template = Template(xml)
 
         # Pass params to template
@@ -177,7 +176,7 @@ class ElementalLive():
         headers = self.generate_headers(url)
 
         # generate body
-        xml = file_fixture('device_preview.xml')
+        xml = read_template('device_preview.xml')
 
         template = Template(xml)
 
