@@ -1,3 +1,4 @@
+import ast
 import hashlib
 import os
 import time
@@ -51,6 +52,7 @@ class ElementalLive():
             digest = hashlib.md5(prehash.encode('utf-8')).hexdigest()
             final_hash = "%s%s" % (self.api_key, digest)
             key = hashlib.md5(final_hash.encode('utf-8')).hexdigest()
+
             return {
                 'X-Auth-User': self.user,
                 'X-Auth-Expires': str(expiration),
@@ -171,21 +173,29 @@ class ElementalLive():
             devices_info, key=lambda d: int(d["id"]))
         return [dict(d) for d in devices_info]
 
-    def generate_preview(self, device_id):
-        url = f'{self.server_ip}/devices/{device_id}/preview'
+    def generate_preview(self, source_type, input_id):
+        url = f'{self.server_ip}/inputs/generate_preview'
         headers = self.generate_headers(url)
 
+        headers['Accept'] = '*/*'
+        headers['Content-Type'] = 'application/x-www-form-urlencoded; ' \
+                                  'charset=UTF-8'
+
         # generate body
-        xml = read_template('device_preview.xml')
+        data = f"input_key=0&live_event[inputs_attributes][0][source_type]=" \
+               f"{source_type}&live_event[inputs_attributes][0]" \
+               f"[device_input_attributes][sdi_settings_attributes]" \
+               f"[input_format]=Auto&live_event[inputs_attributes][0]" \
+               f"[device_input_attributes][device_id]={input_id}"
+        response = self.send_request(
+            http_method="POST", url=url, headers=headers, body=data)
 
-        template = Template(xml)
+        response_parse = ast.literal_eval(response.text)
 
-        body = template.render({'image_small': f'small_{device_id}.jpg',
-                                'image_large': f'large_{device_id}.jpg'})
-
-        device_preview = self.send_request(http_method="POST", url=url,
-                                           headers=headers, body=body)
-        device_preview_info = xmltodict.parse(device_preview.text)
-
-        return [dict(d) for d in
-                device_preview_info['preview_images']['preview_image']]
+        if 'preview_image_id' not in response_parse:
+            raise ElementalException(
+                f"Response: {response.status_code}\n{response.text}")
+        else:
+            preview_url = f'{self.server_ip}/images/thumbs/' \
+                          f'p_{response_parse["preview_image_id"]}_job_0.jpg'
+            return {'preview_url': preview_url}
