@@ -1,5 +1,8 @@
 .pytest_cache
 .python-version
+dist
+build
+elemental.egg-info/
 elemental/main.py
 elemental/Keys.py
 elemental/.DS_Store
