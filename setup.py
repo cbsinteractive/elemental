@@ -5,8 +5,8 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name='python-elemental',
-    author='cbsinteractive.com',
-    author_email='tianchenmin@gmail.com',
+    author='CBS Interactive',
+    author_email='video-processing-team@cbsinteractive.com',
     version='0.1',
     include_patckage_data=True,
     url='https://github.com/cbsinteractive/elemental.git',
