@@ -1,4 +1,6 @@
+import ast
 import hashlib
+import os
 import time
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
@@ -7,7 +9,11 @@ import requests
 import xmltodict
 from jinja2 import Template
 
-TEMPLATE_PATH = "elemental/templates/qvbr_mediastore.xml"
+
+def read_template(file_name):
+    folder = os.path.dirname(os.path.realpath(__file__))
+    with open(os.path.join(folder, 'templates', file_name)) as f:
+        return f.read()
 
 
 class ElementalException(Exception):
@@ -46,6 +52,7 @@ class ElementalLive():
             digest = hashlib.md5(prehash.encode('utf-8')).hexdigest()
             final_hash = "%s%s" % (self.api_key, digest)
             key = hashlib.md5(final_hash.encode('utf-8')).hexdigest()
+
             return {
                 'X-Auth-User': self.user,
                 'X-Auth-Expires': str(expiration),
@@ -74,10 +81,8 @@ class ElementalLive():
         url = f'{self.server_ip}/live_events'
 
         # Generate template
-        xml_file = open(TEMPLATE_PATH, 'r')
-        xml_content = xml_file.read()
-        xml_file.close()
-        template = Template(xml_content)
+        xml = read_template('qvbr_mediastore.xml')
+        template = Template(xml)
 
         # Pass params to template
         body = template.render(**options)
@@ -138,9 +143,9 @@ class ElementalLive():
     def find_devices_in_use(self):
         events_url = f'{self.server_ip}/live_events?filter=active'
         events_headers = self.generate_headers(events_url)
-        events_xml = self.send_request(
+        events = self.send_request(
             http_method="GET", url=events_url, headers=events_headers)
-        events_list = ET.fromstring(events_xml.text)
+        events_list = ET.fromstring(events.text)
 
         # Find in use devices from active events
         in_use_devices = set()
@@ -152,9 +157,9 @@ class ElementalLive():
     def get_input_devices(self):
         devices_url = f'{self.server_ip}/devices'
         devices_headers = self.generate_headers(devices_url)
-        devices_xml = self.send_request(
+        devices = self.send_request(
             http_method="GET", url=devices_url, headers=devices_headers)
-        devices_info = xmltodict.parse(devices_xml.text)[
+        devices_info = xmltodict.parse(devices.text)[
             'device_list']['device']
 
         devices_in_use = self.find_devices_in_use()
@@ -167,3 +172,30 @@ class ElementalLive():
         devices_info = sorted(
             devices_info, key=lambda d: int(d["id"]))
         return [dict(d) for d in devices_info]
+
+    def generate_preview(self, source_type, input_id):
+        url = f'{self.server_ip}/inputs/generate_preview'
+        headers = self.generate_headers(url)
+
+        headers['Accept'] = '*/*'
+        headers['Content-Type'] = 'application/x-www-form-urlencoded; ' \
+                                  'charset=UTF-8'
+
+        # generate body
+        data = f"input_key=0&live_event[inputs_attributes][0][source_type]=" \
+               f"{source_type}&live_event[inputs_attributes][0]" \
+               f"[device_input_attributes][sdi_settings_attributes]" \
+               f"[input_format]=Auto&live_event[inputs_attributes][0]" \
+               f"[device_input_attributes][device_id]={input_id}"
+        response = self.send_request(
+            http_method="POST", url=url, headers=headers, body=data)
+
+        response_parse = ast.literal_eval(response.text)
+
+        if 'preview_image_id' not in response_parse:
+            raise ElementalException(
+                f"Response: {response.status_code}\n{response.text}")
+        else:
+            preview_url = f'{self.server_ip}/images/thumbs/' \
+                          f'p_{response_parse["preview_image_id"]}_job_0.jpg'
+            return {'preview_url': preview_url}

@@ -1,0 +1,131 @@
+{
+    "audio_level": 0,
+    "last_stats": {
+        "type": "job",
+        "fill_msec": "0",
+        "id": "0",
+        "event_state": "running",
+        "elapsed": 1,
+        "media_0": {
+            "id": "0",
+            "state": "running",
+            "frames_complete": "0",
+            "uri": "/dev/null",
+            "fps": "0.0",
+            "pct_rt": "0",
+            "psnr": "0.0",
+            "audio_level": "0",
+            "elapsed": 1,
+            "pct": "Streaming"
+        },
+        "svq": {
+            "quality1": "0.000",
+            "quality2": "0.000",
+            "quality3": "0.000"
+        },
+        "active_input": "0",
+        "buffer_avg": "0",
+        "buffer_max": "0",
+        "dropped_frames": "0",
+        "inputs": [
+            {
+                "id": "0",
+                "state": "quarantined",
+                "buffer_avg": "0",
+                "buffer_max": "0",
+                "dropped_frames": "0",
+                "input_information": "SDI0002019-07-19T00:00:00ZRAWVIDEO1920x10801:14:2:229.97PCM_S32LEunk2S3248000PCM_S32LEunk2S3248000PCM_S32LEunk2S3248000PCM_S32LEunk2S3248000PCM_S32LEunk2S3248000PCM_S32LEunk2S3248000PCM_S32LEunk2S3248000PCM_S32LEunk2S3248000"
+            }
+        ]
+    },
+    "demux_info": "general:\n  id: '0'\n  stream_uri: sdi://0.2\nvideo_streams:\n- stream_id: '0'\n  codec: RAWVIDEO\n  width: '1920'\n  height: '1080'\n  framerate: '29.970'\n  SAR: '1:1'\naudio_streams:\n- stream_id: '1'\n  codec: PCM_S32LE\n  channels: '2'\n  sample_format: '2'\n  sample_rate: '48000'\n- stream_id: '2'\n  codec: PCM_S32LE\n  channels: '2'\n  sample_format: '2'\n  sample_rate: '48000'\n- stream_id: '3'\n  codec: PCM_S32LE\n  channels: '2'\n  sample_format: '2'\n  sample_rate: '48000'\n- stream_id: '4'\n  codec: PCM_S32LE\n  channels: '2'\n  sample_format: '2'\n  sample_rate: '48000'\n- stream_id: '5'\n  codec: PCM_S32LE\n  channels: '2'\n  sample_format: '2'\n  sample_rate: '48000'\n- stream_id: '6'\n  codec: PCM_S32LE\n  channels: '2'\n  sample_format: '2'\n  sample_rate: '48000'\n- stream_id: '7'\n  codec: PCM_S32LE\n  channels: '2'\n  sample_format: '2'\n  sample_rate: '48000'\n- stream_id: '8'\n  codec: PCM_S32LE\n  channels: '2'\n  sample_format: '2'\n  sample_rate: '48000'\ndata:\n- stream_id: '9'\n  codec: SCTE-35\n- stream_id: '10'\n  codec: DVB-Teletext\n- stream_id: '11'\n  codec: KLV (asynchronous)",
+    "demux_hash": {
+        "general": {
+            "id": "0",
+            "stream_uri": "sdi://0.2"
+        },
+        "video_streams": {
+            "1": {
+                "stream_id": "0",
+                "codec": "RAWVIDEO",
+                "width": "1920",
+                "height": "1080",
+                "framerate": "29.970",
+                "SAR": "1:1"
+            }
+        },
+        "audio_streams": {
+            "1": {
+                "stream_id": "1",
+                "codec": "PCM_S32LE",
+                "channels": "2",
+                "sample_format": "2",
+                "sample_rate": "48000"
+            },
+            "2": {
+                "stream_id": "2",
+                "codec": "PCM_S32LE",
+                "channels": "2",
+                "sample_format": "2",
+                "sample_rate": "48000"
+            },
+            "3": {
+                "stream_id": "3",
+                "codec": "PCM_S32LE",
+                "channels": "2",
+                "sample_format": "2",
+                "sample_rate": "48000"
+            },
+            "4": {
+                "stream_id": "4",
+                "codec": "PCM_S32LE",
+                "channels": "2",
+                "sample_format": "2",
+                "sample_rate": "48000"
+            },
+            "5": {
+                "stream_id": "5",
+                "codec": "PCM_S32LE",
+                "channels": "2",
+                "sample_format": "2",
+                "sample_rate": "48000"
+            },
+            "6": {
+                "stream_id": "6",
+                "codec": "PCM_S32LE",
+                "channels": "2",
+                "sample_format": "2",
+                "sample_rate": "48000"
+            },
+            "7": {
+                "stream_id": "7",
+                "codec": "PCM_S32LE",
+                "channels": "2",
+                "sample_format": "2",
+                "sample_rate": "48000"
+            },
+            "8": {
+                "stream_id": "8",
+                "codec": "PCM_S32LE",
+                "channels": "2",
+                "sample_format": "2",
+                "sample_rate": "48000"
+            }
+        },
+        "data": {
+            "1": {
+                "stream_id": "9",
+                "codec": "SCTE-35"
+            },
+            "2": {
+                "stream_id": "10",
+                "codec": "DVB-Teletext"
+            },
+            "3": {
+                "stream_id": "11",
+                "codec": "KLV (asynchronous)"
+            }
+        }
+    },
+    "preview_image_id": 1563568669
+}

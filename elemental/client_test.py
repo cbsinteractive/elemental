@@ -1,10 +1,12 @@
+import json
 import os
 
 import mock
 import pytest
 import requests
 
-from .client import ElementalLive, InvalidRequest, InvalidResponse
+from .client import (ElementalException, ElementalLive, InvalidRequest,
+                     InvalidResponse)
 
 USER = "FAKE"
 API_KEY = "FAKE"
@@ -290,3 +292,44 @@ def test_get_input_devices_will_get_right_devices_info():
                     "description": "AJA Capture Card",
                     "channel": "2", "channel_type": "HD-SDI",
                     "quad": "false", "availability": True}]
+
+
+def test_get_preview_will_parse_response_json_as_expect():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(
+        status=200, text=file_fixture(
+            'success_response_for_generate_preview.json'))
+
+    response = client.generate_preview('DeviceInput', '2')
+
+    assert response == {
+        'preview_url': f'{ELEMENTAL_ADDRESS}/'
+                       f'images/thumbs/p_1563568669_job_0.jpg'}
+
+
+def test_get_preview_will_raise_ElementalException_if_preview_unavaliable():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(
+        status=200, text=json.dumps({"type": "error",
+                                     "message": "Input is invalid. "
+                                                "Device already in use."}))
+
+    with pytest.raises(ElementalException) as exc_info:
+        client.generate_preview('DeviceInput', '1')
+
+    respond_text = json.dumps({'type': 'error',
+                               'message': 'Input is invalid. '
+                                          'Device already in use.'})
+    assert str(exc_info.value).endswith(
+        f"Response: 200\n"
+        f"{respond_text}")
