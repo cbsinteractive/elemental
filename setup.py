@@ -4,10 +4,13 @@ with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 setuptools.setup(
-    name='elemental',
+    name='python-elemental',
+    author='CBS Interactive',
+    author_email='video-processing-team@cbsinteractive.com',
     version='0.1',
+    include_patckage_data=True,
     url='https://github.com/cbsinteractive/elemental.git',
-    license='unlicense',
+    license='MIT',
     long_description=open('README.md').read(),
     install_requires=requirements,
     packages=setuptools.find_packages(),
