@@ -279,7 +279,6 @@ def test_get_input_devices_will_get_right_devices_info():
                       text=file_fixture('sample_device_list.xml'))
 
     res = client.get_input_devices()
-    print(res)
     assert res == [{"id": "1",
                     "name": None, "device_name": "HD-SDI 1",
                     "device_number": "0", "device_type": "AJA",
@@ -292,6 +291,49 @@ def test_get_input_devices_will_get_right_devices_info():
                     "description": "AJA Capture Card",
                     "channel": "2", "channel_type": "HD-SDI",
                     "quad": "false", "availability": True}]
+
+
+def test_get_input_devices_by_id_will_call_send_request_as_expect():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    client.find_devices_in_use = mock.Mock()
+    client.find_devices_in_use.return_value = ("HD-SDI 1",)
+    client.send_request.return_value = \
+        mock_response(status=200,
+                      text=file_fixture('sample_single_device.xml'))
+
+    client.get_input_devices_by_id('2')
+
+    client.send_request.\
+        assert_called_with(http_method="GET",
+                           url=f'{ELEMENTAL_ADDRESS}/devices/2',
+                           headers=HEADERS)
+
+
+def test_get_input_devices_by_id_will_get_right_devices_info():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    client.find_devices_in_use = mock.Mock()
+    client.find_devices_in_use.return_value = ("HD-SDI 1",)
+    client.send_request.return_value = \
+        mock_response(status=200,
+                      text=file_fixture('sample_single_device.xml'))
+
+    res = client.get_input_devices_by_id('2')
+    assert res == {"id": "2",
+                   "name": None, "device_name": "HD-SDI 2",
+                   "device_number": "0", "device_type": "AJA",
+                   "description": "AJA Capture Card",
+                   "channel": "2", "channel_type": "HD-SDI",
+                   "quad": "false"}
 
 
 def test_get_preview_will_parse_response_json_as_expect():

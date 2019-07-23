@@ -7,6 +7,7 @@ elemental/main.py
 elemental/Keys.py
 elemental/.DS_Store
 elemental/templates/.DS_Store
+python_elemental.egg-info
 venv
 .coverage
 .DS_Store

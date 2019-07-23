@@ -173,6 +173,16 @@ class ElementalLive():
             devices_info, key=lambda d: int(d["id"]))
         return [dict(d) for d in devices_info]
 
+    def get_input_devices_by_id(self, input_device_id):
+        devices_url = f'{self.server_ip}/devices/{input_device_id}'
+        devices_headers = self.generate_headers(devices_url)
+        devices = self.send_request(
+            http_method="GET", url=devices_url, headers=devices_headers)
+        print(devices.text)
+        device_info = xmltodict.parse(devices.text)['device']
+        device_info.pop('@href')
+        return dict(device_info)
+
     def generate_preview(self, source_type, input_id):
         url = f'{self.server_ip}/inputs/generate_preview'
         headers = self.generate_headers(url)
