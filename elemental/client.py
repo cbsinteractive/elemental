@@ -187,9 +187,10 @@ class ElementalLive():
                f"[device_input_attributes][sdi_settings_attributes]" \
                f"[input_format]=Auto&live_event[inputs_attributes][0]" \
                f"[device_input_attributes][device_id]={input_id}"
+        print("ddddddddddd", data)
         response = self.send_request(
             http_method="POST", url=url, headers=headers, body=data)
-
+        print("rrrrrrrrrr", response)
         response_parse = ast.literal_eval(response.text)
 
         if 'preview_image_id' not in response_parse:
