@@ -204,7 +204,7 @@ class ElementalLive():
 
         response_parse = ast.literal_eval(response.text)
 
-        if 'preview_image_id' not in response_parse:
+        if 'type' in response_parse and response_parse['type'] == 'error':
             raise ElementalException(
                 f"Response: {response.status_code}\n{response.text}")
         else:
