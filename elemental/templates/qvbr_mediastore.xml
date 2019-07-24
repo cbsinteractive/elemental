@@ -18,11 +18,11 @@
     <service_provider_name nil="true"/>
     <timecode_source>embedded</timecode_source>
     <device_input>
-      <device_type>AJA</device_type>
-      <device_number>{{ device_number }}</device_number>
-      <channel>{{ channel }}</channel>
-      <channel_type>HD-SDI</channel_type>
-      <device_name>HD-SDI 1</device_name>
+      <device_type>{{ input_device["device_type"] }}</device_type>
+      <device_number>{{ input_device["device_number"] }}</device_number>
+      <channel>{{ input_device["channel"] }}</channel>
+      <channel_type>{{ input_device["channel_type"] }}</channel_type>
+      <device_name>{{ input_device["device_name"] }}</device_name>
       <name nil="true"/>
       <sdi_settings>
         <input_format>Auto</input_format>
@@ -835,7 +835,7 @@
       <destination>
         <password>{{ password }}</password>
         <username>{{ username }}</username>
-        <uri>{{ mediastore_container_master}}</uri>
+        <uri>{{ mediastore_container_master }}</uri>
       </destination>
     </apple_live_group_settings>
     <type>apple_live_group_settings</type>
