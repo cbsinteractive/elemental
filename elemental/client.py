@@ -173,7 +173,7 @@ class ElementalLive():
             devices_info, key=lambda d: int(d["id"]))
         return [dict(d) for d in devices_info]
 
-    def get_input_devices_by_id(self, input_device_id):
+    def get_input_device_by_id(self, input_device_id):
         devices_url = f'{self.server_ip}/devices/{input_device_id}'
         devices_headers = self.generate_headers(devices_url)
         devices = self.send_request(
