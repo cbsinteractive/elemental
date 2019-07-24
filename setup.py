@@ -14,4 +14,5 @@ setuptools.setup(
     long_description=open('README.md').read(),
     install_requires=requirements,
     packages=setuptools.find_packages(),
+    package_data={'elemental': ['templates/*']}
 )
