@@ -293,7 +293,7 @@ def test_get_input_devices_will_get_right_devices_info():
                     "quad": "false", "availability": True}]
 
 
-def test_get_input_devices_by_id_will_call_send_request_as_expect():
+def test_get_input_device_by_id_will_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
@@ -306,7 +306,7 @@ def test_get_input_devices_by_id_will_call_send_request_as_expect():
         mock_response(status=200,
                       text=file_fixture('sample_single_device.xml'))
 
-    client.get_input_devices_by_id('2')
+    client.get_input_device_by_id('2')
 
     client.send_request.\
         assert_called_with(http_method="GET",
@@ -314,7 +314,7 @@ def test_get_input_devices_by_id_will_call_send_request_as_expect():
                            headers=HEADERS)
 
 
-def test_get_input_devices_by_id_will_get_right_devices_info():
+def test_get_input_device_by_id_will_get_right_devices_info():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
@@ -327,7 +327,7 @@ def test_get_input_devices_by_id_will_get_right_devices_info():
         mock_response(status=200,
                       text=file_fixture('sample_single_device.xml'))
 
-    res = client.get_input_devices_by_id('2')
+    res = client.get_input_device_by_id('2')
     assert res == {"id": "2",
                    "name": None, "device_name": "HD-SDI 2",
                    "device_number": "0", "device_type": "AJA",
