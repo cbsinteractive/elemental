@@ -2,7 +2,7 @@
 .python-version
 build
 dist
-elemental.egg-info
+python_elemental.egg-info
 elemental/main.py
 elemental/Keys.py
 elemental/.DS_Store

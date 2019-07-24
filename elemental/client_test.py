@@ -333,7 +333,11 @@ def test_get_input_devices_by_id_will_get_right_devices_info():
                    "device_number": "0", "device_type": "AJA",
                    "description": "AJA Capture Card",
                    "channel": "2", "channel_type": "HD-SDI",
+<<<<<<< HEAD
                    "quad": "false"}
+=======
+                   "quad": "false", 'availability': True}
+>>>>>>> c2882e5e7644518171940784ffd38f17e3f2fcdd
 
 
 def test_get_preview_will_parse_response_json_as_expect():

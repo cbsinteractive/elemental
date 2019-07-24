@@ -178,8 +178,10 @@ class ElementalLive():
         devices_headers = self.generate_headers(devices_url)
         devices = self.send_request(
             http_method="GET", url=devices_url, headers=devices_headers)
-        print(devices.text)
         device_info = xmltodict.parse(devices.text)['device']
+        devices_in_use = self.find_devices_in_use()
+        device_info['availability'] = (device_info['device_name']
+                                       not in devices_in_use)
         device_info.pop('@href')
         return dict(device_info)
 

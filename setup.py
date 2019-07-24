@@ -7,7 +7,7 @@ setuptools.setup(
     name='python-elemental',
     author='CBS Interactive',
     author_email='video-processing-team@cbsinteractive.com',
-    version='0.1',
+    version='0.2',
     include_patckage_data=True,
     url='https://github.com/cbsinteractive/elemental.git',
     license='MIT',
