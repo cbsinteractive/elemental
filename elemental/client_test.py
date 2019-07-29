@@ -357,7 +357,7 @@ def test_get_preview_will_parse_response_json_as_expect():
         status=200, text=file_fixture(
             'success_response_for_generate_preview.json'))
 
-    response = client.generate_preview('DeviceInput', '2')
+    response = client.generate_preview('2')
 
     assert response == {
         'preview_url': f'{ELEMENTAL_ADDRESS}/'
@@ -377,7 +377,7 @@ def test_get_preview_will_raise_ElementalException_if_preview_unavaliable():
                                                 "Device already in use."}))
 
     with pytest.raises(ElementalException) as exc_info:
-        client.generate_preview('DeviceInput', '1')
+        client.generate_preview('1')
 
     respond_text = json.dumps({'type': 'error',
                                'message': 'Input is invalid. '
