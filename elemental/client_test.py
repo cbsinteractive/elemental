@@ -141,7 +141,17 @@ def test_create_event_should_call_send_request_as_expect_and_return_event_id():
                                     'mediastore_container_backup':
                                     'https://hu5n3jjiyi2jev.data.medias'
                                     'tore.us-east-1.amazonaws.com/backup',
-                                    'channel': "1", 'device_name': "0"})
+                                    'input_device': {'id': '1',
+                                                     'name': None,
+                                                     'device_name': 'HD-SDI 1',
+                                                     'device_number': '0',
+                                                     'device_type': 'AJA',
+                                                     'description':
+                                                         'AJA Capture Card',
+                                                     'channel': '1',
+                                                     'channel_type': 'HD-SDI',
+                                                     'quad': 'false',
+                                                     'availability': False}})
 
     response_from_elemental_api = client.send_request.call_args_list[0][1]
     assert response_from_elemental_api['http_method'] == 'POST'
@@ -347,7 +357,7 @@ def test_get_preview_will_parse_response_json_as_expect():
         status=200, text=file_fixture(
             'success_response_for_generate_preview.json'))
 
-    response = client.generate_preview('DeviceInput', '2')
+    response = client.generate_preview('2')
 
     assert response == {
         'preview_url': f'{ELEMENTAL_ADDRESS}/'
@@ -367,7 +377,7 @@ def test_get_preview_will_raise_ElementalException_if_preview_unavaliable():
                                                 "Device already in use."}))
 
     with pytest.raises(ElementalException) as exc_info:
-        client.generate_preview('DeviceInput', '1')
+        client.generate_preview('1')
 
     respond_text = json.dumps({'type': 'error',
                                'message': 'Input is invalid. '

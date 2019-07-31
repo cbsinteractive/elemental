@@ -185,7 +185,7 @@ class ElementalLive():
         device_info.pop('@href')
         return dict(device_info)
 
-    def generate_preview(self, source_type, input_id):
+    def generate_preview(self, input_id):
         url = f'{self.server_ip}/inputs/generate_preview'
         headers = self.generate_headers(url)
 
@@ -195,7 +195,7 @@ class ElementalLive():
 
         # generate body
         data = f"input_key=0&live_event[inputs_attributes][0][source_type]=" \
-               f"{source_type}&live_event[inputs_attributes][0]" \
+               f"DeviceInput&live_event[inputs_attributes][0]" \
                f"[device_input_attributes][sdi_settings_attributes]" \
                f"[input_format]=Auto&live_event[inputs_attributes][0]" \
                f"[device_input_attributes][device_id]={input_id}"
@@ -204,7 +204,7 @@ class ElementalLive():
 
         response_parse = ast.literal_eval(response.text)
 
-        if 'preview_image_id' not in response_parse:
+        if 'type' in response_parse and response_parse['type'] == 'error':
             raise ElementalException(
                 f"Response: {response.status_code}\n{response.text}")
         else:
