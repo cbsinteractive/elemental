@@ -140,6 +140,25 @@ class ElementalLive():
         self.send_request(http_method="POST", url=url,
                           headers=headers, body=body)
 
+    def describe_event(self, event_id):
+        url = f'{self.server_ip}/live_events/{event_id}'
+
+        headers = self.generate_headers(url)
+
+        response = self.send_request(http_method="GET", url=url,
+                                     headers=headers)
+        # print(response.text)
+        event_info = {}
+
+        destinations = ET.fromstring(response.text).iter('destination')
+        event_info['origin_url'] = next(destinations).find('uri').text
+        event_info['backup_url'] = next(destinations).find('uri').text
+
+        status = ET.fromstring(response.text).find('status')
+        event_info['status'] = status.text
+
+        return event_info
+
     def find_devices_in_use(self):
         events_url = f'{self.server_ip}/live_events?filter=active'
         events_headers = self.generate_headers(events_url)
