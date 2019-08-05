@@ -425,7 +425,7 @@ def test_describe_event_will_return_event_info_as_expect():
                           'amazonaws.com/mortyg3b4/backup/mortyg3b4.m3u8',
                           'status': 'complete'}
 
-def test_event_can_delete_will_return_False_if_pending():
+def test_event_can_delete_will_raise_exception_if_pending():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.describe_event = mock.Mock()
