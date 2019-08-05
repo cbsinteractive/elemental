@@ -1237,8 +1237,8 @@
       <vod_mode>false</vod_mode>
       <destination>
         <id>329</id>
-        <password>ZF/yjHCSvgCkmM69hf6NJKOgm0Hp61xBVZaT8I6I</password>
-        <username>AKIAX3GU2745IRM7YRTZ</username>
+        <password>FAKE_PASSWORD</password>
+        <username>FAKE_USERNAME</username>
         <uri>https://hu5n3jjiyi2jev.data.mediastore.us-east-1.amazonaws.com/backup</uri>
       </destination>
     </apple_live_group_settings>

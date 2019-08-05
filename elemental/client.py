@@ -140,6 +140,25 @@ class ElementalLive():
         self.send_request(http_method="POST", url=url,
                           headers=headers, body=body)
 
+    def describe_event(self, event_id):
+        url = f'{self.server_ip}/live_events/{event_id}'
+
+        headers = self.generate_headers(url)
+
+        response = self.send_request(http_method="GET", url=url,
+                                     headers=headers)
+        # print(response.text)
+        event_info = {}
+
+        destinations = ET.fromstring(response.text).iter('destination')
+        event_info['origin_url'] = next(destinations).find('uri').text
+        event_info['backup_url'] = next(destinations).find('uri').text
+
+        status = ET.fromstring(response.text).find('status')
+        event_info['status'] = status.text
+
+        return event_info
+
     def find_devices_in_use(self):
         events_url = f'{self.server_ip}/live_events?filter=active'
         events_headers = self.generate_headers(events_url)
@@ -173,7 +192,7 @@ class ElementalLive():
             devices_info, key=lambda d: int(d["id"]))
         return [dict(d) for d in devices_info]
 
-    def get_input_devices_by_id(self, input_device_id):
+    def get_input_device_by_id(self, input_device_id):
         devices_url = f'{self.server_ip}/devices/{input_device_id}'
         devices_headers = self.generate_headers(devices_url)
         devices = self.send_request(
@@ -185,7 +204,7 @@ class ElementalLive():
         device_info.pop('@href')
         return dict(device_info)
 
-    def generate_preview(self, source_type, input_id):
+    def generate_preview(self, input_id):
         url = f'{self.server_ip}/inputs/generate_preview'
         headers = self.generate_headers(url)
 
@@ -195,7 +214,7 @@ class ElementalLive():
 
         # generate body
         data = f"input_key=0&live_event[inputs_attributes][0][source_type]=" \
-               f"{source_type}&live_event[inputs_attributes][0]" \
+               f"DeviceInput&live_event[inputs_attributes][0]" \
                f"[device_input_attributes][sdi_settings_attributes]" \
                f"[input_format]=Auto&live_event[inputs_attributes][0]" \
                f"[device_input_attributes][device_id]={input_id}"
@@ -204,10 +223,18 @@ class ElementalLive():
 
         response_parse = ast.literal_eval(response.text)
 
-        if 'preview_image_id' not in response_parse:
+        if 'type' in response_parse and response_parse['type'] == 'error':
             raise ElementalException(
                 f"Response: {response.status_code}\n{response.text}")
         else:
             preview_url = f'{self.server_ip}/images/thumbs/' \
                           f'p_{response_parse["preview_image_id"]}_job_0.jpg'
             return {'preview_url': preview_url}
+
+    def event_can_delete(self, channel_id):
+        channel_info = self.describe_event(channel_id)
+        if channel_info['status'] in ('pending', 'running',
+                                      'preprocessing', 'postprocessing'):
+            return {'deletable': False}
+        else:
+            return {'deletable': True}

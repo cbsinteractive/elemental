@@ -141,7 +141,17 @@ def test_create_event_should_call_send_request_as_expect_and_return_event_id():
                                     'mediastore_container_backup':
                                     'https://hu5n3jjiyi2jev.data.medias'
                                     'tore.us-east-1.amazonaws.com/backup',
-                                    'channel': "1", 'device_name': "0"})
+                                    'input_device': {'id': '1',
+                                                     'name': None,
+                                                     'device_name': 'HD-SDI 1',
+                                                     'device_number': '0',
+                                                     'device_type': 'AJA',
+                                                     'description':
+                                                         'AJA Capture Card',
+                                                     'channel': '1',
+                                                     'channel_type': 'HD-SDI',
+                                                     'quad': 'false',
+                                                     'availability': False}})
 
     response_from_elemental_api = client.send_request.call_args_list[0][1]
     assert response_from_elemental_api['http_method'] == 'POST'
@@ -293,7 +303,7 @@ def test_get_input_devices_will_get_right_devices_info():
                     "quad": "false", "availability": True}]
 
 
-def test_get_input_devices_by_id_will_call_send_request_as_expect():
+def test_get_input_device_by_id_will_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
@@ -306,7 +316,7 @@ def test_get_input_devices_by_id_will_call_send_request_as_expect():
         mock_response(status=200,
                       text=file_fixture('sample_single_device.xml'))
 
-    client.get_input_devices_by_id('2')
+    client.get_input_device_by_id('2')
 
     client.send_request.\
         assert_called_with(http_method="GET",
@@ -314,7 +324,7 @@ def test_get_input_devices_by_id_will_call_send_request_as_expect():
                            headers=HEADERS)
 
 
-def test_get_input_devices_by_id_will_get_right_devices_info():
+def test_get_input_device_by_id_will_get_right_devices_info():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
@@ -327,7 +337,7 @@ def test_get_input_devices_by_id_will_get_right_devices_info():
         mock_response(status=200,
                       text=file_fixture('sample_single_device.xml'))
 
-    res = client.get_input_devices_by_id('2')
+    res = client.get_input_device_by_id('2')
     assert res == {"id": "2",
                    "name": None, "device_name": "HD-SDI 2",
                    "device_number": "0", "device_type": "AJA",
@@ -351,7 +361,7 @@ def test_get_preview_will_parse_response_json_as_expect():
         status=200, text=file_fixture(
             'success_response_for_generate_preview.json'))
 
-    response = client.generate_preview('DeviceInput', '2')
+    response = client.generate_preview('2')
 
     assert response == {
         'preview_url': f'{ELEMENTAL_ADDRESS}/'
@@ -371,7 +381,7 @@ def test_get_preview_will_raise_ElementalException_if_preview_unavaliable():
                                                 "Device already in use."}))
 
     with pytest.raises(ElementalException) as exc_info:
-        client.generate_preview('DeviceInput', '1')
+        client.generate_preview('1')
 
     respond_text = json.dumps({'type': 'error',
                                'message': 'Input is invalid. '
@@ -379,3 +389,72 @@ def test_get_preview_will_raise_ElementalException_if_preview_unavaliable():
     assert str(exc_info.value).endswith(
         f"Response: 200\n"
         f"{respond_text}")
+
+
+def test_describe_event_will_call_send_request_as_expect():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    response_from_elemental_api = file_fixture('sample_event.xml')
+    client.send_request.return_value = mock_response(
+        status=200, text=response_from_elemental_api)
+
+    event_id = 999
+    client.describe_event(event_id)
+    client.send_request.assert_called_once_with(
+        http_method='GET',
+        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}',
+        headers=HEADERS)
+
+
+def test_describe_event_will_return_event_info_as_expect():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+    client.send_request = mock.Mock()
+    response_from_elemental_api = file_fixture('sample_event.xml')
+    client.send_request.return_value = mock_response(
+        status=200, text=response_from_elemental_api)
+
+    event_id = '139'
+    event_info = client.describe_event(event_id)
+    assert event_info == {'origin_url':
+                          'https://vmjhch43nfkghi.data.mediastore.us-east-1.'
+                          'amazonaws.com/mortyg3b4/master/mortyg3b4.m3u8',
+                          'backup_url':
+                          'https://vmjhch43nfkghi.data.mediastore.us-east-1.'
+                          'amazonaws.com/mortyg3b4/backup/mortyg3b4.m3u8',
+                          'status': 'complete'}
+
+
+def test_event_can_delete_will_return_False_if_pending():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.describe_event = mock.Mock()
+    client.describe_event.return_value = {
+        'status': 'pending',
+        'origin_url': 'fake_origin',
+        'backup_url': 'fake_backup'
+    }
+    d = client.event_can_delete('123')
+    assert d == {
+        'deletable': False
+    }
+
+
+def test_event_can_delete_will_return_True_if_complete():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.describe_event = mock.Mock()
+    client.describe_event.return_value = {
+        'status': 'complete',
+        'origin_url': 'fake_origin',
+        'backup_url': 'fake_backup'
+    }
+    d = client.event_can_delete('321')
+    assert d == {
+        'deletable': True
+    }
