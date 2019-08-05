@@ -230,3 +230,11 @@ class ElementalLive():
             preview_url = f'{self.server_ip}/images/thumbs/' \
                           f'p_{response_parse["preview_image_id"]}_job_0.jpg'
             return {'preview_url': preview_url}
+
+    def event_can_delete(self, channel_id):
+        channel_info = self.describe_event(channel_id)
+        if channel_info['status'] in ('pending', 'running',
+                                      'preprocessing', 'postprocessing'):
+            return {'deletable': False}
+        else:
+            return {'deletable': True}
