@@ -385,3 +385,72 @@ def test_get_preview_will_raise_ElementalException_if_preview_unavaliable():
     assert str(exc_info.value).endswith(
         f"Response: 200\n"
         f"{respond_text}")
+
+
+def test_describe_event_will_call_send_request_as_expect():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    response_from_elemental_api = file_fixture('sample_event.xml')
+    client.send_request.return_value = mock_response(
+        status=200, text=response_from_elemental_api)
+
+    event_id = 999
+    client.describe_event(event_id)
+    client.send_request.assert_called_once_with(
+        http_method='GET',
+        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}',
+        headers=HEADERS)
+
+
+def test_describe_event_will_return_event_info_as_expect():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+    client.send_request = mock.Mock()
+    response_from_elemental_api = file_fixture('sample_event.xml')
+    client.send_request.return_value = mock_response(
+        status=200, text=response_from_elemental_api)
+
+    event_id = '139'
+    event_info = client.describe_event(event_id)
+    assert event_info == {'origin_url':
+                          'https://vmjhch43nfkghi.data.mediastore.us-east-1.'
+                          'amazonaws.com/mortyg3b4/master/mortyg3b4.m3u8',
+                          'backup_url':
+                          'https://vmjhch43nfkghi.data.mediastore.us-east-1.'
+                          'amazonaws.com/mortyg3b4/backup/mortyg3b4.m3u8',
+                          'status': 'complete'}
+
+
+def test_event_can_delete_will_return_False_if_pending():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.describe_event = mock.Mock()
+    client.describe_event.return_value = {
+        'status': 'pending',
+        'origin_url': 'fake_origin',
+        'backup_url': 'fake_backup'
+    }
+    d = client.event_can_delete('123')
+    assert d == {
+        'deletable': False
+    }
+
+
+def test_event_can_delete_will_return_True_if_complete():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.describe_event = mock.Mock()
+    client.describe_event.return_value = {
+        'status': 'complete',
+        'origin_url': 'fake_origin',
+        'backup_url': 'fake_backup'
+    }
+    d = client.event_can_delete('321')
+    assert d == {
+        'deletable': True
+    }

@@ -140,6 +140,25 @@ class ElementalLive():
         self.send_request(http_method="POST", url=url,
                           headers=headers, body=body)
 
+    def describe_event(self, event_id):
+        url = f'{self.server_ip}/live_events/{event_id}'
+
+        headers = self.generate_headers(url)
+
+        response = self.send_request(http_method="GET", url=url,
+                                     headers=headers)
+        # print(response.text)
+        event_info = {}
+
+        destinations = ET.fromstring(response.text).iter('destination')
+        event_info['origin_url'] = next(destinations).find('uri').text
+        event_info['backup_url'] = next(destinations).find('uri').text
+
+        status = ET.fromstring(response.text).find('status')
+        event_info['status'] = status.text
+
+        return event_info
+
     def find_devices_in_use(self):
         events_url = f'{self.server_ip}/live_events?filter=active'
         events_headers = self.generate_headers(events_url)
@@ -211,3 +230,11 @@ class ElementalLive():
             preview_url = f'{self.server_ip}/images/thumbs/' \
                           f'p_{response_parse["preview_image_id"]}_job_0.jpg'
             return {'preview_url': preview_url}
+
+    def event_can_delete(self, channel_id):
+        channel_info = self.describe_event(channel_id)
+        if channel_info['status'] in ('pending', 'running',
+                                      'preprocessing', 'postprocessing'):
+            return {'deletable': False}
+        else:
+            return {'deletable': True}
