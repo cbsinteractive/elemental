@@ -426,7 +426,7 @@ def test_describe_event_will_return_event_info_as_expect():
                           'status': 'complete'}
 
 
-def test_event_can_delete_will_return_False_if_pending():
+def test_event_can_delete_will_raise_exception_if_pending():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.describe_event = mock.Mock()
@@ -435,22 +435,9 @@ def test_event_can_delete_will_return_False_if_pending():
         'origin_url': 'fake_origin',
         'backup_url': 'fake_backup'
     }
-    d = client.event_can_delete('123')
-    assert d == {
-        'deletable': False
-    }
 
+    with pytest.raises(ElementalException) as exc_info:
+        client.event_can_delete('123')
 
-def test_event_can_delete_will_return_True_if_complete():
-    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
-
-    client.describe_event = mock.Mock()
-    client.describe_event.return_value = {
-        'status': 'complete',
-        'origin_url': 'fake_origin',
-        'backup_url': 'fake_backup'
-    }
-    d = client.event_can_delete('321')
-    assert d == {
-        'deletable': True
-    }
+    assert str(exc_info.value).endswith(
+        f"Channel: 123 is not deletable")

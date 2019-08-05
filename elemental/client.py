@@ -235,6 +235,5 @@ class ElementalLive():
         channel_info = self.describe_event(channel_id)
         if channel_info['status'] in ('pending', 'running',
                                       'preprocessing', 'postprocessing'):
-            return {'deletable': False}
-        else:
-            return {'deletable': True}
+            raise ElementalException(
+                f"Channel: {channel_id} is not deletable")
