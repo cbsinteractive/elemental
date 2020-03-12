@@ -1,6 +1,6 @@
 flake8==3.5.0
 Flask==1.0.2
-Flask-RESTful==0.3.7
+Flask-RESTful==0.3.8
 Jinja2==2.10.1
 mock==3.0.5
 pytest==4.5.0
