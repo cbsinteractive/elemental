@@ -7,6 +7,6 @@ pytest==4.5.0
 requests==2.23.0
 requests-mock==1.7.0
 pytest-cov==2.7.1
-codecov==2.0.16
+codecov==2.0.22
 botocore>=1.12.130
 xmltodict==0.12.0
