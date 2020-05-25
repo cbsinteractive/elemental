@@ -1,4 +1,4 @@
-flake8==3.7.9
+flake8==3.8.2
 Flask==1.1.2
 Flask-RESTful==0.3.8
 Jinja2==2.11.2
