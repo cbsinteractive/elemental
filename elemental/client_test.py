@@ -120,45 +120,67 @@ def test_send_request_should_raise_InvalidResponse_on_invalid_status_code(
         f"Response: 404\n{response_from_elemental_api}")
 
 
-def test_create_event_should_call_send_request_as_expect_and_return_event_id():
+def test_create_event():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
     client.generate_headers.return_value = HEADERS
 
     client.send_request = mock.Mock()
-    response_from_elemental_api = file_fixture('success_response_for_'
-                                               'create.xml')
+    elemental_response = file_fixture('success_response_for_create.xml')
 
     client.send_request.return_value = mock_response(
-        status=201, content=response_from_elemental_api)
+        status=201, content=elemental_response)
 
-    event_id = client.create_event({'username': os.getenv('ACCESS_KEY'),
-                                    'password': os.getenv('SECRET_KEY'),
-                                    'mediastore_container_master':
-                                    'https://hu5n3jjiyi2jev.data.media'
-                                    'store.us-east-1.amazonaws.com/master',
-                                    'mediastore_container_backup':
-                                    'https://hu5n3jjiyi2jev.data.medias'
-                                    'tore.us-east-1.amazonaws.com/backup',
-                                    'input_device': {'id': '1',
-                                                     'name': None,
-                                                     'device_name': 'HD-SDI 1',
-                                                     'device_number': '0',
-                                                     'device_type': 'AJA',
-                                                     'description':
-                                                         'AJA Capture Card',
-                                                     'channel': '1',
-                                                     'channel_type': 'HD-SDI',
-                                                     'quad': 'false',
-                                                     'availability': False}})
+    event_id = client.create_event(
+        'new-event',
+        '2',
+        'embedded',
+        'rtp://54.158.42.171:23232')
 
+    client.send_request.assert_called_once_with(
+        http_method='POST', url='FAKE_ADDRESS.com/live_events',
+        headers={'Accept': 'application/xml',
+                 'Content-Type': 'application/xml'},
+        body=file_fixture('create_event_request_body.xml'))
     response_from_elemental_api = client.send_request.call_args_list[0][1]
     assert response_from_elemental_api['http_method'] == 'POST'
     assert response_from_elemental_api['url'] == \
         f'{ELEMENTAL_ADDRESS}/live_events'
     assert response_from_elemental_api['headers'] == HEADERS
-    assert event_id == {'id': '80'}
+    assert event_id == {'id': '53'}
+
+
+def test_create_event_with_secondary_uri():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    elemental_response = file_fixture('success_response_for_create.xml')
+
+    client.send_request.return_value = mock_response(
+        status=201, content=elemental_response)
+
+    event_id = client.create_event(
+        'new-event',
+        '2',
+        'embedded',
+        'rtp://54.158.42.171:23232',
+        'rtp://54.158.42.171:23233')
+
+    client.send_request.assert_called_once_with(
+        http_method='POST', url='FAKE_ADDRESS.com/live_events',
+        headers={'Accept': 'application/xml',
+                 'Content-Type': 'application/xml'},
+        body=file_fixture('create_event_request_body_with_secondary_uri.xml'))
+    response_from_elemental_api = client.send_request.call_args_list[0][1]
+    assert response_from_elemental_api['http_method'] == 'POST'
+    assert response_from_elemental_api['url'] == \
+        f'{ELEMENTAL_ADDRESS}/live_events'
+    assert response_from_elemental_api['headers'] == HEADERS
+    assert event_id == {'id': '53'}
 
 
 def test_delete_event_should_call_send_request_as_expect():
@@ -439,5 +461,4 @@ def test_event_can_delete_will_raise_exception_if_pending():
     with pytest.raises(ElementalException) as exc_info:
         client.event_can_delete('123')
 
-    assert str(exc_info.value).endswith(
-        f"Channel: 123 is not deletable")
+    assert str(exc_info.value).endswith("Channel: 123 is not deletable")

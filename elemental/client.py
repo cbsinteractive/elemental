@@ -75,26 +75,20 @@ class ElementalLive():
                 f"{response.status_code}\n{response.text}")
         return response
 
-    def create_event(self, options):
-
-        # Initiate url
+    def create_event(self, event_name, encoder_input_id, timecode_source,
+                     destination_uri, secondary_destination_uri=None):
         url = f'{self.server_ip}/live_events'
-
-        # Generate template
         xml = read_template('qvbr_mediastore.xml')
         template = Template(xml)
-
-        # Pass params to template
-        body = template.render(**options)
-
-        # Generate headers
+        body = template.render(
+            event_name=event_name,
+            encoder_input_id=encoder_input_id,
+            timecode_source=timecode_source,
+            destination_uri=destination_uri,
+            secondary_destination_uri=secondary_destination_uri)
         headers = self.generate_headers(url)
-
-        # Send request and do exception handling
         response = self.send_request(
             http_method="POST", url=url, headers=headers, body=body)
-
-        # Find newly created event id
         xml_root = ET.fromstring(response.content)
         ids = xml_root.findall('id')
         event_id = ids[0].text

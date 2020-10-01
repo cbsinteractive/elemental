@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <live_event product="Elemental Live + HEVC Package" version="2.18.5.3019758">
-  <name>{{ event_name }}</name>
+  <name>new-event</name>
   <input>
     <deblock_selected>true</deblock_selected>
     <denoise_selected>false</denoise_selected>
@@ -16,11 +16,11 @@
     <prefer_smpte2038>false</prefer_smpte2038>
     <service_name nil="true"/>
     <service_provider_name nil="true"/>
-    <timecode_source>{{ timecode_source }}</timecode_source>
+    <timecode_source>embedded</timecode_source>
     <device_input>
       <device_type>AJA</device_type>
       <device_number>0</device_number>
-      <channel>{{ encoder_input_id }}</channel>
+      <channel>2</channel>
       <channel_type>HD-SDI</channel_type>
       <name>IPENC14</name>
       <sdi_settings>
@@ -56,8 +56,8 @@
   </input>
   <loop_all_inputs>false</loop_all_inputs>
   <timecode_config>
-    <require_initial_timecode>{{ 'true' if timecode_source == 'embedded' else 'false' }}</require_initial_timecode>
-    <source>{{ timecode_source }}</source>
+    <require_initial_timecode>true</require_initial_timecode>
+    <source>embedded</source>
     <sync_threshold nil="true"/>
   </timecode_config>
   <node_id>1</node_id>
@@ -229,11 +229,9 @@
           <row_length>5</row_length>
         </fec_output_settings>
         <destination>
-          <uri>{{ destination_uri}}</uri>
+          <uri>rtp://54.158.42.171:23232</uri>
         </destination>
-        {% if secondary_destination_uri %}<secondary_destination>
-          <uri>{{ secondary_destination_uri }}</uri>
-        </secondary_destination>{% endif %}
+
       </udp_settings>
       <m2ts_settings>
         <arib>false</arib>
