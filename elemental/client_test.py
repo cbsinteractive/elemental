@@ -13,6 +13,7 @@ API_KEY = "FAKE"
 ELEMENTAL_ADDRESS = "FAKE_ADDRESS.com"
 HEADERS = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 REQUEST_BODY = "<live_event>FAKE</live_event>"
+TIMEOUT = 10
 
 
 def file_fixture(file_name):
@@ -66,13 +67,14 @@ def test_send_request_should_call_request_as_expected(mock_request):
     mock_request.return_value = mock_response(status=200)
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
     client.send_request(
-        'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
+        'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY, timeout=TIMEOUT)
 
     request_to_elemental = mock_request.call_args_list[0][1]
     assert request_to_elemental['url'] == f'{ELEMENTAL_ADDRESS}/live_events'
     assert request_to_elemental['method'] == 'POST'
     assert request_to_elemental['headers']['Accept'] == 'application/xml'
     assert request_to_elemental['headers']['Content-Type'] == 'application/xml'
+    assert request_to_elemental['timeout'] == TIMEOUT
 
 
 @mock.patch('requests.request')
@@ -174,7 +176,7 @@ def test_delete_event_should_call_send_request_as_expect():
     client.delete_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='DELETE',
-        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}', headers=HEADERS)
+        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}', headers=HEADERS, timeout=None)
 
 
 def test_start_event_should_call_send_request_as_expect():
@@ -192,7 +194,7 @@ def test_start_event_should_call_send_request_as_expect():
     client.send_request.assert_called_once_with(
         http_method='POST',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/start',
-        headers=HEADERS, body="<start></start>")
+        headers=HEADERS, body="<start></start>", timeout=None)
 
 
 def test_stop_event_should_call_send_request_as_expect():
@@ -209,7 +211,7 @@ def test_stop_event_should_call_send_request_as_expect():
     client.send_request.assert_called_once_with(
         http_method='POST',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/stop',
-        headers=HEADERS, body="<stop></stop>")
+        headers=HEADERS, body="<stop></stop>", timeout=None)
 
 
 def send_request_side_effect(**kwargs):
@@ -237,7 +239,7 @@ def test_find_devices_in_use_will_call_send_request_as_expect():
     client.send_request.assert_called_with(http_method="GET",
                                            url=f'{ELEMENTAL_ADDRESS}'
                                            f'/live_events?'
-                                           f'filter=active', headers=HEADERS)
+                                           f'filter=active', headers=HEADERS, timeout=None)
 
 
 def test_find_devices_in_use_will_return_in_used_devices():
@@ -272,7 +274,7 @@ def test_get_input_devices_will_call_send_request_as_expect():
 
     client.send_request.\
         assert_called_with(http_method="GET",
-                           url=f'{ELEMENTAL_ADDRESS}/devices', headers=HEADERS)
+                           url=f'{ELEMENTAL_ADDRESS}/devices', headers=HEADERS, timeout=None)
 
 
 def test_get_input_devices_will_get_right_devices_info():
@@ -321,7 +323,7 @@ def test_get_input_device_by_id_will_call_send_request_as_expect():
     client.send_request.\
         assert_called_with(http_method="GET",
                            url=f'{ELEMENTAL_ADDRESS}/devices/2',
-                           headers=HEADERS)
+                           headers=HEADERS, timeout=None)
 
 
 def test_get_input_device_by_id_will_get_right_devices_info():
@@ -403,7 +405,7 @@ def test_describe_event_will_call_send_request_as_expect():
     client.send_request.assert_called_once_with(
         http_method='GET',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}',
-        headers=HEADERS)
+        headers=HEADERS, timeout=None)
 
 
 def test_describe_event_will_return_event_info_as_expect():
