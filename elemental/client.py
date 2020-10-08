@@ -36,6 +36,7 @@ class ElementalLive():
         self.server_ip = server_ip
         self.user = user
         self.api_key = api_key
+        self.session = requests.Session()
 
     def generate_headers(self, url=""):
         # Generate headers according to how users create ElementalLive class
@@ -64,7 +65,7 @@ class ElementalLive():
     def send_request(self, http_method, url, headers, body=""):
         # Send request according to different methods
         try:
-            response = requests.request(
+            response = self.session.request(
                 method=http_method, url=url, data=body, headers=headers)
 
         except requests.exceptions.RequestException as e:
