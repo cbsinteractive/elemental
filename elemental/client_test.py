@@ -63,7 +63,8 @@ def test_genterate_header_without_authentication_should_not_contain_user():
 
 def test_send_request_should_call_request_as_expected():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
-    client.session.request = mock.MagicMock(return_value=mock_response(status=200))
+    client.session.request = mock.MagicMock(
+        return_value=mock_response(status=200))
     client.send_request(
         'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
 
@@ -89,7 +90,8 @@ def test_send_request_should_return_response_on_correct_status_code():
 
 def test_send_request_should_raise_InvalidRequest_on_RequestException():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
-    client.session.request = mock.MagicMock(side_effect=requests.exceptions.RequestException())
+    client.session.request = mock.MagicMock(
+        side_effect=requests.exceptions.RequestException())
 
     with pytest.raises(InvalidRequest):
         client.send_request(
