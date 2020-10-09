@@ -61,29 +61,26 @@ def test_genterate_header_without_authentication_should_not_contain_user():
     assert headers['Content-Type'] == 'application/xml'
 
 
-@mock.patch('requests.request')
-def test_send_request_should_call_request_as_expected(mock_request):
-    mock_request.return_value = mock_response(status=200)
+def test_send_request_should_call_request_as_expected():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.session.request = mock.MagicMock(
+        return_value=mock_response(status=200))
     client.send_request(
         'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
 
-    request_to_elemental = mock_request.call_args_list[0][1]
+    request_to_elemental = client.session.request.call_args_list[0][1]
     assert request_to_elemental['url'] == f'{ELEMENTAL_ADDRESS}/live_events'
     assert request_to_elemental['method'] == 'POST'
     assert request_to_elemental['headers']['Accept'] == 'application/xml'
     assert request_to_elemental['headers']['Content-Type'] == 'application/xml'
 
 
-@mock.patch('requests.request')
-def test_send_request_should_return_response_on_correct_status_code(
-        mock_request):
+def test_send_request_should_return_response_on_correct_status_code():
     response_from_elemental_api = file_fixture('success_response_for_'
                                                'create.xml')
-    mock_request.return_value = mock_response(
-        status=201, text=response_from_elemental_api)
-
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.session.request = mock.MagicMock(return_value=mock_response(
+        status=201, text=response_from_elemental_api))
     response = client.send_request(
         'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
 
@@ -91,26 +88,22 @@ def test_send_request_should_return_response_on_correct_status_code(
     assert response.status_code == 201
 
 
-@mock.patch('requests.request')
-def test_send_request_should_raise_InvalidRequest_on_RequestException(
-        mock_request):
-    mock_request.side_effect = requests.exceptions.RequestException()
-
+def test_send_request_should_raise_InvalidRequest_on_RequestException():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.session.request = mock.MagicMock(
+        side_effect=requests.exceptions.RequestException())
 
     with pytest.raises(InvalidRequest):
         client.send_request(
             'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
 
 
-@mock.patch('requests.request')
-def test_send_request_should_raise_InvalidResponse_on_invalid_status_code(
-        mock_request):
+def test_send_request_should_raise_InvalidResponse_on_invalid_status_code():
     response_from_elemental_api = file_fixture('fail_to_create_response.xml')
-    mock_request.return_value = mock_response(
-        status=404, text=response_from_elemental_api)
 
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.session.request = mock.MagicMock(return_value=mock_response(
+        status=404, text=response_from_elemental_api))
 
     with pytest.raises(InvalidResponse) as exc_info:
         client.send_request(
