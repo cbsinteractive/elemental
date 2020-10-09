@@ -13,6 +13,7 @@ API_KEY = "FAKE"
 ELEMENTAL_ADDRESS = "FAKE_ADDRESS.com"
 HEADERS = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 REQUEST_BODY = "<live_event>FAKE</live_event>"
+TIMEOUT = 10
 
 
 def file_fixture(file_name):
@@ -61,29 +62,27 @@ def test_genterate_header_without_authentication_should_not_contain_user():
     assert headers['Content-Type'] == 'application/xml'
 
 
-@mock.patch('requests.request')
-def test_send_request_should_call_request_as_expected(mock_request):
-    mock_request.return_value = mock_response(status=200)
+def test_send_request_should_call_request_as_expected():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.session.request = mock.MagicMock(
+        return_value=mock_response(status=200))
     client.send_request(
-        'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
+        'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY, timeout=TIMEOUT)
 
-    request_to_elemental = mock_request.call_args_list[0][1]
+    request_to_elemental = client.session.request.call_args_list[0][1]
     assert request_to_elemental['url'] == f'{ELEMENTAL_ADDRESS}/live_events'
     assert request_to_elemental['method'] == 'POST'
     assert request_to_elemental['headers']['Accept'] == 'application/xml'
     assert request_to_elemental['headers']['Content-Type'] == 'application/xml'
+    assert request_to_elemental['timeout'] == TIMEOUT
 
 
-@mock.patch('requests.request')
-def test_send_request_should_return_response_on_correct_status_code(
-        mock_request):
+def test_send_request_should_return_response_on_correct_status_code():
     response_from_elemental_api = file_fixture('success_response_for_'
                                                'create.xml')
-    mock_request.return_value = mock_response(
-        status=201, text=response_from_elemental_api)
-
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.session.request = mock.MagicMock(return_value=mock_response(
+        status=201, text=response_from_elemental_api))
     response = client.send_request(
         'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
 
@@ -91,26 +90,22 @@ def test_send_request_should_return_response_on_correct_status_code(
     assert response.status_code == 201
 
 
-@mock.patch('requests.request')
-def test_send_request_should_raise_InvalidRequest_on_RequestException(
-        mock_request):
-    mock_request.side_effect = requests.exceptions.RequestException()
-
+def test_send_request_should_raise_InvalidRequest_on_RequestException():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.session.request = mock.MagicMock(
+        side_effect=requests.exceptions.RequestException())
 
     with pytest.raises(InvalidRequest):
         client.send_request(
             'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
 
 
-@mock.patch('requests.request')
-def test_send_request_should_raise_InvalidResponse_on_invalid_status_code(
-        mock_request):
+def test_send_request_should_raise_InvalidResponse_on_invalid_status_code():
     response_from_elemental_api = file_fixture('fail_to_create_response.xml')
-    mock_request.return_value = mock_response(
-        status=404, text=response_from_elemental_api)
 
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.session.request = mock.MagicMock(return_value=mock_response(
+        status=404, text=response_from_elemental_api))
 
     with pytest.raises(InvalidResponse) as exc_info:
         client.send_request(
@@ -196,7 +191,7 @@ def test_delete_event_should_call_send_request_as_expect():
     client.delete_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='DELETE',
-        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}', headers=HEADERS)
+        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}', headers=HEADERS, timeout=None)
 
 
 def test_start_event_should_call_send_request_as_expect():
@@ -214,7 +209,7 @@ def test_start_event_should_call_send_request_as_expect():
     client.send_request.assert_called_once_with(
         http_method='POST',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/start',
-        headers=HEADERS, body="<start></start>")
+        headers=HEADERS, body="<start></start>", timeout=None)
 
 
 def test_stop_event_should_call_send_request_as_expect():
@@ -231,7 +226,7 @@ def test_stop_event_should_call_send_request_as_expect():
     client.send_request.assert_called_once_with(
         http_method='POST',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/stop',
-        headers=HEADERS, body="<stop></stop>")
+        headers=HEADERS, body="<stop></stop>", timeout=None)
 
 
 def send_request_side_effect(**kwargs):
@@ -259,7 +254,7 @@ def test_find_devices_in_use_will_call_send_request_as_expect():
     client.send_request.assert_called_with(http_method="GET",
                                            url=f'{ELEMENTAL_ADDRESS}'
                                            f'/live_events?'
-                                           f'filter=active', headers=HEADERS)
+                                           f'filter=active', headers=HEADERS, timeout=None)
 
 
 def test_find_devices_in_use_will_return_in_used_devices():
@@ -294,7 +289,7 @@ def test_get_input_devices_will_call_send_request_as_expect():
 
     client.send_request.\
         assert_called_with(http_method="GET",
-                           url=f'{ELEMENTAL_ADDRESS}/devices', headers=HEADERS)
+                           url=f'{ELEMENTAL_ADDRESS}/devices', headers=HEADERS, timeout=None)
 
 
 def test_get_input_devices_will_get_right_devices_info():
@@ -343,7 +338,7 @@ def test_get_input_device_by_id_will_call_send_request_as_expect():
     client.send_request.\
         assert_called_with(http_method="GET",
                            url=f'{ELEMENTAL_ADDRESS}/devices/2',
-                           headers=HEADERS)
+                           headers=HEADERS, timeout=None)
 
 
 def test_get_input_device_by_id_will_get_right_devices_info():
@@ -425,7 +420,7 @@ def test_describe_event_will_call_send_request_as_expect():
     client.send_request.assert_called_once_with(
         http_method='GET',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}',
-        headers=HEADERS)
+        headers=HEADERS, timeout=None)
 
 
 def test_describe_event_will_return_event_info_as_expect():

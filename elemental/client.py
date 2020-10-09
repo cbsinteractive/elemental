@@ -32,10 +32,12 @@ class InvalidResponse(ElementalException):
 
 
 class ElementalLive():
-    def __init__(self, server_ip, user=None, api_key=None):
+    def __init__(self, server_ip, user=None, api_key=None, timeout=5):
         self.server_ip = server_ip
         self.user = user
         self.api_key = api_key
+        self.timeout = timeout
+        self.session = requests.Session()
 
     def generate_headers(self, url=""):
         # Generate headers according to how users create ElementalLive class
@@ -61,11 +63,12 @@ class ElementalLive():
                 'Content-Type': 'application/xml'
             }
 
-    def send_request(self, http_method, url, headers, body=""):
+    def send_request(self, http_method, url, headers, body="", timeout=None):
         # Send request according to different methods
         try:
-            response = requests.request(
-                method=http_method, url=url, data=body, headers=headers)
+            timeout = timeout or self.timeout
+            response = self.session.request(
+                method=http_method, url=url, data=body, headers=headers, timeout=timeout)
 
         except requests.exceptions.RequestException as e:
             raise InvalidRequest(f"{http_method}: {url} failed\n{e}")
@@ -76,7 +79,7 @@ class ElementalLive():
         return response
 
     def create_event(self, event_name, encoder_input_id, timecode_source,
-                     destination_uri, secondary_destination_uri=None):
+                     destination_uri, secondary_destination_uri=None, timeout=None):
         url = f'{self.server_ip}/live_events'
         xml = read_template('qvbr_mediastore.xml')
         template = Template(xml)
@@ -88,14 +91,14 @@ class ElementalLive():
             secondary_destination_uri=secondary_destination_uri)
         headers = self.generate_headers(url)
         response = self.send_request(
-            http_method="POST", url=url, headers=headers, body=body)
+            http_method="POST", url=url, headers=headers, body=body, timeout=timeout)
         xml_root = ET.fromstring(response.content)
         ids = xml_root.findall('id')
         event_id = ids[0].text
 
         return {'id': event_id}
 
-    def delete_event(self, event_id):
+    def delete_event(self, event_id, timeout=None):
 
         # Initial url
         url = f'{self.server_ip}/live_events/{event_id}'
@@ -104,9 +107,9 @@ class ElementalLive():
         headers = self.generate_headers(url)
 
         # Send request and do exception handling
-        self.send_request(http_method="DELETE", url=url, headers=headers)
+        self.send_request(http_method="DELETE", url=url, headers=headers, timeout=timeout)
 
-    def start_event(self, event_id):
+    def start_event(self, event_id, timeout=None):
         # Initail url
         url = f'{self.server_ip}/live_events/{event_id}/start'
 
@@ -118,9 +121,9 @@ class ElementalLive():
 
         # Send request and do exception handling
         self.send_request(http_method="POST", url=url,
-                          headers=headers, body=body)
+                          headers=headers, body=body, timeout=timeout)
 
-    def stop_event(self, event_id):
+    def stop_event(self, event_id, timeout=None):
         # Initail url
         url = f'{self.server_ip}/live_events/{event_id}/stop'
 
@@ -132,15 +135,15 @@ class ElementalLive():
 
         # Send request and do exception handling
         self.send_request(http_method="POST", url=url,
-                          headers=headers, body=body)
+                          headers=headers, body=body, timeout=timeout)
 
-    def describe_event(self, event_id):
+    def describe_event(self, event_id, timeout=None):
         url = f'{self.server_ip}/live_events/{event_id}'
 
         headers = self.generate_headers(url)
 
         response = self.send_request(http_method="GET", url=url,
-                                     headers=headers)
+                                     headers=headers, timeout=timeout)
         # print(response.text)
         event_info = {}
 
@@ -153,11 +156,11 @@ class ElementalLive():
 
         return event_info
 
-    def find_devices_in_use(self):
+    def find_devices_in_use(self, timeout=None):
         events_url = f'{self.server_ip}/live_events?filter=active'
         events_headers = self.generate_headers(events_url)
         events = self.send_request(
-            http_method="GET", url=events_url, headers=events_headers)
+            http_method="GET", url=events_url, headers=events_headers, timeout=timeout)
         events_list = ET.fromstring(events.text)
 
         # Find in use devices from active events
@@ -167,11 +170,11 @@ class ElementalLive():
 
         return in_use_devices
 
-    def get_input_devices(self):
+    def get_input_devices(self, timeout=None):
         devices_url = f'{self.server_ip}/devices'
         devices_headers = self.generate_headers(devices_url)
         devices = self.send_request(
-            http_method="GET", url=devices_url, headers=devices_headers)
+            http_method="GET", url=devices_url, headers=devices_headers, timeout=timeout)
         devices_info = xmltodict.parse(devices.text)[
             'device_list']['device']
 
@@ -186,11 +189,11 @@ class ElementalLive():
             devices_info, key=lambda d: int(d["id"]))
         return [dict(d) for d in devices_info]
 
-    def get_input_device_by_id(self, input_device_id):
+    def get_input_device_by_id(self, input_device_id, timeout=None):
         devices_url = f'{self.server_ip}/devices/{input_device_id}'
         devices_headers = self.generate_headers(devices_url)
         devices = self.send_request(
-            http_method="GET", url=devices_url, headers=devices_headers)
+            http_method="GET", url=devices_url, headers=devices_headers, timeout=timeout)
         device_info = xmltodict.parse(devices.text)['device']
         devices_in_use = self.find_devices_in_use()
         device_info['availability'] = (device_info['device_name']
@@ -198,7 +201,7 @@ class ElementalLive():
         device_info.pop('@href')
         return dict(device_info)
 
-    def generate_preview(self, input_id):
+    def generate_preview(self, input_id, timeout=None):
         url = f'{self.server_ip}/inputs/generate_preview'
         headers = self.generate_headers(url)
 
@@ -213,7 +216,7 @@ class ElementalLive():
                f"[input_format]=Auto&live_event[inputs_attributes][0]" \
                f"[device_input_attributes][device_id]={input_id}"
         response = self.send_request(
-            http_method="POST", url=url, headers=headers, body=data)
+            http_method="POST", url=url, headers=headers, body=data, timeout=timeout)
 
         response_parse = ast.literal_eval(response.text)
 
@@ -225,7 +228,7 @@ class ElementalLive():
                           f'p_{response_parse["preview_image_id"]}_job_0.jpg'
             return {'preview_url': preview_url}
 
-    def event_can_delete(self, channel_id):
+    def event_can_delete(self, channel_id, timeout=None):
         channel_info = self.describe_event(channel_id)
         if channel_info['status'] in ('pending', 'running',
                                       'preprocessing', 'postprocessing'):
