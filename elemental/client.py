@@ -37,6 +37,7 @@ class ElementalLive():
         self.user = user
         self.api_key = api_key
         self.timeout = timeout
+        self.session = requests.Session()
 
     def generate_headers(self, url=""):
         # Generate headers according to how users create ElementalLive class
@@ -66,7 +67,7 @@ class ElementalLive():
         # Send request according to different methods
         try:
             timeout = timeout or self.timeout
-            response = requests.request(
+            response = self.session.request(
                 method=http_method, url=url, data=body, headers=headers, timeout=timeout)
 
         except requests.exceptions.RequestException as e:
