@@ -2,11 +2,11 @@ import ast
 import hashlib
 import time
 import xml.etree.ElementTree as ET
-from typing import Optional, Dict, TypedDict, Set, List
+from typing import Dict, List, Optional, Set, TypedDict
 from urllib.parse import urlparse
 
 import requests
-import xmltodict
+import xmltodict  # type: ignore
 
 
 class ElementalException(Exception):
@@ -55,7 +55,7 @@ class ElementalLive:
 
     def generate_headers(self, url: Optional[str] = "") -> Dict[str, str]:
         # Generate headers according to how users create ElementalLive class
-        if self.user is None and self.api_key is None:
+        if self.user is None or self.api_key is None:
             return {
                 'Accept': 'application/xml',
                 'Content-Type': 'application/xml'
@@ -63,14 +63,13 @@ class ElementalLive:
         else:
             expiration = int(time.time() + 120)
             parse = urlparse(url)
-            prehash = "%s%s%s%s" % (
-                parse.path, self.user, self.api_key, expiration)
-            digest = hashlib.md5(prehash.encode('utf-8')).hexdigest()
-            final_hash = "%s%s" % (self.api_key, digest)
+            pre_hash = f"{str(parse.path)}{self.user}{self.api_key}{expiration}"
+            digest = hashlib.md5(pre_hash.encode('utf-8')).hexdigest()
+            final_hash = f"{self.api_key}{digest}"
             key = hashlib.md5(final_hash.encode('utf-8')).hexdigest()
 
             return {
-                'X-Auth-User': self.user,
+                'X-Auth-User': str(self.user),
                 'X-Auth-Expires': str(expiration),
                 'X-Auth-Key': key,
                 'Accept': 'application/xml',
@@ -134,16 +133,22 @@ class ElementalLive:
         event_info = {}
 
         destinations = list(ET.fromstring(response.text).iter('destination'))
-        event_info['origin_url'] = destinations[0].find('uri').text
+        uri = destinations[0].find('uri')
+        event_info['origin_url'] = uri.text if uri is not None else ''
         if len(destinations) > 1:
-            event_info['backup_url'] = destinations[1].find('uri').text
+            uri = destinations[1].find('uri')
+            event_info['backup_url'] = uri.text if uri is not None else ''
 
         status = ET.fromstring(response.text).find('status')
-        event_info['status'] = status.text
+        event_info['status'] = status.text if status is not None else 'unknown'
 
-        return event_info
+        return EventStatusDict(
+            status=str(event_info['status']),
+            origin_url=str(event_info['origin_url']),
+            backup_url=event_info.get('backup_url')
+        )
 
-    def find_devices_in_use(self, timeout: Optional[int] = None) -> Set[str]:
+    def find_devices_in_use(self, timeout: Optional[int] = None) -> Set[Optional[str]]:
         events_url = f'{self.server_url}/live_events?filter=active'
         events_headers = self.generate_headers(events_url)
         events = self.send_request(
@@ -162,19 +167,29 @@ class ElementalLive:
         devices_headers = self.generate_headers(devices_url)
         devices = self.send_request(
             http_method="GET", url=devices_url, headers=devices_headers, timeout=timeout)
-        devices_info = xmltodict.parse(devices.text)[
+        devices_information = xmltodict.parse(devices.text)[
             'device_list']['device']
 
         devices_in_use = self.find_devices_in_use()
 
-        for device in devices_info:
+        for device in devices_information:
             device.pop('@href')
             device['availability'] = \
                 (device['device_name'] not in devices_in_use)
 
-        devices_info = sorted(
-            devices_info, key=lambda d: int(d["id"]))
-        return [dict(d) for d in devices_info]
+        devices_information = sorted(devices_information, key=lambda d: int(d["id"]))
+        return [DeviceAvailabilityDict(
+            id=device_info['id'],
+            name=device_info['name'],
+            description=device_info['description'],
+            device_name=device_info['device_name'],
+            device_number=device_info['device_number'],
+            device_type=device_info['device_type'],
+            availability=device_info['availability'],
+            channel=device_info['channel'],
+            channel_type=device_info['channel_type'],
+            quad=device_info['quad'],
+        ) for device_info in devices_information]
 
     def get_input_device_by_id(self, input_device_id: str, timeout: Optional[int] = None) -> DeviceAvailabilityDict:
         devices_url = f'{self.server_url}/devices/{input_device_id}'
@@ -186,7 +201,18 @@ class ElementalLive:
         device_info['availability'] = (device_info['device_name']
                                        not in devices_in_use)
         device_info.pop('@href')
-        return dict(device_info)
+        return DeviceAvailabilityDict(
+            id=device_info['id'],
+            name=device_info['name'],
+            description=device_info['description'],
+            device_name=device_info['device_name'],
+            device_number=device_info['device_number'],
+            device_type=device_info['device_type'],
+            availability=device_info['availability'],
+            channel=device_info['channel'],
+            channel_type=device_info['channel_type'],
+            quad=device_info['quad'],
+        )
 
     def generate_preview(self, input_id: str, timeout: Optional[int] = None) -> PreviewUrlDict:
         url = f'{self.server_url}/inputs/generate_preview'

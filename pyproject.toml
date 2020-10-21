@@ -6,7 +6,6 @@ authors = ["CBS Interactive <video-processing-team@cbsinteractive.com>"]
 repository = "https://github.com/cbsinteractive/elemental.git"
 readme = "README.md"
 license = "MIT"
-include = ["elemental/templates/*.xml"]
 packages = [
     { include = "elemental" },
 ]
