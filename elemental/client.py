@@ -78,8 +78,8 @@ class ElementalLive:
                 f"{response.status_code}\n{response.text}")
         return response
 
-    def create_event(self, event_name, encoder_input_id, timecode_source,
-                     destination_uri, secondary_destination_uri=None, timeout=None):
+    def create_event(self, event_name, encoder_input_id, timecode_source, destination_uri,
+                     secondary_destination_uri=None, zixi_stream_id=None, timeout=None):
         url = f'{self.server_url}/live_events'
         xml = read_template('qvbr_mediastore.xml')
         template = Template(xml)
@@ -88,10 +88,12 @@ class ElementalLive:
             encoder_input_id=encoder_input_id,
             timecode_source=timecode_source,
             destination_uri=destination_uri,
-            secondary_destination_uri=secondary_destination_uri)
+            secondary_destination_uri=secondary_destination_uri,
+            zixi_stream_id=zixi_stream_id,
+        )
         headers = self.generate_headers(url)
         response = self.send_request(
-            http_method="POST", url=url, headers=headers, body=body, timeout=timeout)
+            http_method="POST", url=url, headers=headers, body=body.strip(), timeout=timeout)
         xml_root = ET.fromstring(response.content)
         ids = xml_root.findall('id')
         event_id = ids[0].text
@@ -117,6 +119,13 @@ class ElementalLive:
         self.send_request(http_method="POST", url=url,
                           headers=headers, body=body, timeout=timeout)
 
+    def reset_event(self, event_id, timeout=None):
+        url = f'{self.server_url}/live_events/{event_id}/reset'
+        body = ""
+        headers = self.generate_headers(url)
+        self.send_request(http_method="POST", url=url,
+                          headers=headers, body=body, timeout=timeout)
+
     def describe_event(self, event_id, timeout=None):
         url = f'{self.server_url}/live_events/{event_id}'
         headers = self.generate_headers(url)
@@ -124,9 +133,10 @@ class ElementalLive:
                                      headers=headers, timeout=timeout)
         event_info = {}
 
-        destinations = ET.fromstring(response.text).iter('destination')
-        event_info['origin_url'] = next(destinations).find('uri').text
-        event_info['backup_url'] = next(destinations).find('uri').text
+        destinations = list(ET.fromstring(response.text).iter('destination'))
+        event_info['origin_url'] = destinations[0].find('uri').text
+        if len(destinations) > 1:
+            event_info['backup_url'] = destinations[1].find('uri').text
 
         status = ET.fromstring(response.text).find('status')
         event_info['status'] = status.text

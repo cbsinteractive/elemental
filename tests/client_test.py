@@ -133,16 +133,18 @@ def test_create_event():
         'embedded',
         'rtp://54.158.42.171:23232')
 
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['body'] == file_fixture('create_event_request_body.xml').strip()
+
     client.send_request.assert_called_once_with(
         http_method='POST', url='FAKE_ADDRESS.com/live_events',
         headers={'Accept': 'application/xml',
                  'Content-Type': 'application/xml'},
-        body=file_fixture('create_event_request_body.xml'), timeout=None)
-    response_from_elemental_api = client.send_request.call_args_list[0][1]
-    assert response_from_elemental_api['http_method'] == 'POST'
-    assert response_from_elemental_api['url'] == \
-        f'{ELEMENTAL_ADDRESS}/live_events'
-    assert response_from_elemental_api['headers'] == HEADERS
+        body=mock.ANY, timeout=None)
+
+    assert send_mock_call['http_method'] == 'POST'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events'
+    assert send_mock_call['headers'] == HEADERS
     assert event_id == {'id': '53'}
 
 
@@ -165,16 +167,52 @@ def test_create_event_with_secondary_uri():
         'rtp://54.158.42.171:23232',
         'rtp://54.158.42.171:23233')
 
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['body'] == file_fixture('create_event_request_body_with_secondary_uri.xml').strip()
     client.send_request.assert_called_once_with(
         http_method='POST', url='FAKE_ADDRESS.com/live_events',
         headers={'Accept': 'application/xml',
                  'Content-Type': 'application/xml'},
-        body=file_fixture('create_event_request_body_with_secondary_uri.xml'), timeout=None)
-    response_from_elemental_api = client.send_request.call_args_list[0][1]
-    assert response_from_elemental_api['http_method'] == 'POST'
-    assert response_from_elemental_api['url'] == \
-        f'{ELEMENTAL_ADDRESS}/live_events'
-    assert response_from_elemental_api['headers'] == HEADERS
+        body=mock.ANY, timeout=None)
+    assert send_mock_call['http_method'] == 'POST'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events'
+    assert send_mock_call['headers'] == HEADERS
+    assert event_id == {'id': '53'}
+
+
+def test_create_event_zixi():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    elemental_response = file_fixture('success_response_for_create.xml')
+
+    client.send_request.return_value = mock_response(
+        status=201, content=elemental_response)
+
+    event_id = client.create_event(
+        'new-event',
+        '2',
+        'embedded',
+        'rtp://54.158.42.171:23232',
+        'rtp://54.158.42.171:23233',
+        zixi_stream_id='main01',
+    )
+
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['body'] == file_fixture(
+        'create_event_request_body_with_secondary_uri_zixi_key.xml').strip()
+    client.send_request.assert_called_once_with(
+        http_method='POST', url='FAKE_ADDRESS.com/live_events',
+        headers={'Accept': 'application/xml',
+                 'Content-Type': 'application/xml'},
+        body=mock.ANY, timeout=None)
+    assert send_mock_call['http_method'] == 'POST'
+    assert send_mock_call['url'] == \
+           f'{ELEMENTAL_ADDRESS}/live_events'
+    assert send_mock_call['headers'] == HEADERS
     assert event_id == {'id': '53'}
 
 
