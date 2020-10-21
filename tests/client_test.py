@@ -250,6 +250,24 @@ def test_start_event_should_call_send_request_as_expect():
         headers=HEADERS, body="<start></start>", timeout=None)
 
 
+def test_reset_event_should_call_send_request_as_expect():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+
+    client.send_request.return_value = mock_response(status=200)
+
+    event_id = 999
+    client.reset_event(event_id)
+    client.send_request.assert_called_once_with(
+        http_method='POST',
+        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/reset',
+        headers=HEADERS, body='', timeout=None)
+
+
 def test_stop_event_should_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 

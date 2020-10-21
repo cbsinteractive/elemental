@@ -109,22 +109,18 @@ class ElementalLive:
         url = f'{self.server_url}/live_events/{event_id}/start'
         body = "<start></start>"
         headers = self.generate_headers(url)
-        self.send_request(http_method="POST", url=url,
-                          headers=headers, body=body, timeout=timeout)
+        self.send_request(http_method="POST", url=url, headers=headers, body=body, timeout=timeout)
 
     def stop_event(self, event_id, timeout=None):
         url = f'{self.server_url}/live_events/{event_id}/stop'
         body = "<stop></stop>"
         headers = self.generate_headers(url)
-        self.send_request(http_method="POST", url=url,
-                          headers=headers, body=body, timeout=timeout)
+        self.send_request(http_method="POST", url=url, headers=headers, body=body, timeout=timeout)
 
     def reset_event(self, event_id, timeout=None):
         url = f'{self.server_url}/live_events/{event_id}/reset'
-        body = ""
         headers = self.generate_headers(url)
-        self.send_request(http_method="POST", url=url,
-                          headers=headers, body=body, timeout=timeout)
+        self.send_request(http_method="POST", url=url, headers=headers, body="", timeout=timeout)
 
     def describe_event(self, event_id, timeout=None):
         url = f'{self.server_url}/live_events/{event_id}'
