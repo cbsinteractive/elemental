@@ -54,7 +54,7 @@ def test_generate_header_with_authentication_should_contain_user():
     assert headers['Content-Type'] == 'application/xml'
 
 
-def test_genterate_header_without_authentication_should_not_contain_user():
+def test_generate_header_without_authentication_should_not_contain_user():
     client = ElementalLive(ELEMENTAL_ADDRESS)
     headers = client.generate_headers()
     assert 'X-Auth-User' not in headers
@@ -78,8 +78,7 @@ def test_send_request_should_call_request_as_expected():
 
 
 def test_send_request_should_return_response_on_correct_status_code():
-    response_from_elemental_api = file_fixture('success_response_for_'
-                                               'create.xml')
+    response_from_elemental_api = file_fixture('success_response_for_create.xml')
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
     client.session.request = mock.MagicMock(return_value=mock_response(
         status=201, text=response_from_elemental_api))
@@ -127,91 +126,17 @@ def test_create_event():
     client.send_request.return_value = mock_response(
         status=201, content=elemental_response)
 
-    event_id = client.create_event(
-        'new-event',
-        '2',
-        'embedded',
-        'rtp://54.158.42.171:23232')
-
-    send_mock_call = client.send_request.call_args_list[0][1]
-    assert send_mock_call['body'] == file_fixture('create_event_request_body.xml').strip()
+    event_id = client.create_event('<new-event />')
 
     client.send_request.assert_called_once_with(
         http_method='POST', url='FAKE_ADDRESS.com/live_events',
         headers={'Accept': 'application/xml',
                  'Content-Type': 'application/xml'},
-        body=mock.ANY, timeout=None)
+        body='<new-event />', timeout=None)
 
+    send_mock_call = client.send_request.call_args_list[0][1]
     assert send_mock_call['http_method'] == 'POST'
     assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events'
-    assert send_mock_call['headers'] == HEADERS
-    assert event_id == {'id': '53'}
-
-
-def test_create_event_with_secondary_uri():
-    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
-
-    client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
-
-    client.send_request = mock.Mock()
-    elemental_response = file_fixture('success_response_for_create.xml')
-
-    client.send_request.return_value = mock_response(
-        status=201, content=elemental_response)
-
-    event_id = client.create_event(
-        'new-event',
-        '2',
-        'embedded',
-        'rtp://54.158.42.171:23232',
-        'rtp://54.158.42.171:23233')
-
-    send_mock_call = client.send_request.call_args_list[0][1]
-    assert send_mock_call['body'] == file_fixture('create_event_request_body_with_secondary_uri.xml').strip()
-    client.send_request.assert_called_once_with(
-        http_method='POST', url='FAKE_ADDRESS.com/live_events',
-        headers={'Accept': 'application/xml',
-                 'Content-Type': 'application/xml'},
-        body=mock.ANY, timeout=None)
-    assert send_mock_call['http_method'] == 'POST'
-    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events'
-    assert send_mock_call['headers'] == HEADERS
-    assert event_id == {'id': '53'}
-
-
-def test_create_event_zixi():
-    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
-
-    client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
-
-    client.send_request = mock.Mock()
-    elemental_response = file_fixture('success_response_for_create.xml')
-
-    client.send_request.return_value = mock_response(
-        status=201, content=elemental_response)
-
-    event_id = client.create_event(
-        'new-event',
-        '2',
-        'embedded',
-        'rtp://54.158.42.171:23232',
-        'rtp://54.158.42.171:23233',
-        zixi_stream_id='main01',
-    )
-
-    send_mock_call = client.send_request.call_args_list[0][1]
-    assert send_mock_call['body'] == file_fixture(
-        'create_event_request_body_with_secondary_uri_zixi_key.xml').strip()
-    client.send_request.assert_called_once_with(
-        http_method='POST', url='FAKE_ADDRESS.com/live_events',
-        headers={'Accept': 'application/xml',
-                 'Content-Type': 'application/xml'},
-        body=mock.ANY, timeout=None)
-    assert send_mock_call['http_method'] == 'POST'
-    assert send_mock_call['url'] == \
-           f'{ELEMENTAL_ADDRESS}/live_events'
     assert send_mock_call['headers'] == HEADERS
     assert event_id == {'id': '53'}
 
@@ -225,7 +150,7 @@ def test_delete_event_should_call_send_request_as_expect():
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(status=200)
 
-    event_id = 999
+    event_id = '999'
     client.delete_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='DELETE',
@@ -242,7 +167,7 @@ def test_start_event_should_call_send_request_as_expect():
 
     client.send_request.return_value = mock_response(status=200)
 
-    event_id = 999
+    event_id = '999'
     client.start_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='POST',
@@ -260,7 +185,7 @@ def test_reset_event_should_call_send_request_as_expect():
 
     client.send_request.return_value = mock_response(status=200)
 
-    event_id = 999
+    event_id = '999'
     client.reset_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='POST',
@@ -277,7 +202,7 @@ def test_stop_event_should_call_send_request_as_expect():
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(status=200)
 
-    event_id = 999
+    event_id = '999'
     client.stop_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='POST',
@@ -471,7 +396,7 @@ def test_describe_event_will_call_send_request_as_expect():
     client.send_request.return_value = mock_response(
         status=200, text=response_from_elemental_api)
 
-    event_id = 999
+    event_id = '999'
     client.describe_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='GET',
@@ -499,7 +424,15 @@ def test_describe_event_will_return_event_info_as_expect():
                           'status': 'complete'}
 
 
-def test_event_can_delete_will_raise_exception_if_pending():
+@pytest.mark.parametrize('status,expected_result', [
+    ('pending', False),
+    ('running', False),
+    ('preprocessing', False),
+    ('postprocessing', False),
+    ('error', True),
+    ('completed', True),
+])
+def test_event_can_delete(status, expected_result):
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.describe_event = mock.Mock()
@@ -509,7 +442,4 @@ def test_event_can_delete_will_raise_exception_if_pending():
         'backup_url': 'fake_backup'
     }
 
-    with pytest.raises(ElementalException) as exc_info:
-        client.event_can_delete('123')
-
-    assert str(exc_info.value).endswith("Channel: 123 is not deletable")
+    assert client.event_can_delete('123') is False
