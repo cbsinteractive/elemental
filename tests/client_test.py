@@ -1,12 +1,12 @@
 import json
 import os
 
-import mock
+from unittest import mock
 import pytest
 import requests
 
-from .client import (ElementalException, ElementalLive, InvalidRequest,
-                     InvalidResponse)
+from elemental.client import (ElementalException, ElementalLive, InvalidRequest,
+                              InvalidResponse)
 
 USER = "FAKE"
 API_KEY = "FAKE"
@@ -17,7 +17,7 @@ TIMEOUT = 10
 
 
 def file_fixture(file_name):
-    with open(os.path.join("elemental/test_templates", file_name)) as f:
+    with open(os.path.join("tests/fixtures", file_name)) as f:
         return f.read()
 
 
@@ -137,7 +137,7 @@ def test_create_event():
         http_method='POST', url='FAKE_ADDRESS.com/live_events',
         headers={'Accept': 'application/xml',
                  'Content-Type': 'application/xml'},
-        body=file_fixture('create_event_request_body.xml'))
+        body=file_fixture('create_event_request_body.xml'), timeout=None)
     response_from_elemental_api = client.send_request.call_args_list[0][1]
     assert response_from_elemental_api['http_method'] == 'POST'
     assert response_from_elemental_api['url'] == \
@@ -169,7 +169,7 @@ def test_create_event_with_secondary_uri():
         http_method='POST', url='FAKE_ADDRESS.com/live_events',
         headers={'Accept': 'application/xml',
                  'Content-Type': 'application/xml'},
-        body=file_fixture('create_event_request_body_with_secondary_uri.xml'))
+        body=file_fixture('create_event_request_body_with_secondary_uri.xml'), timeout=None)
     response_from_elemental_api = client.send_request.call_args_list[0][1]
     assert response_from_elemental_api['http_method'] == 'POST'
     assert response_from_elemental_api['url'] == \
