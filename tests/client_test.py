@@ -43,7 +43,7 @@ def mock_response(status=200, content=None, text=None,
 
 def test_ElementalLive_should_receive_server_ip():
     e = ElementalLive(ELEMENTAL_ADDRESS)
-    assert e.server_ip == ELEMENTAL_ADDRESS
+    assert e.server_url == ELEMENTAL_ADDRESS
 
 
 def test_generate_header_with_authentication_should_contain_user():
