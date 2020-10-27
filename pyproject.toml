@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "python-elemental"
+version = "0.5.0"
+description = "Python Client for Elemental On-Premises Appliances"
+authors = ["CBS Interactive <video-processing-team@cbsinteractive.com>"]
+repository = "https://github.com/cbsinteractive/elemental.git"
+readme = "README.md"
+license = "MIT"
+packages = [
+    { include = "elemental" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.23"
+xmltodict = "^0.12.0"
+
+[tool.poetry.dev-dependencies]
+requests-mock = "^1.8.0"
+pytest = "^6.1.1"
+pytest-cov = "^2.10.1"
+pytest-mypy = "^0.7.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

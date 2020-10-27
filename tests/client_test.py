@@ -1,12 +1,12 @@
 import json
 import os
 
-import mock
+from unittest import mock
 import pytest
 import requests
 
-from .client import (ElementalException, ElementalLive, InvalidRequest,
-                     InvalidResponse)
+from elemental.client import (ElementalException, ElementalLive, InvalidRequest,
+                              InvalidResponse)
 
 USER = "FAKE"
 API_KEY = "FAKE"
@@ -17,7 +17,7 @@ TIMEOUT = 10
 
 
 def file_fixture(file_name):
-    with open(os.path.join("elemental/test_templates", file_name)) as f:
+    with open(os.path.join("tests/fixtures", file_name)) as f:
         return f.read()
 
 
@@ -43,7 +43,7 @@ def mock_response(status=200, content=None, text=None,
 
 def test_ElementalLive_should_receive_server_ip():
     e = ElementalLive(ELEMENTAL_ADDRESS)
-    assert e.server_ip == ELEMENTAL_ADDRESS
+    assert e.server_url == ELEMENTAL_ADDRESS
 
 
 def test_generate_header_with_authentication_should_contain_user():
@@ -54,7 +54,7 @@ def test_generate_header_with_authentication_should_contain_user():
     assert headers['Content-Type'] == 'application/xml'
 
 
-def test_genterate_header_without_authentication_should_not_contain_user():
+def test_generate_header_without_authentication_should_not_contain_user():
     client = ElementalLive(ELEMENTAL_ADDRESS)
     headers = client.generate_headers()
     assert 'X-Auth-User' not in headers
@@ -78,8 +78,7 @@ def test_send_request_should_call_request_as_expected():
 
 
 def test_send_request_should_return_response_on_correct_status_code():
-    response_from_elemental_api = file_fixture('success_response_for_'
-                                               'create.xml')
+    response_from_elemental_api = file_fixture('success_response_for_create.xml')
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
     client.session.request = mock.MagicMock(return_value=mock_response(
         status=201, text=response_from_elemental_api))
@@ -115,45 +114,31 @@ def test_send_request_should_raise_InvalidResponse_on_invalid_status_code():
         f"Response: 404\n{response_from_elemental_api}")
 
 
-def test_create_event_should_call_send_request_as_expect_and_return_event_id():
+def test_create_event():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
     client.generate_headers.return_value = HEADERS
 
     client.send_request = mock.Mock()
-    response_from_elemental_api = file_fixture('success_response_for_'
-                                               'create.xml')
+    elemental_response = file_fixture('success_response_for_create.xml')
 
     client.send_request.return_value = mock_response(
-        status=201, content=response_from_elemental_api)
+        status=201, content=elemental_response)
 
-    event_id = client.create_event({'username': os.getenv('ACCESS_KEY'),
-                                    'password': os.getenv('SECRET_KEY'),
-                                    'mediastore_container_master':
-                                    'https://hu5n3jjiyi2jev.data.media'
-                                    'store.us-east-1.amazonaws.com/master',
-                                    'mediastore_container_backup':
-                                    'https://hu5n3jjiyi2jev.data.medias'
-                                    'tore.us-east-1.amazonaws.com/backup',
-                                    'input_device': {'id': '1',
-                                                     'name': None,
-                                                     'device_name': 'HD-SDI 1',
-                                                     'device_number': '0',
-                                                     'device_type': 'AJA',
-                                                     'description':
-                                                         'AJA Capture Card',
-                                                     'channel': '1',
-                                                     'channel_type': 'HD-SDI',
-                                                     'quad': 'false',
-                                                     'availability': False}})
+    event_id = client.create_event('<new-event />')
 
-    response_from_elemental_api = client.send_request.call_args_list[0][1]
-    assert response_from_elemental_api['http_method'] == 'POST'
-    assert response_from_elemental_api['url'] == \
-        f'{ELEMENTAL_ADDRESS}/live_events'
-    assert response_from_elemental_api['headers'] == HEADERS
-    assert event_id == {'id': '80'}
+    client.send_request.assert_called_once_with(
+        http_method='POST', url='FAKE_ADDRESS.com/live_events',
+        headers={'Accept': 'application/xml',
+                 'Content-Type': 'application/xml'},
+        body='<new-event />', timeout=None)
+
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['http_method'] == 'POST'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events'
+    assert send_mock_call['headers'] == HEADERS
+    assert event_id == {'id': '53'}
 
 
 def test_delete_event_should_call_send_request_as_expect():
@@ -165,7 +150,7 @@ def test_delete_event_should_call_send_request_as_expect():
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(status=200)
 
-    event_id = 999
+    event_id = '999'
     client.delete_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='DELETE',
@@ -182,12 +167,30 @@ def test_start_event_should_call_send_request_as_expect():
 
     client.send_request.return_value = mock_response(status=200)
 
-    event_id = 999
+    event_id = '999'
     client.start_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='POST',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/start',
         headers=HEADERS, body="<start></start>", timeout=None)
+
+
+def test_reset_event_should_call_send_request_as_expect():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+
+    client.send_request.return_value = mock_response(status=200)
+
+    event_id = '999'
+    client.reset_event(event_id)
+    client.send_request.assert_called_once_with(
+        http_method='POST',
+        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/reset',
+        headers=HEADERS, body='', timeout=None)
 
 
 def test_stop_event_should_call_send_request_as_expect():
@@ -199,7 +202,7 @@ def test_stop_event_should_call_send_request_as_expect():
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(status=200)
 
-    event_id = 999
+    event_id = '999'
     client.stop_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='POST',
@@ -393,7 +396,7 @@ def test_describe_event_will_call_send_request_as_expect():
     client.send_request.return_value = mock_response(
         status=200, text=response_from_elemental_api)
 
-    event_id = 999
+    event_id = '999'
     client.describe_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='GET',
@@ -421,7 +424,15 @@ def test_describe_event_will_return_event_info_as_expect():
                           'status': 'complete'}
 
 
-def test_event_can_delete_will_raise_exception_if_pending():
+@pytest.mark.parametrize('status,expected_result', [
+    ('pending', False),
+    ('running', False),
+    ('preprocessing', False),
+    ('postprocessing', False),
+    ('error', True),
+    ('completed', True),
+])
+def test_event_can_delete(status, expected_result):
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.describe_event = mock.Mock()
@@ -431,8 +442,4 @@ def test_event_can_delete_will_raise_exception_if_pending():
         'backup_url': 'fake_backup'
     }
 
-    with pytest.raises(ElementalException) as exc_info:
-        client.event_can_delete('123')
-
-    assert str(exc_info.value).endswith(
-        f"Channel: 123 is not deletable")
+    assert client.event_can_delete('123') is False
