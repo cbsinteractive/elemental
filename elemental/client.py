@@ -1,12 +1,19 @@
 import ast
 import hashlib
+import os
 import time
 import xml.etree.ElementTree as ET
-from typing import Dict, List, Optional, Set, TypedDict
 from urllib.parse import urlparse
 
 import requests
-import xmltodict  # type: ignore
+import xmltodict
+from jinja2 import Template
+
+
+def read_template(file_name):
+    folder = os.path.dirname(os.path.realpath(__file__))
+    with open(os.path.join(folder, 'templates', file_name)) as f:
+        return f.read()
 
 
 class ElementalException(Exception):
@@ -24,38 +31,17 @@ class InvalidResponse(ElementalException):
     pass
 
 
-EventIdDict = TypedDict('EventIdDict', {'id': str})
-
-EventStatusDict = TypedDict('EventStatusDict', {'origin_url': str, 'backup_url': Optional[str], 'status': str})
-
-DeviceAvailabilityDict = TypedDict('DeviceAvailabilityDict', {
-    'id': str,
-    'name': Optional[str],
-    'device_name': str,
-    'device_number': str,
-    'device_type': str,
-    'description': str,
-    'channel': str,
-    'channel_type': str,
-    'quad': str,
-    'availability': bool
-})
-
-PreviewUrlDict = TypedDict('PreviewUrlDict', {'preview_url': str})
-
-
-class ElementalLive:
-    def __init__(self, server_url: str, user: Optional[str] = None, api_key: Optional[str] = None,
-                 timeout: Optional[int] = 5) -> None:
-        self.server_url = server_url
+class ElementalLive():
+    def __init__(self, server_ip, user=None, api_key=None, timeout=5):
+        self.server_ip = server_ip
         self.user = user
         self.api_key = api_key
         self.timeout = timeout
         self.session = requests.Session()
 
-    def generate_headers(self, url: Optional[str] = "") -> Dict[str, str]:
+    def generate_headers(self, url=""):
         # Generate headers according to how users create ElementalLive class
-        if self.user is None or self.api_key is None:
+        if self.user is None and self.api_key is None:
             return {
                 'Accept': 'application/xml',
                 'Content-Type': 'application/xml'
@@ -63,21 +49,21 @@ class ElementalLive:
         else:
             expiration = int(time.time() + 120)
             parse = urlparse(url)
-            pre_hash = f"{str(parse.path)}{self.user}{self.api_key}{expiration}"
-            digest = hashlib.md5(pre_hash.encode('utf-8')).hexdigest()
-            final_hash = f"{self.api_key}{digest}"
+            prehash = "%s%s%s%s" % (
+                parse.path, self.user, self.api_key, expiration)
+            digest = hashlib.md5(prehash.encode('utf-8')).hexdigest()
+            final_hash = "%s%s" % (self.api_key, digest)
             key = hashlib.md5(final_hash.encode('utf-8')).hexdigest()
 
             return {
-                'X-Auth-User': str(self.user),
+                'X-Auth-User': self.user,
                 'X-Auth-Expires': str(expiration),
                 'X-Auth-Key': key,
                 'Accept': 'application/xml',
                 'Content-Type': 'application/xml'
             }
 
-    def send_request(self, http_method: str, url: str, headers: Dict[str, str],
-                     body: Optional[str] = "", timeout: Optional[int] = None) -> requests.Response:
+    def send_request(self, http_method, url, headers, body="", timeout=None):
         # Send request according to different methods
         try:
             timeout = timeout or self.timeout
@@ -92,64 +78,92 @@ class ElementalLive:
                 f"{response.status_code}\n{response.text}")
         return response
 
-    def create_event(self, event_xml: str, timeout: Optional[int] = None) -> EventIdDict:
-        url = f'{self.server_url}/live_events'
+    def create_event(self, options, timeout=None):
+
+        # Initiate url
+        url = f'{self.server_ip}/live_events'
+
+        # Generate template
+        xml = read_template('qvbr_mediastore.xml')
+        template = Template(xml)
+
+        # Pass params to template
+        body = template.render(**options)
+
+        # Generate headers
         headers = self.generate_headers(url)
+
+        # Send request and do exception handling
         response = self.send_request(
-            http_method="POST", url=url, headers=headers, body=event_xml, timeout=timeout)
+            http_method="POST", url=url, headers=headers, body=body, timeout=timeout)
+
+        # Find newly created event id
         xml_root = ET.fromstring(response.content)
         ids = xml_root.findall('id')
-        event_id = str(ids[0].text)
+        event_id = ids[0].text
 
         return {'id': event_id}
 
-    def delete_event(self, event_id: str, timeout: Optional[int] = None) -> None:
-        url = f'{self.server_url}/live_events/{event_id}'
+    def delete_event(self, event_id, timeout=None):
+
+        # Initial url
+        url = f'{self.server_ip}/live_events/{event_id}'
+
+        # Generate headers
         headers = self.generate_headers(url)
+
+        # Send request and do exception handling
         self.send_request(http_method="DELETE", url=url, headers=headers, timeout=timeout)
 
-    def start_event(self, event_id: str, timeout: Optional[int] = None) -> None:
-        url = f'{self.server_url}/live_events/{event_id}/start'
+    def start_event(self, event_id, timeout=None):
+        # Initail url
+        url = f'{self.server_ip}/live_events/{event_id}/start'
+
+        # Generate body
         body = "<start></start>"
-        headers = self.generate_headers(url)
-        self.send_request(http_method="POST", url=url, headers=headers, body=body, timeout=timeout)
 
-    def stop_event(self, event_id: str, timeout: Optional[int] = None) -> None:
-        url = f'{self.server_url}/live_events/{event_id}/stop'
+        # Generate headers
+        headers = self.generate_headers(url)
+
+        # Send request and do exception handling
+        self.send_request(http_method="POST", url=url,
+                          headers=headers, body=body, timeout=timeout)
+
+    def stop_event(self, event_id, timeout=None):
+        # Initail url
+        url = f'{self.server_ip}/live_events/{event_id}/stop'
+
+        # Generate body
         body = "<stop></stop>"
-        headers = self.generate_headers(url)
-        self.send_request(http_method="POST", url=url, headers=headers, body=body, timeout=timeout)
 
-    def reset_event(self, event_id: str, timeout: Optional[int] = None) -> None:
-        url = f'{self.server_url}/live_events/{event_id}/reset'
+        # Generate headers according to how users create ElementalLive class
         headers = self.generate_headers(url)
-        self.send_request(http_method="POST", url=url, headers=headers, body="", timeout=timeout)
 
-    def describe_event(self, event_id: str, timeout: Optional[int] = None) -> EventStatusDict:
-        url = f'{self.server_url}/live_events/{event_id}'
+        # Send request and do exception handling
+        self.send_request(http_method="POST", url=url,
+                          headers=headers, body=body, timeout=timeout)
+
+    def describe_event(self, event_id, timeout=None):
+        url = f'{self.server_ip}/live_events/{event_id}'
+
         headers = self.generate_headers(url)
+
         response = self.send_request(http_method="GET", url=url,
                                      headers=headers, timeout=timeout)
+        # print(response.text)
         event_info = {}
 
-        destinations = list(ET.fromstring(response.text).iter('destination'))
-        uri = destinations[0].find('uri')
-        event_info['origin_url'] = uri.text if uri is not None else ''
-        if len(destinations) > 1:
-            uri = destinations[1].find('uri')
-            event_info['backup_url'] = uri.text if uri is not None else ''
+        destinations = ET.fromstring(response.text).iter('destination')
+        event_info['origin_url'] = next(destinations).find('uri').text
+        event_info['backup_url'] = next(destinations).find('uri').text
 
         status = ET.fromstring(response.text).find('status')
-        event_info['status'] = status.text if status is not None else 'unknown'
+        event_info['status'] = status.text
 
-        return EventStatusDict(
-            status=str(event_info['status']),
-            origin_url=str(event_info['origin_url']),
-            backup_url=event_info.get('backup_url')
-        )
+        return event_info
 
-    def find_devices_in_use(self, timeout: Optional[int] = None) -> Set[Optional[str]]:
-        events_url = f'{self.server_url}/live_events?filter=active'
+    def find_devices_in_use(self, timeout=None):
+        events_url = f'{self.server_ip}/live_events?filter=active'
         events_headers = self.generate_headers(events_url)
         events = self.send_request(
             http_method="GET", url=events_url, headers=events_headers, timeout=timeout)
@@ -162,37 +176,27 @@ class ElementalLive:
 
         return in_use_devices
 
-    def get_input_devices(self, timeout: Optional[int] = None) -> List[DeviceAvailabilityDict]:
-        devices_url = f'{self.server_url}/devices'
+    def get_input_devices(self, timeout=None):
+        devices_url = f'{self.server_ip}/devices'
         devices_headers = self.generate_headers(devices_url)
         devices = self.send_request(
             http_method="GET", url=devices_url, headers=devices_headers, timeout=timeout)
-        devices_information = xmltodict.parse(devices.text)[
+        devices_info = xmltodict.parse(devices.text)[
             'device_list']['device']
 
         devices_in_use = self.find_devices_in_use()
 
-        for device in devices_information:
+        for device in devices_info:
             device.pop('@href')
             device['availability'] = \
                 (device['device_name'] not in devices_in_use)
 
-        devices_information = sorted(devices_information, key=lambda d: int(d["id"]))
-        return [DeviceAvailabilityDict(
-            id=device_info['id'],
-            name=device_info['name'],
-            description=device_info['description'],
-            device_name=device_info['device_name'],
-            device_number=device_info['device_number'],
-            device_type=device_info['device_type'],
-            availability=device_info['availability'],
-            channel=device_info['channel'],
-            channel_type=device_info['channel_type'],
-            quad=device_info['quad'],
-        ) for device_info in devices_information]
+        devices_info = sorted(
+            devices_info, key=lambda d: int(d["id"]))
+        return [dict(d) for d in devices_info]
 
-    def get_input_device_by_id(self, input_device_id: str, timeout: Optional[int] = None) -> DeviceAvailabilityDict:
-        devices_url = f'{self.server_url}/devices/{input_device_id}'
+    def get_input_device_by_id(self, input_device_id, timeout=None):
+        devices_url = f'{self.server_ip}/devices/{input_device_id}'
         devices_headers = self.generate_headers(devices_url)
         devices = self.send_request(
             http_method="GET", url=devices_url, headers=devices_headers, timeout=timeout)
@@ -201,21 +205,10 @@ class ElementalLive:
         device_info['availability'] = (device_info['device_name']
                                        not in devices_in_use)
         device_info.pop('@href')
-        return DeviceAvailabilityDict(
-            id=device_info['id'],
-            name=device_info['name'],
-            description=device_info['description'],
-            device_name=device_info['device_name'],
-            device_number=device_info['device_number'],
-            device_type=device_info['device_type'],
-            availability=device_info['availability'],
-            channel=device_info['channel'],
-            channel_type=device_info['channel_type'],
-            quad=device_info['quad'],
-        )
+        return dict(device_info)
 
-    def generate_preview(self, input_id: str, timeout: Optional[int] = None) -> PreviewUrlDict:
-        url = f'{self.server_url}/inputs/generate_preview'
+    def generate_preview(self, input_id, timeout=None):
+        url = f'{self.server_ip}/inputs/generate_preview'
         headers = self.generate_headers(url)
 
         headers['Accept'] = '*/*'
@@ -237,10 +230,13 @@ class ElementalLive:
             raise ElementalException(
                 f"Response: {response.status_code}\n{response.text}")
         else:
-            preview_url = f'{self.server_url}/images/thumbs/' \
+            preview_url = f'{self.server_ip}/images/thumbs/' \
                           f'p_{response_parse["preview_image_id"]}_job_0.jpg'
             return {'preview_url': preview_url}
 
-    def event_can_delete(self, channel_id: str, timeout: Optional[int] = None) -> bool:
-        channel_info = self.describe_event(channel_id, timeout=timeout)
-        return channel_info['status'] not in ('pending', 'running', 'preprocessing', 'postprocessing',)
+    def event_can_delete(self, channel_id, timeout=None):
+        channel_info = self.describe_event(channel_id)
+        if channel_info['status'] in ('pending', 'running',
+                                      'preprocessing', 'postprocessing'):
+            raise ElementalException(
+                f"Channel: {channel_id} is not deletable")

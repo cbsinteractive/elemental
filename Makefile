@@ -9,7 +9,10 @@ clean-build:
 	rm --force --recursive *.egg-info
 
 lint:
-	tox -e deadfixtures,isort-check,flake8
+	flake8 --exclude=.tox --exclude=venv
 
-test:
-	tox
+test: lint
+	py.test --verbose --cov=./elemental --color=yes .
+
+test_cov: test
+	codecov
