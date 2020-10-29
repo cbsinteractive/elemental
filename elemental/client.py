@@ -108,6 +108,11 @@ class ElementalLive:
         headers = self.generate_headers(url)
         self.send_request(http_method="DELETE", url=url, headers=headers, timeout=timeout)
 
+    def cancel_event(self, event_id: str, timeout: Optional[int] = None) -> None:
+        url = f'{self.server_url}/live_events/{event_id}/cancel'
+        headers = self.generate_headers(url)
+        self.send_request(http_method="POST", url=url, headers=headers, timeout=timeout)
+
     def start_event(self, event_id: str, timeout: Optional[int] = None) -> None:
         url = f'{self.server_url}/live_events/{event_id}/start'
         body = "<start></start>"
