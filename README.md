@@ -11,8 +11,8 @@ Python Client for Elemental On-Premises Appliances
 
 Before running tests locally, install `tox` and `poetry`.
 
-    pip install tox
-    pip install poetry
+    pipx install tox
+    pipx install poetry
 
 Run tests using
 
