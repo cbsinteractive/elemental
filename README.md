@@ -6,3 +6,18 @@
 
 
 Python Client for Elemental On-Premises Appliances
+
+## Run Tests
+
+Before running tests locally, install `tox` and `poetry`.
+
+    pipx install tox
+    pipx install poetry
+
+Run tests using
+
+    make test
+
+To run lint, use
+
+    make lint
