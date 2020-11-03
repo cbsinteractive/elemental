@@ -141,6 +141,48 @@ def test_create_event():
     assert event_id == {'id': '53'}
 
 
+def test_update_event():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(
+        status=200)
+
+    client.update_event('53', '<updated-event />')
+
+    client.send_request.assert_called_once_with(
+        http_method='PUT', url='FAKE_ADDRESS.com/live_events/53',
+        headers={'Accept': 'application/xml',
+                 'Content-Type': 'application/xml'},
+        body='<updated-event />', timeout=None)
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['http_method'] == 'PUT'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53'
+    assert send_mock_call['headers'] == HEADERS
+
+
+def test_update_event_with_restart():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(
+        status=200)
+
+    client.update_event('53', '<updated-event />', restart=True)
+
+    client.send_request.assert_called_once_with(
+        http_method='PUT', url='FAKE_ADDRESS.com/live_events/53?unlocked=1',
+        headers={'Accept': 'application/xml',
+                 'Content-Type': 'application/xml'},
+        body='<updated-event />', timeout=None)
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['http_method'] == 'PUT'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53?unlocked=1'
+    assert send_mock_call['headers'] == HEADERS
+
+
 def test_delete_event_should_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 

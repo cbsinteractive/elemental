@@ -103,6 +103,15 @@ class ElementalLive:
 
         return {'id': event_id}
 
+    def update_event(self, event_id: str, event_xml: str, restart: Optional[bool] = False,
+                     timeout: Optional[int] = None) -> None:
+        url = f'{self.server_url}/live_events/{event_id}'
+        if restart:
+            url += '?unlocked=1'
+        headers = self.generate_headers(url)
+        self.send_request(
+            http_method="PUT", url=url, headers=headers, body=event_xml, timeout=timeout)
+
     def delete_event(self, event_id: str, timeout: Optional[int] = None) -> None:
         url = f'{self.server_url}/live_events/{event_id}'
         headers = self.generate_headers(url)
