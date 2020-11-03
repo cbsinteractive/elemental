@@ -440,6 +440,43 @@ def test_describe_event_will_return_event_info_as_expect():
                           'status': 'complete'}
 
 
+def test_get_event_status():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = HEADERS
+
+    client.send_request = mock.Mock()
+    response_from_elemental_api = """<?xml version="1.0" encoding="UTF-8"?>
+    <live_event href="/live_events/18">
+      <node>ctcsdprdel5</node>
+      <user_data/>
+      <submitted>2020-11-02 18:38:27 -0500</submitted>
+      <priority>50</priority>
+      <restart_on_failure>false</restart_on_failure>
+      <status>pending</status>
+      <average_fps>0</average_fps>
+      <start_time/>
+      <elapsed>0</elapsed>
+      <elapsed_time_in_words>00:00:00</elapsed_time_in_words>
+      <dropped_frames/>
+      <buffer_avg/>
+      <buffer_max/>
+    </live_event>
+    """
+    client.send_request.return_value = mock_response(
+        status=200, text=response_from_elemental_api)
+    event_id = '999'
+
+    status = client.get_event_status(event_id)
+
+    assert status == 'pending'
+    client.send_request.assert_called_once_with(
+        http_method='GET',
+        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/status',
+        headers=HEADERS, timeout=None)
+
+
 @pytest.mark.parametrize('status,expected_result', [
     ('pending', False),
     ('running', False),

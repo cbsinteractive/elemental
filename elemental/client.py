@@ -144,14 +144,19 @@ class ElementalLive:
             uri = destinations[1].find('uri')
             event_info['backup_url'] = uri.text if uri is not None else ''
 
-        status = ET.fromstring(response.text).find('status')
-        event_info['status'] = status.text if status is not None else 'unknown'
+        event_info['status'] = self._parse_status(response.text)
 
         return EventStatusDict(
             status=str(event_info['status']),
             origin_url=str(event_info['origin_url']),
             backup_url=event_info.get('backup_url')
         )
+
+    def get_event_status(self, event_id: str, timeout: Optional[int] = None) -> None:
+        url = f'{self.server_url}/live_events/{event_id}/status'
+        headers = self.generate_headers(url)
+        response = self.send_request(http_method="GET", url=url, headers=headers, timeout=timeout)
+        return self._parse_status(response.text)
 
     def find_devices_in_use(self, timeout: Optional[int] = None) -> Set[Optional[str]]:
         events_url = f'{self.server_url}/live_events?filter=active'
@@ -249,3 +254,7 @@ class ElementalLive:
     def event_can_delete(self, channel_id: str, timeout: Optional[int] = None) -> bool:
         channel_info = self.describe_event(channel_id, timeout=timeout)
         return channel_info['status'] not in ('pending', 'running', 'preprocessing', 'postprocessing',)
+
+    def _parse_status(self, text):
+        status = ET.fromstring(text).find('status')
+        return status.text if status is not None else 'unknown'
