@@ -26,4 +26,4 @@ To run lint, use
 First, make sure you have been added as a collaborator [here](https://pypi.org/manage/project/python-elemental/collaboration/).
 Manually increase the version [here](https://github.com/cbsinteractive/elemental/blob/master/pyproject.toml#L3) and run
 
-    poetry publish
+    make release
