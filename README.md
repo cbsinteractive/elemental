@@ -23,7 +23,6 @@ To run lint, use
     make lint
 
 ## Release Updated Version
-First, make sure you have been added as a collaborator [here](https://pypi.org/manage/project/python-elemental/collaboration/).
-Manually increase the version [here](https://github.com/cbsinteractive/elemental/blob/master/pyproject.toml#L3) and run
-
-    make release
+Use the Github UI to [create a new release](https://github.com/cbsinteractive/elemental/releases/new), the tag needs
+to follow the semver format `0.0.0`. After the new release is created, a Github workflow will build and publish the
+new python package to PyPI automatically.
