@@ -13,6 +13,3 @@ lint:
 
 test:
 	tox
-
-release: clean-build
-	poetry publish --build
