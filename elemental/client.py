@@ -24,6 +24,11 @@ class InvalidResponse(ElementalException):
     pass
 
 
+class NotFound(InvalidResponse):
+    """Exception raised by 'request' with NotFound"""
+    pass
+
+
 EventIdDict = TypedDict('EventIdDict', {'id': str})
 
 EventStatusDict = TypedDict('EventStatusDict', {'origin_url': str, 'backup_url': Optional[str], 'status': str})
@@ -87,9 +92,14 @@ class ElementalLive:
         except requests.exceptions.RequestException as e:
             raise InvalidRequest(f"{http_method}: {url} failed\n{e}")
         if response.status_code not in (200, 201):
-            raise InvalidResponse(
-                f"{http_method}: {url} failed\nResponse: "
-                f"{response.status_code}\n{response.text}")
+            if response.status_code == 404:
+                raise NotFound(
+                    f"{http_method}: {url} failed\nResponse: "
+                    f"{response.status_code}\n{response.text}")
+            else:
+                raise InvalidResponse(
+                    f"{http_method}: {url} failed\nResponse: "
+                    f"{response.status_code}\n{response.text}")
         return response
 
     def create_event(self, event_xml: str, timeout: Optional[int] = None) -> EventIdDict:
