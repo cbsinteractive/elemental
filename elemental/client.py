@@ -134,6 +134,18 @@ class ElementalLive:
         headers = self.generate_headers(url)
         self.send_request(http_method="POST", url=url, headers=headers, body=body, timeout=timeout)
 
+    def event_pause_output(self, event_id: str, output_id: str, timeout: Optional[int] = None) -> None:
+        url = f'{self.server_url}/live_events/{event_id}/pause_output'
+        body = f"<output_id>{output_id}</output_id>"
+        headers = self.generate_headers(url)
+        self.send_request(http_method="POST", url=url, headers=headers, body=body, timeout=timeout)
+
+    def event_unpause_output(self, event_id: str, output_id: str, timeout: Optional[int] = None) -> None:
+        url = f'{self.server_url}/live_events/{event_id}/unpause_output'
+        body = f"<output_id>{output_id}</output_id>"
+        headers = self.generate_headers(url)
+        self.send_request(http_method="POST", url=url, headers=headers, body=body, timeout=timeout)
+
     def reset_event(self, event_id: str, timeout: Optional[int] = None) -> None:
         url = f'{self.server_url}/live_events/{event_id}/reset'
         headers = self.generate_headers(url)
