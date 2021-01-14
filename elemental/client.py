@@ -91,15 +91,14 @@ class ElementalLive:
 
         except requests.exceptions.RequestException as e:
             raise InvalidRequest(f"{http_method}: {url} failed\n{e}")
+        if response.status_code == 404:
+            raise NotFound(
+                f"{http_method}: {url} failed\nResponse: "
+                f"{response.status_code}\n{response.text}")
         if response.status_code not in (200, 201):
-            if response.status_code == 404:
-                raise NotFound(
-                    f"{http_method}: {url} failed\nResponse: "
-                    f"{response.status_code}\n{response.text}")
-            else:
-                raise InvalidResponse(
-                    f"{http_method}: {url} failed\nResponse: "
-                    f"{response.status_code}\n{response.text}")
+            raise InvalidResponse(
+                f"{http_method}: {url} failed\nResponse: "
+                f"{response.status_code}\n{response.text}")
         return response
 
     def create_event(self, event_xml: str, timeout: Optional[int] = None) -> EventIdDict:
