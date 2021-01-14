@@ -620,3 +620,53 @@ def test_event_unpause_output():
     assert send_mock_call['http_method'] == 'POST'
     assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53/unpause_output'
     assert send_mock_call['headers'] == {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+
+
+def test_event_start_output():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(status=200)
+
+    client.event_start_output(event_id='53', output_id='13')
+
+    client.send_request.assert_called_once_with(
+        http_method='POST',
+        url='FAKE_ADDRESS.com/live_events/53/start_output',
+        headers={
+            'Accept': 'application/xml',
+            'Content-Type': 'application/xml'
+        },
+        body='<output_id>13</output_id>',
+        timeout=None
+    )
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['http_method'] == 'POST'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53/start_output'
+    assert send_mock_call['headers'] == {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+
+
+def test_event_stop_output():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(status=200)
+
+    client.event_stop_output(event_id='53', output_id='13')
+
+    client.send_request.assert_called_once_with(
+        http_method='POST',
+        url='FAKE_ADDRESS.com/live_events/53/stop_output',
+        headers={
+            'Accept': 'application/xml',
+            'Content-Type': 'application/xml'
+        },
+        body='<output_id>13</output_id>',
+        timeout=None
+    )
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['http_method'] == 'POST'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53/stop_output'
+    assert send_mock_call['headers'] == {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
