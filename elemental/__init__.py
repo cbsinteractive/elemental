@@ -1,4 +1,4 @@
 from .client import (ElementalException, ElementalLive, InvalidRequest,
-                     InvalidResponse)
+                     InvalidResponse, NotFound)
 
-__all__ = ('ElementalException', 'ElementalLive', 'InvalidResponse', 'InvalidRequest',)
+__all__ = ('ElementalException', 'ElementalLive', 'InvalidResponse', 'InvalidRequest', 'NotFound')

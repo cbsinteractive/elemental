@@ -6,7 +6,7 @@ import pytest
 import requests
 
 from elemental.client import (ElementalException, ElementalLive, InvalidRequest,
-                              InvalidResponse)
+                              InvalidResponse, NotFound)
 
 USER = "FAKE"
 API_KEY = "FAKE"
@@ -107,6 +107,21 @@ def test_send_request_should_raise_InvalidResponse_on_invalid_status_code():
         status=404, text=response_from_elemental_api))
 
     with pytest.raises(InvalidResponse) as exc_info:
+        client.send_request(
+            'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
+
+    assert str(exc_info.value).endswith(
+        f"Response: 404\n{response_from_elemental_api}")
+
+
+def test_send_request_should_raise_NotFound_on_404():
+    response_from_elemental_api = file_fixture('fail_to_create_response.xml')
+
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.session.request = mock.MagicMock(return_value=mock_response(
+        status=404, text=response_from_elemental_api))
+
+    with pytest.raises(NotFound) as exc_info:
         client.send_request(
             'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
 
