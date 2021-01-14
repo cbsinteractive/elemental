@@ -67,7 +67,8 @@ def test_send_request_should_call_request_as_expected():
     client.session.request = mock.MagicMock(
         return_value=mock_response(status=200))
     client.send_request(
-        'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY, timeout=TIMEOUT)
+        'POST', f'{ELEMENTAL_ADDRESS}/live_events', {'Accept': 'application/xml', 'Content-Type': 'application/xml'},
+        REQUEST_BODY, timeout=TIMEOUT)
 
     request_to_elemental = client.session.request.call_args_list[0][1]
     assert request_to_elemental['url'] == f'{ELEMENTAL_ADDRESS}/live_events'
@@ -83,7 +84,8 @@ def test_send_request_should_return_response_on_correct_status_code():
     client.session.request = mock.MagicMock(return_value=mock_response(
         status=201, text=response_from_elemental_api))
     response = client.send_request(
-        'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
+        'POST', f'{ELEMENTAL_ADDRESS}/live_events', {'Accept': 'application/xml', 'Content-Type': 'application/xml'},
+        REQUEST_BODY)
 
     assert response.text == response_from_elemental_api
     assert response.status_code == 201
@@ -96,7 +98,8 @@ def test_send_request_should_raise_InvalidRequest_on_RequestException():
 
     with pytest.raises(InvalidRequest):
         client.send_request(
-            'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
+            'POST', f'{ELEMENTAL_ADDRESS}/live_events',
+            {'Accept': 'application/xml', 'Content-Type': 'application/xml'}, REQUEST_BODY)
 
 
 def test_send_request_should_raise_InvalidResponse_on_invalid_status_code():
@@ -108,7 +111,8 @@ def test_send_request_should_raise_InvalidResponse_on_invalid_status_code():
 
     with pytest.raises(InvalidResponse) as exc_info:
         client.send_request(
-            'POST', f'{ELEMENTAL_ADDRESS}/live_events', HEADERS, REQUEST_BODY)
+            'POST', f'{ELEMENTAL_ADDRESS}/live_events',
+            {'Accept': 'application/xml', 'Content-Type': 'application/xml'}, REQUEST_BODY)
 
     assert str(exc_info.value).endswith(
         f"Response: 404\n{response_from_elemental_api}")
@@ -133,7 +137,7 @@ def test_create_event():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     elemental_response = file_fixture('success_response_for_create.xml')
@@ -152,14 +156,14 @@ def test_create_event():
     send_mock_call = client.send_request.call_args_list[0][1]
     assert send_mock_call['http_method'] == 'POST'
     assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events'
-    assert send_mock_call['headers'] == HEADERS
+    assert send_mock_call['headers'] == {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
     assert event_id == {'id': '53'}
 
 
 def test_update_event():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(
         status=200)
@@ -174,13 +178,13 @@ def test_update_event():
     send_mock_call = client.send_request.call_args_list[0][1]
     assert send_mock_call['http_method'] == 'PUT'
     assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53'
-    assert send_mock_call['headers'] == HEADERS
+    assert send_mock_call['headers'] == {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
 
 def test_update_event_with_restart():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(
         status=200)
@@ -195,14 +199,14 @@ def test_update_event_with_restart():
     send_mock_call = client.send_request.call_args_list[0][1]
     assert send_mock_call['http_method'] == 'PUT'
     assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53?unlocked=1'
-    assert send_mock_call['headers'] == HEADERS
+    assert send_mock_call['headers'] == {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
 
 def test_delete_event_should_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(status=200)
@@ -211,14 +215,15 @@ def test_delete_event_should_call_send_request_as_expect():
     client.delete_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='DELETE',
-        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}', headers=HEADERS, timeout=None)
+        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}',
+        headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, timeout=None)
 
 
 def test_cancel_event_should_call_send_request_as_expected():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(status=200)
@@ -227,14 +232,15 @@ def test_cancel_event_should_call_send_request_as_expected():
     client.cancel_event(event_id)
     client.send_request.assert_called_once_with(
         http_method='POST',
-        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/cancel', headers=HEADERS, timeout=None)
+        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/cancel',
+        headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, timeout=None)
 
 
 def test_start_event_should_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
 
@@ -245,14 +251,14 @@ def test_start_event_should_call_send_request_as_expect():
     client.send_request.assert_called_once_with(
         http_method='POST',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/start',
-        headers=HEADERS, body="<start></start>", timeout=None)
+        headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, body="<start></start>", timeout=None)
 
 
 def test_reset_event_should_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
 
@@ -263,14 +269,14 @@ def test_reset_event_should_call_send_request_as_expect():
     client.send_request.assert_called_once_with(
         http_method='POST',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/reset',
-        headers=HEADERS, body='', timeout=None)
+        headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, body='', timeout=None)
 
 
 def test_stop_event_should_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(status=200)
@@ -280,7 +286,7 @@ def test_stop_event_should_call_send_request_as_expect():
     client.send_request.assert_called_once_with(
         http_method='POST',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/stop',
-        headers=HEADERS, body="<stop></stop>", timeout=None)
+        headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, body="<stop></stop>", timeout=None)
 
 
 def send_request_side_effect(**kwargs):
@@ -296,7 +302,7 @@ def test_find_devices_in_use_will_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.send_request.return_value = \
@@ -308,14 +314,15 @@ def test_find_devices_in_use_will_call_send_request_as_expect():
     client.send_request.assert_called_with(http_method="GET",
                                            url=f'{ELEMENTAL_ADDRESS}'
                                            f'/live_events?'
-                                           f'filter=active', headers=HEADERS, timeout=None)
+                                           f'filter=active',
+                                           headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, timeout=None)
 
 
 def test_find_devices_in_use_will_return_in_used_devices():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.send_request.return_value = \
@@ -330,7 +337,7 @@ def test_get_input_devices_will_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.find_devices_in_use = mock.Mock()
@@ -343,14 +350,15 @@ def test_get_input_devices_will_call_send_request_as_expect():
 
     client.send_request.\
         assert_called_with(http_method="GET",
-                           url=f'{ELEMENTAL_ADDRESS}/devices', headers=HEADERS, timeout=None)
+                           url=f'{ELEMENTAL_ADDRESS}/devices',
+                           headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, timeout=None)
 
 
 def test_get_input_devices_will_get_right_devices_info():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.find_devices_in_use = mock.Mock()
@@ -378,7 +386,7 @@ def test_get_input_device_by_id_will_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.find_devices_in_use = mock.Mock()
@@ -392,14 +400,14 @@ def test_get_input_device_by_id_will_call_send_request_as_expect():
     client.send_request.\
         assert_called_with(http_method="GET",
                            url=f'{ELEMENTAL_ADDRESS}/devices/2',
-                           headers=HEADERS, timeout=None)
+                           headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, timeout=None)
 
 
 def test_get_input_device_by_id_will_get_right_devices_info():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.find_devices_in_use = mock.Mock()
@@ -421,7 +429,7 @@ def test_get_preview_will_parse_response_json_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(
@@ -439,7 +447,7 @@ def test_get_preview_will_raise_ElementalException_if_preview_unavaliable():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     client.send_request.return_value = mock_response(
@@ -462,7 +470,7 @@ def test_describe_event_will_call_send_request_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     response_from_elemental_api = file_fixture('sample_event.xml')
@@ -474,13 +482,13 @@ def test_describe_event_will_call_send_request_as_expect():
     client.send_request.assert_called_once_with(
         http_method='GET',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}',
-        headers=HEADERS, timeout=None)
+        headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, timeout=None)
 
 
 def test_describe_event_will_return_event_info_as_expect():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
     client.send_request = mock.Mock()
     response_from_elemental_api = file_fixture('sample_event.xml')
     client.send_request.return_value = mock_response(
@@ -501,7 +509,7 @@ def test_get_event_status():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     response_from_elemental_api = """<?xml version="1.0" encoding="UTF-8"?>
@@ -531,14 +539,14 @@ def test_get_event_status():
     client.send_request.assert_called_once_with(
         http_method='GET',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/status',
-        headers=HEADERS, timeout=None)
+        headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, timeout=None)
 
 
 def test_get_event_status_missing_status_in_elemental_response():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
-    client.generate_headers.return_value = HEADERS
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
 
     client.send_request = mock.Mock()
     response_from_elemental_api = """<?xml version="1.0" encoding="UTF-8"?>
@@ -555,7 +563,7 @@ def test_get_event_status_missing_status_in_elemental_response():
     client.send_request.assert_called_once_with(
         http_method='GET',
         url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}/status',
-        headers=HEADERS, timeout=None)
+        headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, timeout=None)
 
 
 @pytest.mark.parametrize('status,expected_result', [
@@ -577,3 +585,103 @@ def test_event_can_delete(status, expected_result):
     }
 
     assert client.event_can_delete('123') is False
+
+
+def test_event_pause_output():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(status=200)
+
+    client.event_pause_output(event_id='53', output_id='13')
+
+    client.send_request.assert_called_once_with(
+        http_method='POST',
+        url='FAKE_ADDRESS.com/live_events/53/pause_output',
+        headers={
+            'Accept': 'application/xml',
+            'Content-Type': 'application/xml'
+        },
+        body='<output_id>13</output_id>',
+        timeout=None
+    )
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['http_method'] == 'POST'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53/pause_output'
+    assert send_mock_call['headers'] == {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+
+
+def test_event_unpause_output():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(status=200)
+
+    client.event_unpause_output(event_id='53', output_id='13')
+
+    client.send_request.assert_called_once_with(
+        http_method='POST',
+        url='FAKE_ADDRESS.com/live_events/53/unpause_output',
+        headers={
+            'Accept': 'application/xml',
+            'Content-Type': 'application/xml'
+        },
+        body='<output_id>13</output_id>',
+        timeout=None
+    )
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['http_method'] == 'POST'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53/unpause_output'
+    assert send_mock_call['headers'] == {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+
+
+def test_event_start_output():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(status=200)
+
+    client.event_start_output(event_id='53', output_id='13')
+
+    client.send_request.assert_called_once_with(
+        http_method='POST',
+        url='FAKE_ADDRESS.com/live_events/53/start_output',
+        headers={
+            'Accept': 'application/xml',
+            'Content-Type': 'application/xml'
+        },
+        body='<output_id>13</output_id>',
+        timeout=None
+    )
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['http_method'] == 'POST'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53/start_output'
+    assert send_mock_call['headers'] == {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+
+
+def test_event_stop_output():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(status=200)
+
+    client.event_stop_output(event_id='53', output_id='13')
+
+    client.send_request.assert_called_once_with(
+        http_method='POST',
+        url='FAKE_ADDRESS.com/live_events/53/stop_output',
+        headers={
+            'Accept': 'application/xml',
+            'Content-Type': 'application/xml'
+        },
+        body='<output_id>13</output_id>',
+        timeout=None
+    )
+    send_mock_call = client.send_request.call_args_list[0][1]
+    assert send_mock_call['http_method'] == 'POST'
+    assert send_mock_call['url'] == f'{ELEMENTAL_ADDRESS}/live_events/53/stop_output'
+    assert send_mock_call['headers'] == {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
