@@ -194,6 +194,13 @@ class ElementalLive:
             backup_url=event_info.get('backup_url')
         )
 
+    def get_event_xml(self, event_id: str, timeout: Optional[int] = None) -> str:
+        url = f'{self.server_url}/live_events/{event_id}'
+        headers = self.generate_headers(url)
+        response = self.send_request(http_method="GET", url=url,
+                                     headers=headers, timeout=timeout)
+        return response.text
+
     def get_event_status(self, event_id: str, timeout: Optional[int] = None) -> str:
         url = f'{self.server_url}/live_events/{event_id}/status'
         headers = self.generate_headers(url)
