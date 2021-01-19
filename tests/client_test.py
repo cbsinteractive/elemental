@@ -542,6 +542,30 @@ def test_get_event_status():
         headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, timeout=None)
 
 
+def test_get_event_xml():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+
+    client.send_request = mock.Mock()
+    response_from_elemental_api = """<?xml version="1.0" encoding="UTF-8"?>
+    <live_event href="/live_events/18">
+      <node>ctcsdprdel5</node>
+    </live_event>
+    """
+    client.send_request.return_value = mock_response(
+        status=200, text=response_from_elemental_api)
+    event_id = '18'
+
+    event_xml = client.get_event_xml(event_id)
+
+    assert event_xml == response_from_elemental_api
+    client.send_request.assert_called_once_with(
+        http_method='GET',
+        url=f'{ELEMENTAL_ADDRESS}/live_events/{event_id}',
+        headers={'Accept': 'application/xml', 'Content-Type': 'application/xml'}, timeout=None)
+
+
 def test_get_event_status_missing_status_in_elemental_response():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
