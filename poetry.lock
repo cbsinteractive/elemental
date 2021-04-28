@@ -212,7 +212,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)", "win-inet-pton"]
 
 [[package]]
 name = "requests-mock"
-version = "1.8.0"
+version = "1.9.1"
 description = "Mock out responses from the requests package"
 category = "dev"
 optional = false
@@ -282,7 +282,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "d524fc3fcfd824b89d9e3064903fc67c8cb526570890ced6341b8f1d3f6dd86b"
+content-hash = "09dc77fb596a0da97065d5e774df5a807b1620120e11dddae67faf46c2c49eff"
 
 [metadata.files]
 atomicwrites = [
@@ -406,8 +406,8 @@ requests = [
     {file = "requests-2.24.0.tar.gz", hash = "sha256:b3559a131db72c33ee969480840fff4bb6dd111de7dd27c8ee1f820f4f00231b"},
 ]
 requests-mock = [
-    {file = "requests-mock-1.8.0.tar.gz", hash = "sha256:e68f46844e4cee9d447150343c9ae875f99fa8037c6dcf5f15bf1fe9ab43d226"},
-    {file = "requests_mock-1.8.0-py2.py3-none-any.whl", hash = "sha256:11215c6f4df72702aa357f205cf1e537cffd7392b3e787b58239bde5fb3db53b"},
+    {file = "requests-mock-1.9.1.tar.gz", hash = "sha256:154903e7646b8215fbdccc6898c32a77b87d2fbafad2f43e99d6d7987dc86953"},
+    {file = "requests_mock-1.9.1-py2.py3-none-any.whl", hash = "sha256:705c03efff5c4e38a00eb203e71e9b4381fbce9679870bda3ac533b61a0b8b9d"},
 ]
 six = [
     {file = "six-1.15.0-py2.py3-none-any.whl", hash = "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"},
