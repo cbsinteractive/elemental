@@ -180,7 +180,7 @@ class ElementalLive:
         event_info = {}
 
         destinations = list(ET.fromstring(response.text).iter('destination'))
-        uri = destinations[0].find('uri')
+        uri = destinations[0].find('uri') if destinations else None
         event_info['origin_url'] = uri.text if uri is not None else ''
         if len(destinations) > 1:
             uri = destinations[1].find('uri')

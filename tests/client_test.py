@@ -443,7 +443,7 @@ def test_get_preview_will_parse_response_json_as_expect():
                        f'images/thumbs/p_1563568669_job_0.jpg'}
 
 
-def test_get_preview_will_raise_ElementalException_if_preview_unavaliable():
+def test_get_preview_will_raise_ElementalException_if_preview_unavailable():
     client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
 
     client.generate_headers = mock.Mock()
@@ -503,6 +503,21 @@ def test_describe_event_will_return_event_info_as_expect():
                           'https://vmjhch43nfkghi.data.mediastore.us-east-1.'
                           'amazonaws.com/mortyg3b4/backup/mortyg3b4.m3u8',
                           'status': 'complete'}
+
+
+def test_describe_event_will_return_event_info_with_empty_origin_url_if_destination_is_missing_in_response():
+    client = ElementalLive(ELEMENTAL_ADDRESS, USER, API_KEY)
+    client.generate_headers = mock.Mock()
+    client.generate_headers.return_value = {'Accept': 'application/xml', 'Content-Type': 'application/xml'}
+    client.send_request = mock.Mock()
+    client.send_request.return_value = mock_response(
+        status=200, text='<live_event></live_event>')
+
+    event_id = '139'
+    event_info = client.describe_event(event_id)
+    assert event_info == {'origin_url': '',
+                          'backup_url': None,
+                          'status': 'unknown'}
 
 
 def test_get_event_status():
