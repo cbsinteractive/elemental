@@ -10,9 +10,6 @@ on:
       - synchronize
       - reopened
 
-env:
-  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
 jobs:
   test:
     name: Run Tests
@@ -31,4 +28,3 @@ jobs:
       - name: Run Tests
         run: |
           tox
-          tox -e codecov -- -t ${{ env.CODECOV_TOKEN }}
