@@ -29,6 +29,11 @@ class NotFound(InvalidResponse):
     pass
 
 
+class ConnectionTimeout(ElementalException):
+    """Exception raised by 'request' with invalid response"""
+    pass
+
+
 EventIdDict = TypedDict('EventIdDict', {'id': str})
 
 EventStatusDict = TypedDict('EventStatusDict', {'origin_url': str, 'backup_url': Optional[str], 'status': str})
@@ -89,6 +94,8 @@ class ElementalLive:
             response = self.session.request(
                 method=http_method, url=url, data=body, headers=headers, timeout=timeout)
 
+        except requests.exceptions.ConnectTimeout as e:
+            raise ConnectionTimeout(f"{http_method}: {url} failed\n{e}")
         except requests.exceptions.RequestException as e:
             raise InvalidRequest(f"{http_method}: {url} failed\n{e}")
         if response.status_code == 404:
