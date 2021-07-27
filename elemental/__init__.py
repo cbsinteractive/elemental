@@ -1,4 +1,4 @@
-from .client import (ElementalException, ElementalLive, InvalidRequest,
+from .client import (ConnectionTimeout, ElementalException, ElementalLive, InvalidRequest,
                      InvalidResponse, NotFound)
 
-__all__ = ('ElementalException', 'ElementalLive', 'InvalidResponse', 'InvalidRequest', 'NotFound')
+__all__ = ('ConnectionTimeout', 'ElementalException', 'ElementalLive', 'InvalidResponse', 'InvalidRequest', 'NotFound')
